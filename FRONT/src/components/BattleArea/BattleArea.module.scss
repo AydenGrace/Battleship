@@ -9,35 +9,3 @@
     max-width: calc(25px * 11);
   }
 }
-.ship2,
-.ship3,
-.ship4,
-.ship5,
-.ship {
-  position: absolute;
-  z-index: 2;
-  min-height: 50px;
-  min-width: calc(50px * 5);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-
-.ship2 {
-  background-size: contain;
-  background-image: url("ship_2.svg");
-}
-.ship3 {
-  background-image: url("ship_3.svg");
-}
-.ship4 {
-  background-image: url("ship_4.svg");
-}
-.ship5 {
-  background-image: url("ship_5.svg");
-}
-
-.rotated {
-  transform: translateX(-40%) translateY(200%) rotate(90deg);
-}

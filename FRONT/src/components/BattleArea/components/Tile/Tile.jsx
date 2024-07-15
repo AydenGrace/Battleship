@@ -6,7 +6,7 @@ export default function Tile({ Value, Column, Row }) {
   const [Pointer, setPointer] = useState("");
   const [Hover, setHover] = useState("");
   const [EffectBG, setEffectBG] = useState("");
-  const { myShips, TestSwitch, setWait, myBattleMap } = useContext(ShipContext);
+  const { TestSwitch, mode, myBattleMap } = useContext(ShipContext);
 
   useEffect(() => {
     switch (Value.type) {
@@ -41,21 +41,37 @@ export default function Tile({ Value, Column, Row }) {
         setEffectBG("");
         break;
     }
-    if (Value.type === "border") return;
-  }, [myBattleMap]);
-
-  const handleClick = () => {
-    switch (Value.type) {
-      case "sea":
-      case "ship":
-      case "miss":
-      case "destroyed":
-      case "border":
+    switch (mode) {
+      case "none":
+        setHover("");
+        setPointer("");
+        break;
+      case "battle":
+        setHover("BattleHover");
+        break;
+      case "selection":
+      case "test":
       default:
         break;
     }
-    TestSwitch(Row, Column);
+    if (Value.type === "border") return;
+  }, [myBattleMap, mode]);
+
+  const handleClick = () => {
+    switch (mode) {
+      case "selection":
+        break;
+      case "battle":
+        break;
+      case "test":
+        TestSwitch(Row, Column);
+        break;
+      case "none":
+      default:
+        break;
+    }
   };
+
   return (
     <div className={`${style.Tile} f-center ${Pointer} `} onClick={handleClick}>
       <p>{Value.value}</p>

@@ -53,16 +53,33 @@
   }
 }
 
+.BattleHover {
+  &:hover {
+    background-color: red;
+    opacity: 0.3;
+  }
+}
+
 .ship2 {
-  background-size: contain;
-  background-image: url("ship_2.svg");
+  mask-size: contain;
+  -webkit-mask-image: url("ship_2.svg");
+  mask-image: url("ship_2.svg");
 }
 .ship3 {
-  background-image: url("ship_3.svg");
+  -webkit-mask-image: url("ship_3.svg");
+  mask-image: url("ship_3.svg");
 }
 .ship4 {
-  background-image: url("ship_4.svg");
+  mask-size: contain;
+  -webkit-mask-image: url("ship_4.svg");
+  mask-image: url("ship_4.svg");
 }
 .ship5 {
-  background-image: url("ship_5.svg");
+  mask-size: cover;
+  -webkit-mask-image: url("ship_5.svg");
+  mask-image: url("ship_5.svg");
+}
+
+.w-100 {
+  width: 100%;
 }

@@ -8,12 +8,13 @@ export default function ShipProvider({ children }) {
     wait = !wait;
   };
 
+  const [selectedShip, setSelectedShip] = useState(-1);
   const [myShips, setMyShips] = useState([
-    { Tiles: 2, Start: [-1, -1], End: [-1, -1], Life: 2 },
-    { Tiles: 3, Start: [-1, -1], End: [-1, -1], Life: 3 },
-    { Tiles: 3, Start: [-1, -1], End: [-1, -1], Life: 3 },
-    { Tiles: 4, Start: [-1, -1], End: [-1, -1], Life: 4 },
-    { Tiles: 5, Start: [-1, -1], End: [-1, -1], Life: 5 },
+    { Tiles: 2, Start: [1, 1], Life: 2, rotated: false },
+    { Tiles: 3, Start: [5, 2], Life: 3, rotated: true },
+    { Tiles: 3, Start: [10, 1], Life: 3, rotated: true },
+    { Tiles: 4, Start: [1, 4], Life: 4, rotated: false },
+    { Tiles: 5, Start: [1, 5], Life: 5, rotated: false },
   ]);
 
   const [myBattleMap, setMyBattleMap] = useState([
@@ -309,21 +310,17 @@ export default function ShipProvider({ children }) {
   ]);
 
   const [enemyShips, setEnemyShips] = useState([
-    { Tiles: 2, Start: [-1, -1], End: [-1, -1], Life: 2 },
-    { Tiles: 3, Start: [-1, -1], End: [-1, -1], Life: 3 },
-    { Tiles: 3, Start: [-1, -1], End: [-1, -1], Life: 3 },
-    { Tiles: 4, Start: [-1, -1], End: [-1, -1], Life: 4 },
-    { Tiles: 5, Start: [-1, -1], End: [-1, -1], Life: 5 },
+    { Tiles: 2, Start: [1, 1], Life: 2, rotated: false },
+    { Tiles: 3, Start: [1, 2], Life: 3, rotated: false },
+    { Tiles: 3, Start: [1, 3], Life: 3, rotated: false },
+    { Tiles: 4, Start: [1, 4], Life: 4, rotated: false },
+    { Tiles: 5, Start: [1, 5], Life: 5, rotated: false },
   ]);
 
   const [mode, setMode] = useState("none");
   //none
   //selection
   //battle
-
-  const LoopPause = async () => {
-    if (!wait) return;
-  };
 
   const SettingShips = async (idxShip) => {
     console.log(myShips.length, idxShip);
@@ -372,11 +369,14 @@ export default function ShipProvider({ children }) {
       value={{
         myShips,
         enemyShips,
+        mode,
         setMode,
         myBattleMap,
         TestSwitch,
         setWait,
         SettingShips,
+        setSelectedShip,
+        selectedShip,
       }}
     >
       {children}
