@@ -25,3 +25,19 @@
   border-radius: 20px;
   background-color: white;
 }
+
+.destroyed {
+  background-image: url("destroyed.webp");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.missed {
+  background-image: url("miss.webp");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+}

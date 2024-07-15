@@ -1,32 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./BattleArea.module.scss";
 import Tile from "./components/Tile/Tile";
+import { ShipContext } from "../../context/ShipContext";
 
 export default function BattleArea() {
-  const Tiles = [
-    ["\\", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-    ["1", "", "", "", "", "", "", "", "", "", ""],
-    ["2", "", "", "", "", "", "", "", "", "", ""],
-    ["3", "", "", "", "", "", "", "", "", "", ""],
-    ["4", "", "", "", "", "", "", "", "", "", ""],
-    ["5", "", "", "", "", "", "", "", "", "", ""],
-    ["6", "", "", "", "", "", "", "", "", "", ""],
-    ["7", "", "", "", "", "", "", "", "", "", ""],
-    ["8", "", "", "", "", "", "", "", "", "", ""],
-    ["9", "", "", "", "", "", "", "", "", "", ""],
-    ["10", "", "", "", "", "", "", "", "", "", ""],
-  ];
+  const { myBattleMap } = useContext(ShipContext);
 
   return (
     <section className={`${style.BattleArea}`}>
-      {Tiles.map((Row, ridx) =>
-        Row.map((column, cidx) => (
-          <Tile
-            key={`${ridx}_${cidx}`}
-            Value={column}
-            Column={cidx}
-            Row={ridx}
-          />
+      {myBattleMap.map((Row, ridx) =>
+        Row.map((tile, cidx) => (
+          <Tile key={`${ridx}_${cidx}`} Value={tile} Column={cidx} Row={ridx} />
         ))
       )}
     </section>
