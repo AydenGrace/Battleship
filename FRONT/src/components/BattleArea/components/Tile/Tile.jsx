@@ -4,24 +4,37 @@ import { ShipContext } from "../../../../context/ShipContext";
 
 export default function Tile({ Value, Column, Row }) {
   const [Pointer, setPointer] = useState("");
+  const [Hover, setHover] = useState("");
   const [EffectBG, setEffectBG] = useState("");
-  const { myShips } = useContext(ShipContext);
+  const { myShips, TestSwitch } = useContext(ShipContext);
 
   useEffect(() => {
     switch (Value.type) {
       case "sea":
+        setHover("TileHover");
         setPointer("pointer");
+        setEffectBG("");
         break;
       case "ship":
+        setHover("");
+        setPointer("");
+        setEffectBG("");
         break;
       case "miss":
+        setHover("");
+        setPointer("");
         setEffectBG("missed");
         break;
       case "destroyed":
+        setHover("");
+        setPointer("");
         setEffectBG("destroyed");
         break;
       case "border":
       default:
+        setHover("");
+        setPointer("");
+        setEffectBG("");
         break;
     }
     if (Value.type === "border") return;
@@ -39,11 +52,12 @@ export default function Tile({ Value, Column, Row }) {
       default:
         break;
     }
+    TestSwitch(Row, Column);
   };
   return (
-    <div className={`${style.Tile} f-center ${Pointer}`} onClick={handleClick}>
+    <div className={`${style.Tile} f-center ${Pointer} `} onClick={handleClick}>
       <p>{Value.value}</p>
-      <div className={`${style.Effect} ${EffectBG}`}></div>
+      <div className={`${style.Effect} ${EffectBG} ${Hover}`}></div>
     </div>
   );
 }

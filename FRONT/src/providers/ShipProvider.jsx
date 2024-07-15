@@ -12,7 +12,7 @@ export default function ShipProvider({ children }) {
 
   const [myBattleMap, setMyBattleMap] = useState([
     [
-      { value: "\\", type: "border" },
+      { value: "", type: "border" },
       { value: "A", type: "border" },
       { value: "B", type: "border" },
       { value: "C", type: "border" },
@@ -317,8 +317,39 @@ export default function ShipProvider({ children }) {
 
   const Shoot = () => {};
 
+  const TestSwitch = (row, column) => {
+    let tempBattleMap = [...myBattleMap];
+    tempBattleMap.map((Row, ridx) => {
+      if (ridx === row) {
+        Row.map((Column, cidx) => {
+          if (cidx === column) {
+            switch (Column.type) {
+              case "sea":
+                Column.type = "miss";
+                break;
+
+              case "miss":
+                Column.type = "destroyed";
+                break;
+              case "destroyed":
+                Column.type = "sea";
+                break;
+              case "ship":
+              case "border":
+              default:
+                break;
+            }
+          }
+        });
+      }
+    });
+    setMyShips([...tempBattleMap]);
+  };
+
   return (
-    <ShipContext.Provider value={{ myShips, enemyShips, setMode, myBattleMap }}>
+    <ShipContext.Provider
+      value={{ myShips, enemyShips, setMode, myBattleMap, TestSwitch }}
+    >
       {children}
     </ShipContext.Provider>
   );

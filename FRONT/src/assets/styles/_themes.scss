@@ -41,3 +41,10 @@
   background-repeat: no-repeat;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.TileHover {
+  &:hover {
+    background-color: white;
+    opacity: 0.3;
+  }
+}
