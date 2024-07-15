@@ -42,9 +42,27 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.border {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .TileHover {
   &:hover {
     background-color: white;
     opacity: 0.3;
   }
+}
+
+.ship2 {
+  background-size: contain;
+  background-image: url("ship_2.svg");
+}
+.ship3 {
+  background-image: url("ship_3.svg");
+}
+.ship4 {
+  background-image: url("ship_4.svg");
+}
+.ship5 {
+  background-image: url("ship_5.svg");
 }

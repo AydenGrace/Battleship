@@ -6,7 +6,7 @@ export default function Tile({ Value, Column, Row }) {
   const [Pointer, setPointer] = useState("");
   const [Hover, setHover] = useState("");
   const [EffectBG, setEffectBG] = useState("");
-  const { myShips, TestSwitch } = useContext(ShipContext);
+  const { myShips, TestSwitch, setWait, myBattleMap } = useContext(ShipContext);
 
   useEffect(() => {
     switch (Value.type) {
@@ -31,6 +31,10 @@ export default function Tile({ Value, Column, Row }) {
         setEffectBG("destroyed");
         break;
       case "border":
+        setHover("");
+        setPointer("");
+        setEffectBG("");
+        break;
       default:
         setHover("");
         setPointer("");
@@ -38,13 +42,11 @@ export default function Tile({ Value, Column, Row }) {
         break;
     }
     if (Value.type === "border") return;
-  }, [myShips]);
+  }, [myBattleMap]);
 
   const handleClick = () => {
     switch (Value.type) {
       case "sea":
-        console.log(Row, Column);
-        break;
       case "ship":
       case "miss":
       case "destroyed":

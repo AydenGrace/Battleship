@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { ShipContext } from "../context/ShipContext";
 
 export default function ShipProvider({ children }) {
+  let wait = false;
+
+  const setWait = () => {
+    wait = !wait;
+  };
+
   const [myShips, setMyShips] = useState([
     { Tiles: 2, Start: [-1, -1], End: [-1, -1], Life: 2 },
     { Tiles: 3, Start: [-1, -1], End: [-1, -1], Life: 3 },
@@ -315,6 +321,21 @@ export default function ShipProvider({ children }) {
   //selection
   //battle
 
+  const LoopPause = async () => {
+    if (!wait) return;
+  };
+
+  const SettingShips = async (idxShip) => {
+    console.log(myShips.length, idxShip);
+    if (idxShip >= myShips.length) {
+      setMode("none");
+      return;
+    }
+    setMode("selection");
+
+    console.log(`Placez votre navire de taille ${myShips[idxShip].Tiles}`);
+  };
+
   const Shoot = () => {};
 
   const TestSwitch = (row, column) => {
@@ -343,12 +364,20 @@ export default function ShipProvider({ children }) {
         });
       }
     });
-    setMyShips([...tempBattleMap]);
+    setMyBattleMap([...tempBattleMap]);
   };
 
   return (
     <ShipContext.Provider
-      value={{ myShips, enemyShips, setMode, myBattleMap, TestSwitch }}
+      value={{
+        myShips,
+        enemyShips,
+        setMode,
+        myBattleMap,
+        TestSwitch,
+        setWait,
+        SettingShips,
+      }}
     >
       {children}
     </ShipContext.Provider>
