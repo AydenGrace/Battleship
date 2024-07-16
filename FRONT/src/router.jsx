@@ -68,9 +68,9 @@ export const router = createBrowserRouter([
       {
         path: "/room/:id",
         element: (
-          <InRoom>
-            <Room />
-          </InRoom>
+          // <InRoom>
+          <Room />
+          //</InRoom>
         ),
       },
     ],
