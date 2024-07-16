@@ -4,6 +4,7 @@ const express = require("express");
 const PORT = process.env.PORT || 5000;
 const cors = require("cors");
 const userRoutes = require("./routes/users");
+const roomsRoutes = require("./routes/room");
 const messagesRoutes = require("./routes/messages");
 const { serverHttp, app } = require("./socket/socket");
 
@@ -15,6 +16,7 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
+app.use("/api/rooms", roomsRoutes);
 app.use("/api/messages", messagesRoutes);
 
 mongoose
