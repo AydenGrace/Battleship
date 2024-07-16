@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { CurrentRoomContext } from "../context/CurrentRoomContext";
 
 export default function CurrentRoomProvider({ children }) {
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = useState("aaa");
 
-  const setCurrentRoom = (value) => {
+  function setCurrentRoom(value) {
     setRoom(value);
-  };
+  }
 
   return (
-    <CurrentRoomContext.Provider value={(room, setCurrentRoom)}>
+    <CurrentRoomContext.Provider value={{ room, setRoom, setCurrentRoom }}>
       {children}
     </CurrentRoomContext.Provider>
   );

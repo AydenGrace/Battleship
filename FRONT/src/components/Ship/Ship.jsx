@@ -13,7 +13,7 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
 
   const handleWindowResize = (event) => {
     if (window.outerWidth > 577) setSavedTileSize(50);
-    else setSavedTileSize(25);
+    else setSavedTileSize(30);
   };
   useEffect(() => {
     switch (mode) {
@@ -35,7 +35,7 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
     if (isRotated) {
       switch (nbTiles) {
         case 2:
-          setTransform(`translateX(-25%) translateY(50%) rotate(90deg)`);
+          setTransform(`translateX(-20%) translateY(50%) rotate(90deg)`);
           break;
         case 3:
           setTransform(`translateX(-33%) translateY(100%) rotate(90deg)`);
@@ -57,7 +57,7 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
   useEffect(() => {
     // console.log(window.innerWidth);
     if (window.outerWidth > 577) setSavedTileSize(50);
-    else setSavedTileSize(25);
+    else setSavedTileSize(30);
     window.addEventListener("resize", handleWindowResize);
     return () => {
       window.removeEventListener("resize", handleWindowResize);

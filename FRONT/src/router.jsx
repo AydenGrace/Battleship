@@ -10,6 +10,7 @@ import Logout from "./pages/Logout/Logout";
 import Room from "./pages/Room/Room";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
+import InRoom from "./components/ProtectedRoutes/InRoom";
 
 export const router = createBrowserRouter([
   {
@@ -67,9 +68,9 @@ export const router = createBrowserRouter([
       {
         path: "/room/:id",
         element: (
-          <UserConnected>
+          <InRoom>
             <Room />
-          </UserConnected>
+          </InRoom>
         ),
       },
     ],

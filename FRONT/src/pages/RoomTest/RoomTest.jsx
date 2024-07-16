@@ -9,7 +9,7 @@ export default function RoomTest() {
       <h1>Salle de Test</h1>
       <div className="d-flex">
         <BattleArea />
-        <Setup />
+        {/* <Setup /> */}
       </div>
     </div>
   );

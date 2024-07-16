@@ -23,16 +23,18 @@ function App() {
             <MessagesProvider>
               <SocketProvider>
                 <MessageSocketProvider>
-                  <Header />
-                  <div className="headerSep"></div>
                   <CurrentRoomProvider>
+                    <Header />
+                    <div className="headerSep"></div>
+
                     <ShipProvider>
                       <main className="f-center flex-fill flex-column w-100">
                         <Outlet />
                       </main>
                     </ShipProvider>
+
+                    <Toaster position="bottom-right" reverseOrder={false} />
                   </CurrentRoomProvider>
-                  <Toaster position="bottom-right" reverseOrder={false} />
                 </MessageSocketProvider>
               </SocketProvider>
             </MessagesProvider>

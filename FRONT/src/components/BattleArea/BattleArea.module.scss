@@ -2,10 +2,10 @@
 
 .BattleArea {
   position: relative;
-  max-width: calc(50px * 11);
+  max-width: calc(var(--Tile-desktop) * 11);
   display: flex;
   flex-wrap: wrap;
   @include mixin.xs {
-    max-width: calc(25px * 11);
+    max-width: calc(var(--Tile-mobile) * 11);
   }
 }

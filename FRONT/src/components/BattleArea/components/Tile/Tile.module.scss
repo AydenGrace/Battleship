@@ -2,16 +2,16 @@
 
 .Tile {
   position: relative;
-  min-width: 50px;
-  min-height: 50px;
-  max-width: 50px;
-  max-height: 50px;
+  min-width: var(--Tile-desktop);
+  min-height: var(--Tile-desktop);
+  max-width: var(--Tile-desktop);
+  max-height: var(--Tile-desktop);
   border: 1px solid black;
   @include mixin.xs {
-    min-width: 25px;
-    min-height: 25px;
-    max-width: 25px;
-    max-height: 25px;
+    min-width: var(--Tile-mobile);
+    min-height: var(--Tile-mobile);
+    max-width: var(--Tile-mobile);
+    max-height: var(--Tile-mobile);
   }
 
   p {
