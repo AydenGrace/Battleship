@@ -3,7 +3,8 @@
   border-radius: 20px;
   cursor: pointer;
   transition: 0.2s opacity;
-
+  font-family: var(--font-family);
+  font-size: 1.1rem;
   &:hover {
     opacity: 0.8;
   }
@@ -58,6 +59,24 @@
     background-color: red;
     opacity: 0.3;
   }
+}
+
+.card {
+  background-color: var(--secondary);
+  padding: 20px 20px;
+  border: 2px solid var(--light-secondary);
+  gap: 10px;
+}
+
+.input {
+  background-color: var(--dark-secondary);
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 1.2rem;
+  text-align: center;
+  color: white;
 }
 
 .ship2 {

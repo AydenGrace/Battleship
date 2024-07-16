@@ -64,7 +64,8 @@ export default function Tile({ Value, Column, Row }) {
       case "battle":
         break;
       case "test":
-        TestSwitch(Row, Column);
+        // TestSwitch(Row, Column);
+        console.log(Row, Column, Value.type);
         break;
       case "none":
       default:

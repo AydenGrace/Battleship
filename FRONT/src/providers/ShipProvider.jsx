@@ -8,6 +8,314 @@ export default function ShipProvider({ children }) {
     wait = !wait;
   };
 
+  const Reset = () => {
+    setMyShips([
+      { Tiles: 2, Start: [-1, -1], Life: 2, rotated: false },
+      { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+      { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+      { Tiles: 4, Start: [-1, -1], Life: 4, rotated: false },
+      { Tiles: 5, Start: [-1, -1], Life: 5, rotated: false },
+    ]);
+    setEnemyShips([
+      { Tiles: 2, Start: [-1, -1], Life: 2, rotated: false },
+      { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+      { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+      { Tiles: 4, Start: [-1, -1], Life: 4, rotated: false },
+      { Tiles: 5, Start: [-1, -1], Life: 5, rotated: false },
+    ]);
+    setMyBattleMap([
+      [
+        { value: "", type: "border" },
+        { value: "A", type: "border" },
+        { value: "B", type: "border" },
+        { value: "C", type: "border" },
+        { value: "D", type: "border" },
+        { value: "E", type: "border" },
+        { value: "F", type: "border" },
+        { value: "G", type: "border" },
+        { value: "H", type: "border" },
+        { value: "I", type: "border" },
+        { value: "J", type: "border" },
+      ],
+      [
+        { value: "1", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "2", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "3", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "4", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "5", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "6", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "7", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "8", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "9", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "10", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+    ]);
+    setEnemyBattleMap([
+      [
+        { value: "", type: "border" },
+        { value: "A", type: "border" },
+        { value: "B", type: "border" },
+        { value: "C", type: "border" },
+        { value: "D", type: "border" },
+        { value: "E", type: "border" },
+        { value: "F", type: "border" },
+        { value: "G", type: "border" },
+        { value: "H", type: "border" },
+        { value: "I", type: "border" },
+        { value: "J", type: "border" },
+      ],
+      [
+        { value: "1", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "2", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "3", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "4", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "5", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "6", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "7", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "8", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "9", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+      [
+        { value: "10", type: "border" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+        { value: "", type: "sea" },
+      ],
+    ]);
+    setMode("none");
+  };
+
   const [selectedShip, setSelectedShip] = useState(-1);
   const [myShips, setMyShips] = useState([
     { Tiles: 2, Start: [1, 1], Life: 2, rotated: false },
@@ -333,6 +641,53 @@ export default function ShipProvider({ children }) {
     console.log(`Placez votre navire de taille ${myShips[idxShip].Tiles}`);
   };
 
+  const ShipOnBattlefield = async () => {
+    //Change value of the Tiles when a ship is set
+
+    //RESET
+    myShips.map((ship, idx) => {
+      myBattleMap.map((row, ridx) => {
+        row.map((tile, cidx) => {
+          if (cidx === 0 || ridx === 0) tile.type = "border";
+          else tile.type = "sea";
+        });
+      });
+    });
+    //SEARCH SHIPS
+    myShips.map((ship, idx) => {
+      if (ship.Start[0] > 0 && ship.Start[1] > 0) {
+        myBattleMap.map((row, ridx) => {
+          // console.log(ridx, ship.Start[1]);
+          if (ridx === ship.Start[1]) {
+            //Find Row
+            row.map((tile, cidx) => {
+              if (cidx === ship.Start[0]) {
+                //Starting Point Found
+                if (ship.rotated) {
+                  //Is rotated (Y)
+                  for (let i = 0; i < ship.Tiles; i++) {
+                    // console.log(`SHIP ${idx} : [${ridx + i},${cidx}]`);
+                    if (ridx + i < 11)
+                      myBattleMap[ridx + i][cidx].type = "ship";
+                  }
+                } else {
+                  //Is horintaly (X)
+                  for (let i = 0; i < ship.Tiles; i++) {
+                    // console.log(`SHIP ${idx} : [${ridx},${cidx + i}]`);
+                    if (cidx + i < 11)
+                      myBattleMap[ridx][cidx + i].type = "ship";
+                  }
+                }
+              }
+            });
+          }
+        });
+      }
+    });
+    setMyBattleMap([...myBattleMap]);
+    // console.log(myBattleMap);
+  };
+
   const Shoot = () => {};
 
   const TestSwitch = (row, column) => {
@@ -364,10 +719,15 @@ export default function ShipProvider({ children }) {
     setMyBattleMap([...tempBattleMap]);
   };
 
+  useEffect(() => {
+    ShipOnBattlefield();
+  }, [myShips]);
+
   return (
     <ShipContext.Provider
       value={{
         myShips,
+        setMyShips,
         enemyShips,
         mode,
         setMode,
@@ -377,6 +737,7 @@ export default function ShipProvider({ children }) {
         SettingShips,
         setSelectedShip,
         selectedShip,
+        Reset,
       }}
     >
       {children}

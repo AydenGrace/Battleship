@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Ship.module.scss";
 import { ShipContext } from "../../context/ShipContext";
+import toast from "react-hot-toast";
 
 export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
-  const { setSelectedShip, mode } = useContext(ShipContext);
+  const { setSelectedShip, mode, myShips } = useContext(ShipContext);
   const [transform, setTransform] = useState("");
   const [SavedTileSize, setSavedTileSize] = useState(TileSize);
   const [Pointer, setPointer] = useState("");
   const [Zindex, setZindex] = useState(3);
+  const [display, setDisplay] = useState("none");
 
   const handleWindowResize = (event) => {
     if (window.outerWidth > 577) setSavedTileSize(50);
@@ -46,8 +48,11 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
           setTransform(`translateX(-40%) translateY(200%) rotate(90deg)`);
           break;
       }
-    }
-  }, []);
+    } else setTransform(``);
+
+    if (X > 0 && X < 11 && Y > 0 && Y < 11) setDisplay("block");
+    else setDisplay("none");
+  }, [myShips]);
 
   useEffect(() => {
     // console.log(window.innerWidth);
@@ -60,9 +65,16 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
   }, [handleWindowResize]);
 
   const handleClick = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     setSelectedShip(id);
     console.log(`Current selected ship : ${id}`);
+    toast.success("Ship selected !");
+    // toast("TOUCHÉ !", {
+    //   icon: "📢",
+    // });
+    // toast("RATÉ !", {
+    //   icon: "🌊",
+    // });
   };
 
   return (
@@ -76,6 +88,7 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
         minWidth: `calc(${SavedTileSize}px*${nbTiles})`,
         transform: transform,
         zIndex: Zindex,
+        display: display,
       }}
       onClick={(e) => handleClick(e)}
     ></div>
