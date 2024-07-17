@@ -12,7 +12,7 @@ export default function AllUsersProvider({ children }) {
 
   const updateAllUsers = async () => {
     const users = await getUsers();
-    console.log(users);
+    // console.log(users);
     setAllUsers(users);
   };
 

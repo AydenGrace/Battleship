@@ -7,7 +7,7 @@ export default function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useContext(UserContext);
-  console.log(socket);
+  // console.log(socket);
   useEffect(() => {
     if (!user) {
       setSocket(null);

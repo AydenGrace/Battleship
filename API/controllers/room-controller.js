@@ -15,6 +15,19 @@ const makeid = (length) => {
   return result;
 };
 
+const getRoomById = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const room = await Room.findOne({
+      _id
+    })
+    if (!room) res.status(200).json([]);
+    else res.status(200).json(room);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const createRoom = async (req, res) => {
   const { userId } = req.body;
   let code;
@@ -97,5 +110,6 @@ module.exports = {
   makeid,
   createRoom,
   joinRoom,
+  getRoomById,
   startRoom,
 };
