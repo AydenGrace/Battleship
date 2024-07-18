@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import style from "./Homepage.module.scss";
 import { UserContext } from "../../context/UserContext";
 import toast from "react-hot-toast";
-import { createRoom } from "../../apis/room";
+import { createRoom, joinRoom } from "../../apis/room";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { Navigate } from "react-router-dom";
 
@@ -24,10 +24,22 @@ export default function Homepage() {
     } else toast.error(response.message);
   };
 
-  const JoinRoom = () => {
+  const JoinRoom = async () => {
+    console.log(document.getElementById("code").value);
     if (!user) {
       toast.error("Vous devez être connecté pour jouer");
       return;
+    }
+
+    const response = await joinRoom(
+      document.getElementById("code").value,
+      user._id
+    );
+    console.log(response);
+    if (response.error) {
+      toast.error(response.error);
+    } else {
+      window.location.href = `/room/${response.room._id}`;
     }
   };
 
@@ -50,7 +62,7 @@ export default function Homepage() {
           />
           <div
             className={`${style.validate} btn btn-primary`}
-            onClick={JoinRoom}
+            onClick={(e) => JoinRoom()}
           >
             <i className="fa-solid fa-circle-chevron-right fa-xl"></i>
           </div>

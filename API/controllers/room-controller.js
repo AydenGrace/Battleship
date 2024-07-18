@@ -19,8 +19,8 @@ const getRoomById = async (req, res) => {
   try {
     const { _id } = req.body;
     const room = await Room.findOne({
-      _id
-    })
+      _id,
+    }).populate("users");
     if (!room) res.status(200).json([]);
     else res.status(200).json(room);
   } catch (error) {
@@ -42,6 +42,7 @@ const createRoom = async (req, res) => {
       users: [userId],
     });
     await newRoom.save();
+    await User.findOneAndUpdate({ _id: userId }, { ready: false });
     res.status(200).json(newRoom);
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -51,7 +52,10 @@ const createRoom = async (req, res) => {
 const joinRoom = async (req, res) => {
   const { code, userId } = req.body;
   try {
-    const isUserExist = await User.findOne({ _id: userId });
+    const isUserExist = await User.findOneAndUpdate(
+      { _id: userId },
+      { ready: false }
+    );
     if (!isUserExist) {
       res.status(400).json({ error: "User not Found" });
       return;
@@ -73,14 +77,15 @@ const joinRoom = async (req, res) => {
         return;
       } else {
         const receiverSocketId = getReceiverSocketId(
-          isRoomExist.users.filter((id) => !id.equals(userId))
+          isRoomExist.users.find((id) => !id.equals(userId))
         );
         if (receiverSocketId) {
-          console.log(receiverSocketId);
+          console.log(isRoomExist.users);
+          // console.log(receiverSocketId);
           console.log(
             `Player ${isUserExist.username} join room : ${isRoomExist.code}`
           );
-          io.to(receiverSocketId).emit("newPlayer", isUserExist.username);
+          io.to(receiverSocketId).emit("join", isUserExist);
         }
         res.status(200).json({ room: isRoomExist });
         return;
@@ -96,7 +101,7 @@ const joinRoom = async (req, res) => {
       console.log(
         `Player ${isUserExist.username} join room : ${isRoomExist.code}`
       );
-      io.to(receiverSocketId).emit("newPlayer", isUserExist.username);
+      io.to(receiverSocketId).emit("join", isUserExist);
     }
     res.status(200).json({ room: isRoomExist });
   } catch (error) {
@@ -104,7 +109,106 @@ const joinRoom = async (req, res) => {
   }
 };
 
-const startRoom = async (req, res) => {};
+const playerReady = async (req, res) => {
+  // console.log(req.body);
+  const { code, userId } = req.body;
+  try {
+    // console.log(userId);
+    const isUserExist = await User.findOne({ _id: userId });
+    if (isUserExist.ready) isUserExist.ready = false;
+    else isUserExist.ready = true;
+    isUserExist.save();
+    const isRoomExist = await Room.findOne({ code });
+    console.log(isUserExist);
+    let receiverSocketId;
+    isRoomExist.users.map((_id, idx) => {
+      receiverSocketId = null;
+      receiverSocketId = getReceiverSocketId(_id);
+      console.log(receiverSocketId);
+      if (receiverSocketId) {
+        console.log(receiverSocketId);
+        console.log(`Player ${isUserExist.username} is ready !`);
+        io.to(receiverSocketId).emit("ready", isUserExist);
+      }
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+};
+
+const startRoom = async (req, res) => {
+  const { code } = req.body;
+  console.log(code);
+  try {
+    const thisRoom = await Room.findOneAndUpdate(
+      { code },
+      { status: "prepare_battle" }
+    );
+    let receiverSocketId;
+    if (thisRoom) {
+      thisRoom.users.map((_id, idx) => {
+        receiverSocketId = null;
+        receiverSocketId = getReceiverSocketId(_id);
+        console.log(receiverSocketId);
+        if (receiverSocketId) {
+          console.log(receiverSocketId);
+          io.to(receiverSocketId).emit("start", thisRoom);
+        }
+      });
+    }
+  } catch (e) {
+    res.status(400).json({ e: error.message });
+  }
+};
+
+const setBattleMap = async (roomId, userId, map) => {
+  let thisRoom = await Room.findOne({ _id: roomId });
+  // console.log(thisRoom);
+  if (thisRoom) {
+    if (thisRoom.maps.length > 1) return false;
+    if (thisRoom.maps.length === 0) {
+      thisRoom.maps.push({
+        user: userId,
+        map,
+      });
+      await thisRoom.save();
+    } else {
+      let isAlreadyExist = false;
+      thisRoom.maps.map((map, idx) => {
+        if (map.user === userId) isAlreadyExist = true;
+      });
+      if (isAlreadyExist) return false;
+      thisRoom.maps.push({
+        user: userId,
+        map,
+      });
+      await thisRoom.save();
+    }
+    console.log(thisRoom.maps);
+    if (thisRoom.maps.length >= 2) {
+      thisRoom.status = "battle";
+      await thisRoom.save();
+      console.log("BATTLE BEGIN");
+      let receiverSocketId;
+      thisRoom.users.map((_id, idx) => {
+        receiverSocketId = null;
+        receiverSocketId = getReceiverSocketId(_id);
+        // console.log(receiverSocketId);
+        if (receiverSocketId) {
+          // console.log(receiverSocketId);
+          io.to(receiverSocketId).emit("battle", thisRoom);
+        }
+      });
+    }
+  }
+};
+
+const PreparationsCompleted = async (req, res) => {
+  // console.log(req.body);
+  const { roomId, userId, map } = req.body;
+  setBattleMap(roomId, userId, map);
+  res.send({ message: "Reçu" });
+};
 
 module.exports = {
   makeid,
@@ -112,4 +216,6 @@ module.exports = {
   joinRoom,
   getRoomById,
   startRoom,
+  playerReady,
+  PreparationsCompleted,
 };

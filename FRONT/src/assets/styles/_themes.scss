@@ -28,7 +28,7 @@
 }
 
 .destroyed {
-  background-image: url("destroyed.webp");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/battleship-65975.appspot.com/o/destroyed.webp?alt=media&token=8d8add69-1042-4689-8a59-6cbed72b9ddc");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 }
 
 .missed {
-  background-image: url("miss.webp");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/battleship-65975.appspot.com/o/miss.webp?alt=media&token=4446a62b-6696-40d0-94ca-d4bd18a68e6f");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -81,24 +81,32 @@
 
 .ship2 {
   mask-size: contain;
-  -webkit-mask-image: url("ship_2.svg");
-  mask-image: url("ship_2.svg");
+  -webkit-mask-image: url("../../../public/ship_2.svg");
+  mask-image: url("../../../public/ship_2.svg");
 }
 .ship3 {
-  -webkit-mask-image: url("ship_3.svg");
-  mask-image: url("ship_3.svg");
+  -webkit-mask-image: url("../../../public/ship_3.svg");
+  mask-image: url("../../../public/ship_3.svg");
 }
 .ship4 {
   mask-size: contain;
-  -webkit-mask-image: url("ship_4.svg");
-  mask-image: url("ship_4.svg");
+  -webkit-mask-image: url("../../../public/ship_4.svg");
+  mask-image: url("../../../public/ship_4.svg");
 }
 .ship5 {
   mask-size: cover;
-  -webkit-mask-image: url("ship_5.svg");
-  mask-image: url("ship_5.svg");
+  -webkit-mask-image: url("../../../public/ship_5.svg");
+  mask-image: url("../../../public/ship_5.svg");
 }
 
 .w-100 {
   width: 100%;
+}
+
+.bg-g {
+  background-color: darkgreen;
+}
+
+.border-g {
+  border-color: rgb(0, 59, 0);
 }

@@ -22,20 +22,8 @@ export const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/prepare",
-        element: (
-          <UserConnected>
-            <Homepage />
-          </UserConnected>
-        ),
-      },
-      {
-        path: "/battle",
-        element: (
-          <UserConnected>
-            <Homepage />
-          </UserConnected>
-        ),
+        path: "/battle/:id",
+        element: <Battle />,
       },
       {
         path: "/test",
@@ -67,11 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/room/:id",
-        element: (
-          // <InRoom>
-          <Room />
-          //</InRoom>
-        ),
+        element: <Room />,
       },
     ],
   },

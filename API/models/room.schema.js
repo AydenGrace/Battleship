@@ -10,6 +10,7 @@ const roomSchema = new mongoose.Schema(
     ],
     code: { type: String, required: true },
     status: { type: String, default: "pending" },
+    maps: [],
   },
   {
     timestamps: true,

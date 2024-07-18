@@ -22,6 +22,10 @@ export default function SocketProvider({ children }) {
 
     socket.on("newMessage", (message) => {});
 
+    // socket.on("join", (message) => {
+    //   console.log(message);
+    // });
+
     return () => socket.close();
   }, [user]);
 

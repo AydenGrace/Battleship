@@ -9,3 +9,19 @@
     max-width: calc(var(--Tile-mobile) * 11);
   }
 }
+
+.btnArea {
+  @include mixin.xs {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.ship {
+  background-color: white;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  min-height: 25px;
+  width: 50px;
+}

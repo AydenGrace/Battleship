@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { ShipContext } from "../context/ShipContext";
 
 export default function ShipProvider({ children }) {
-  let wait = false;
-
-  const setWait = () => {
-    wait = !wait;
-  };
+  const [preparedIndex, setPreparedIndex] = useState(0);
 
   const Reset = () => {
     setMyShips([
@@ -319,10 +315,10 @@ export default function ShipProvider({ children }) {
   const [selectedShip, setSelectedShip] = useState(-1);
   const [myShips, setMyShips] = useState([
     { Tiles: 2, Start: [1, 1], Life: 2, rotated: false },
-    { Tiles: 3, Start: [5, 2], Life: 3, rotated: true },
-    { Tiles: 3, Start: [10, 1], Life: 3, rotated: true },
-    { Tiles: 4, Start: [1, 4], Life: 4, rotated: false },
-    { Tiles: 5, Start: [1, 5], Life: 5, rotated: false },
+    { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+    { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
+    { Tiles: 4, Start: [-1, -1], Life: 4, rotated: false },
+    { Tiles: 5, Start: [-1, -1], Life: 5, rotated: false },
   ]);
 
   const [myBattleMap, setMyBattleMap] = useState([
@@ -688,6 +684,12 @@ export default function ShipProvider({ children }) {
     // console.log(myBattleMap);
   };
 
+  const setShipPosition = (shipIdx, Row, Column) => {
+    let temp = [...myShips];
+    temp[shipIdx].Start = [Row, Column];
+    setMyShips([...temp]);
+  };
+
   const Shoot = () => {};
 
   const TestSwitch = (row, column) => {
@@ -733,11 +735,13 @@ export default function ShipProvider({ children }) {
         setMode,
         myBattleMap,
         TestSwitch,
-        setWait,
+        preparedIndex,
+        setPreparedIndex,
         SettingShips,
         setSelectedShip,
         selectedShip,
         Reset,
+        setShipPosition,
       }}
     >
       {children}

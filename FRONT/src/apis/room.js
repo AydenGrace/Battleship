@@ -16,7 +16,6 @@ export async function createRoom(_id) {
   }
 }
 
-
 export async function getRoom(_id) {
   try {
     const response = await fetch(`${BASE_URL}/get`, {
@@ -25,6 +24,70 @@ export async function getRoom(_id) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ _id }),
+    });
+    const message = await response.json();
+    return message;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function joinRoom(code, _id) {
+  try {
+    const response = await fetch(`${BASE_URL}/join`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code, userId: _id }),
+    });
+    const message = await response.json();
+    return message;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function Ready(code, _id) {
+  try {
+    const response = await fetch(`${BASE_URL}/ready`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code, userId: _id }),
+    });
+    const message = await response.json();
+    return message;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function Start(code, _id) {
+  try {
+    const response = await fetch(`${BASE_URL}/start`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code, userId: _id }),
+    });
+    const message = await response.json();
+    return message;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function PreparationsCompleted(roomId, userId, map) {
+  try {
+    const response = await fetch(`${BASE_URL}/preparationsCompleted`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ roomId, userId, map }),
     });
     const message = await response.json();
     return message;

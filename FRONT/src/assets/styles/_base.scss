@@ -15,6 +15,12 @@ h4 {
   margin: 0;
 }
 
+a {
+  color: white;
+  &:visited {
+    color: white;
+  }
+}
 * {
   box-sizing: border-box;
 }
