@@ -5,7 +5,7 @@
   "scripts": {
     "server": "nodemon API/index.js",
     "start": "node API/index.js",
-    "build": "npm i & npm i --prefix API && npm run build --prefix FRONT"
+    "build": "npm i & npm i --prefix FRONT --production=false & npm i --prefix API && npm run build --prefix FRONT"
   },
   "author": "",
   "license": "ISC",
