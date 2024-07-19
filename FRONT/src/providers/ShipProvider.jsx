@@ -314,7 +314,7 @@ export default function ShipProvider({ children }) {
 
   const [selectedShip, setSelectedShip] = useState(-1);
   const [myShips, setMyShips] = useState([
-    { Tiles: 2, Start: [1, 1], Life: 2, rotated: false },
+    { Tiles: 2, Start: [-1, -1], Life: 2, rotated: false },
     { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
     { Tiles: 3, Start: [-1, -1], Life: 3, rotated: false },
     { Tiles: 4, Start: [-1, -1], Life: 4, rotated: false },

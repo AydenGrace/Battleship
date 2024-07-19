@@ -8,7 +8,7 @@ import { PreparationsCompleted } from "../../apis/room";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { UserContext } from "../../context/UserContext";
 
-export default function BattleArea({ ForcedMode }) {
+export default function BattleArea({ ForcedMode, ShipPositions }) {
   const {
     myBattleMap,
     setMyShips,
@@ -20,18 +20,26 @@ export default function BattleArea({ ForcedMode }) {
   } = useContext(ShipContext);
   const [TileSize, setTileSize] = useState(50);
   const [idx, setIdx] = useState(0);
-  const [thisMode, setThisMode] = useState(ForcedMode);
+  const [thisMode, setThisMode] = useState(mode);
   const { room } = useContext(CurrentRoomContext);
   const { user } = useContext(UserContext);
   const [validateText, setValidateText] = useState("Valider la position");
   const [BtnView, setBtnView] = useState(true);
   const [currentShip, setCurrentShip] = useState("ship2");
+  const [localShip, setLocalShip] = useState(myShips);
 
   useEffect(() => {
     if (ForcedMode) {
-      setMode(ForcedMode);
+      setThisMode(ForcedMode);
     }
-  }, []);
+    console.log(ShipPositions);
+    if (ShipPositions) {
+      setMyShips(ShipPositions);
+      setLocalShip(ShipPositions);
+    } else {
+      setLocalShip(myShips);
+    }
+  }, [ShipPositions, ForcedMode]);
 
   const ResetShips = () => {
     for (let i = 0; i < 5; i++)
@@ -44,7 +52,7 @@ export default function BattleArea({ ForcedMode }) {
   };
 
   const changeMode = () => {
-    switch (mode) {
+    switch (thisMode) {
       case "selection":
         setMode("battle");
         break;
@@ -59,15 +67,17 @@ export default function BattleArea({ ForcedMode }) {
         setMode("selection");
         break;
     }
-    setThisMode(mode);
+    setThisMode(thisMode);
   };
 
   const handleRotate = () => {
     let canRotate = false;
-    if (myShips[preparedIndex].rotated) {
+    if (localShip[preparedIndex].rotated) {
       //Vertical to Horizontal
       if (
-        myShips[preparedIndex].Start[0] + myShips[preparedIndex].Tiles - 1 <=
+        localShip[preparedIndex].Start[0] +
+          localShip[preparedIndex].Tiles -
+          1 <=
         10
       ) {
         canRotate = true;
@@ -77,7 +87,9 @@ export default function BattleArea({ ForcedMode }) {
     } else {
       //Horizontal to Vertical
       if (
-        myShips[preparedIndex].Start[1] + myShips[preparedIndex].Tiles - 1 <=
+        localShip[preparedIndex].Start[1] +
+          localShip[preparedIndex].Tiles -
+          1 <=
         10
       ) {
         canRotate = true;
@@ -88,25 +100,25 @@ export default function BattleArea({ ForcedMode }) {
 
     let ThereIsAShip = false;
     //VERIFICATION NAVIRE SUR TRAJECTOIR
-    if (!myShips[preparedIndex].rotated) {
-      for (let i = 1; i < myShips[preparedIndex].Tiles; i++) {
+    if (!localShip[preparedIndex].rotated) {
+      for (let i = 1; i < localShip[preparedIndex].Tiles; i++) {
         console.log(
-          myBattleMap[myShips[preparedIndex].Start[1] + i][
-            myShips[preparedIndex].Start[0]
+          myBattleMap[localShip[preparedIndex].Start[1] + i][
+            localShip[preparedIndex].Start[0]
           ]
         );
         if (
-          myBattleMap[myShips[preparedIndex].Start[1] + i][
-            myShips[preparedIndex].Start[0]
+          myBattleMap[localShip[preparedIndex].Start[1] + i][
+            localShip[preparedIndex].Start[0]
           ].type === "ship"
         )
           ThereIsAShip = true;
       }
     } else {
-      for (let i = 1; i < myShips[preparedIndex].Tiles; i++) {
+      for (let i = 1; i < localShip[preparedIndex].Tiles; i++) {
         if (
-          myBattleMap[myShips[preparedIndex].Start[1]][
-            myShips[preparedIndex].Start[0] + i
+          myBattleMap[localShip[preparedIndex].Start[1]][
+            localShip[preparedIndex].Start[0] + i
           ].type === "ship"
         )
           ThereIsAShip = true;
@@ -119,31 +131,32 @@ export default function BattleArea({ ForcedMode }) {
 
     //ROTATION
     if (canRotate) {
-      let tempsShips = [...myShips];
+      let tempsShips = [...localShip];
       if (tempsShips[preparedIndex].rotated)
         tempsShips[preparedIndex].rotated = !tempsShips[preparedIndex].rotated;
       else tempsShips[preparedIndex].rotated = true;
-      setMyShips(tempsShips);
+      setLocalShip(tempsShips);
       return;
     }
   };
 
   const handleNext = () => {
     if (
-      myShips[preparedIndex].Start[0] < 0 ||
-      myShips[preparedIndex].Start[1] < 0
+      localShip[preparedIndex].Start[0] < 0 ||
+      localShip[preparedIndex].Start[1] < 0
     ) {
       toast.error("Veuillez placer le navire");
       return;
     }
-    if (preparedIndex >= myShips.length - 1) {
+    if (preparedIndex >= localShip.length - 1) {
       setValidateText("En attente de l'adversaire...");
       setBtnView(false);
       setMode("none");
       console.log(room);
       console.log(user);
       console.log(myBattleMap);
-      PreparationsCompleted(room._id, user._id, myBattleMap);
+      setPreparedIndex(0);
+      PreparationsCompleted(room._id, user._id, myBattleMap, localShip);
     } else {
       setPreparedIndex(preparedIndex + 1);
       switch (preparedIndex + 1) {
@@ -170,24 +183,44 @@ export default function BattleArea({ ForcedMode }) {
 
   return (
     <section className={`${style.BattleArea}`}>
-      {myShips.map((ship, idx) => (
-        <Ship
-          key={`ship_${idx}`}
-          id={idx}
-          nbTiles={ship.Tiles}
-          TileSize={TileSize}
-          X={ship.Start[0]}
-          Y={ship.Start[1]}
-          isRotated={ship.rotated}
-        />
-      ))}
-      {myBattleMap.map((Row, ridx) =>
-        Row.map((tile, cidx) => (
-          <Tile key={`${ridx}_${cidx}`} Value={tile} Column={cidx} Row={ridx} />
-        ))
-      )}
+      <div className={`d-flex flex-wrap ${style.container}`}>
+        {ShipPositions
+          ? ShipPositions.map((ship, idx) => (
+              <Ship
+                key={`ship_${idx}`}
+                id={idx}
+                nbTiles={ship.Tiles}
+                TileSize={TileSize}
+                X={ship.Start[0]}
+                Y={ship.Start[1]}
+                isRotated={ship.rotated}
+              />
+            ))
+          : localShip.map((ship, idx) => (
+              <Ship
+                key={`ship_${idx}`}
+                id={idx}
+                nbTiles={ship.Tiles}
+                TileSize={TileSize}
+                X={ship.Start[0]}
+                Y={ship.Start[1]}
+                isRotated={ship.rotated}
+              />
+            ))}
+        {myBattleMap.map((Row, ridx) =>
+          Row.map((tile, cidx) => (
+            <Tile
+              key={`${ridx}_${cidx}`}
+              Value={tile}
+              Column={cidx}
+              Row={ridx}
+              Mode={thisMode}
+            />
+          ))
+        )}
+      </div>
 
-      {mode === "selection" && (
+      {thisMode === "selection" && (
         <>
           {BtnView && (
             <div
@@ -199,7 +232,7 @@ export default function BattleArea({ ForcedMode }) {
               ></div>
               <div className="d-flex align-items-center flex-fill gap-10">
                 <p>Navire n°{preparedIndex + 1}</p>
-                <p>Taille {myShips[preparedIndex].Tiles}</p>
+                <p>Taille {localShip[preparedIndex].Tiles}</p>
               </div>
             </div>
           )}
@@ -221,7 +254,7 @@ export default function BattleArea({ ForcedMode }) {
           </div>
         </>
       )}
-      {mode === "none" && preparedIndex > 0 && (
+      {thisMode === "none" && preparedIndex > 0 && (
         <div
           className={`d-flex justify-content-center align-items-center w-100 p-10 ${style.btnArea}`}
         >

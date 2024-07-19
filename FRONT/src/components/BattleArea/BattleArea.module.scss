@@ -5,8 +5,33 @@
   max-width: calc(var(--Tile-desktop) * 11);
   display: flex;
   flex-wrap: wrap;
+
   @include mixin.xs {
     max-width: calc(var(--Tile-mobile) * 11);
+  }
+}
+
+.container {
+  position: relative;
+  max-width: calc(var(--Tile-desktop) * 11);
+  display: flex;
+  flex-wrap: wrap;
+
+  @include mixin.xs {
+    max-width: calc(var(--Tile-mobile) * 11);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/battleship-65975.appspot.com/o/tile.webp?alt=media&token=a7d2745a-612b-4a09-ae9c-06d16dca0466");
+    background-position: center;
+    background-size: cover;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.8;
   }
 }
 

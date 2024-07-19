@@ -3,13 +3,12 @@ import style from "./Tile.module.scss";
 import { ShipContext } from "../../../../context/ShipContext";
 import toast from "react-hot-toast";
 
-export default function Tile({ Value, Column, Row }) {
+export default function Tile({ Value, Column, Row, Mode }) {
   const [Pointer, setPointer] = useState("");
   const [Hover, setHover] = useState("");
   const [EffectBG, setEffectBG] = useState("");
   const {
     TestSwitch,
-    mode,
     myBattleMap,
     setPreparedIndex,
     preparedIndex,
@@ -50,13 +49,13 @@ export default function Tile({ Value, Column, Row }) {
         setEffectBG("");
         break;
     }
-    switch (mode) {
+    switch (Mode) {
       case "none":
         setHover("");
         setPointer("");
         break;
       case "battle":
-        setHover("BattleHover");
+        if (Value.type != "border") setHover("BattleHover");
         break;
       case "selection":
       case "test":
@@ -64,15 +63,16 @@ export default function Tile({ Value, Column, Row }) {
         break;
     }
     if (Value.type === "border") return;
-  }, [myBattleMap, mode]);
+  }, [myBattleMap, Mode]);
 
   const handleClick = () => {
-    switch (mode) {
+    switch (Mode) {
       case "selection":
         console.log(Row, Column, Value.type);
         PrepareMyShips(Row, Column);
         break;
       case "battle":
+        console.log("SHOOT", Row, Column);
         break;
       case "test":
         // TestSwitch(Row, Column);
@@ -159,7 +159,7 @@ export default function Tile({ Value, Column, Row }) {
   };
 
   const rotate = () => {
-    if (mode === "selection") {
+    if (Mode === "selection") {
       console.log("ROTATE");
     }
   };

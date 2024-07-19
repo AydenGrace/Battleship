@@ -80,14 +80,14 @@ export async function Start(code, _id) {
   }
 }
 
-export async function PreparationsCompleted(roomId, userId, map) {
+export async function PreparationsCompleted(roomId, userId, map, ships) {
   try {
     const response = await fetch(`${BASE_URL}/preparationsCompleted`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ roomId, userId, map }),
+      body: JSON.stringify({ roomId, userId, map, ships }),
     });
     const message = await response.json();
     return message;

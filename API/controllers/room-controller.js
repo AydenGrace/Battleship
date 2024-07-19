@@ -157,11 +157,11 @@ const startRoom = async (req, res) => {
       });
     }
   } catch (e) {
-    res.status(400).json({ e: error.message });
+    res.status(400).json({ error: e.message });
   }
 };
 
-const setBattleMap = async (roomId, userId, map) => {
+const setBattleMap = async (roomId, userId, map, ships) => {
   let thisRoom = await Room.findOne({ _id: roomId });
   // console.log(thisRoom);
   if (thisRoom) {
@@ -170,6 +170,7 @@ const setBattleMap = async (roomId, userId, map) => {
       thisRoom.maps.push({
         user: userId,
         map,
+        ships,
       });
       await thisRoom.save();
     } else {
@@ -181,12 +182,14 @@ const setBattleMap = async (roomId, userId, map) => {
       thisRoom.maps.push({
         user: userId,
         map,
+        ships,
       });
       await thisRoom.save();
     }
     console.log(thisRoom.maps);
     if (thisRoom.maps.length >= 2) {
       thisRoom.status = "battle";
+      thisRoom.current_turn = Math.round(Math.random()); //Définition aléatoire du premier joueur
       await thisRoom.save();
       console.log("BATTLE BEGIN");
       let receiverSocketId;
@@ -205,9 +208,39 @@ const setBattleMap = async (roomId, userId, map) => {
 
 const PreparationsCompleted = async (req, res) => {
   // console.log(req.body);
-  const { roomId, userId, map } = req.body;
-  setBattleMap(roomId, userId, map);
+  const { roomId, userId, map, ships } = req.body;
+  setBattleMap(roomId, userId, map, ships);
   res.send({ message: "Reçu" });
+};
+
+const Shoot = async (req, res) => {
+  const { roomId, ShooterId, X, Y } = req.body;
+  try {
+    const thisRoom = await Room.findOne({ _id: roomId });
+    //ROOM NOT FOUND
+    if (!thisRoom) {
+      res.status(400).json({ error: "Room not found" });
+      return;
+    }
+    //GAME NOT LAUNCH
+    if (thisRoom.status != "battle") {
+      res.status(400).json({ error: "Battle not started" });
+      return;
+    }
+    //ROOM NOT FOUND
+    if (!isRoomExist.users.find((id) => id.equals(ShooterId))) {
+      res.status(400).json({ error: "Shooter not in this room" });
+      return;
+    }
+    //BAD COORDINATES
+    if (X < 1 || Y < 1 || X > 10 || Y > 10) {
+      res.status(400).json({ error: "Bad coordinates" });
+      return;
+    }
+    //SHOOT IS LEGAL (Well, not in your country but...)
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 };
 
 module.exports = {
@@ -218,4 +251,5 @@ module.exports = {
   startRoom,
   playerReady,
   PreparationsCompleted,
+  Shoot,
 };
