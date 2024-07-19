@@ -95,3 +95,19 @@ export async function PreparationsCompleted(roomId, userId, map, ships) {
     console.error(error);
   }
 }
+
+export async function Shoot(roomId, ShooterId, X, Y) {
+  try {
+    const response = await fetch(`${BASE_URL}/shoot`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ roomId, ShooterId, X, Y }),
+    });
+    const message = await response.json();
+    return message;
+  } catch (error) {
+    console.error(error);
+  }
+}

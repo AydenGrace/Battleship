@@ -214,33 +214,80 @@ const PreparationsCompleted = async (req, res) => {
 };
 
 const Shoot = async (req, res) => {
+  console.log(req.body);
   const { roomId, ShooterId, X, Y } = req.body;
   try {
     const thisRoom = await Room.findOne({ _id: roomId });
     //ROOM NOT FOUND
     if (!thisRoom) {
-      res.status(400).json({ error: "Room not found" });
+      res.json({ error: "Room not found" });
       return;
     }
     //GAME NOT LAUNCH
     if (thisRoom.status != "battle") {
-      res.status(400).json({ error: "Battle not started" });
+      res.json({ error: "Battle not started" });
       return;
     }
     //ROOM NOT FOUND
-    if (!isRoomExist.users.find((id) => id.equals(ShooterId))) {
-      res.status(400).json({ error: "Shooter not in this room" });
+    if (!thisRoom.users.find((id) => id.equals(ShooterId))) {
+      res.json({ error: "Shooter not in this room" });
       return;
     }
     //BAD COORDINATES
     if (X < 1 || Y < 1 || X > 10 || Y > 10) {
-      res.status(400).json({ error: "Bad coordinates" });
+      res.json({ error: "Bad coordinates" });
       return;
     }
     //SHOOT IS LEGAL (Well, not in your country but...)
+
+    //Get index of Target Map
+    let idx;
+    if (thisRoom.maps[0].user === ShooterId) idx = 1;
+    else if (thisRoom.maps[1].user === ShooterId) idx = 0;
+    else idx = -1;
+
+    // console.log(thisRoom.maps[idx].map[X][Y]);
+    switch (thisRoom.maps[idx].map[X][Y].type) {
+      case "ship":
+        thisRoom.maps[idx].map[X][Y].type = "destroyed";
+        break;
+      case "sea":
+        thisRoom.maps[idx].map[X][Y].type = "miss";
+        break;
+      case "border":
+      case "destroyed":
+      case "miss":
+      default:
+        break;
+    }
+    console.log(thisRoom.maps[idx].map[X][Y].type);
+    if (thisRoom.current_turn) thisRoom.current_turn = 0;
+    else thisRoom.current_turn = 1;
+    await thisRoom.save();
+    await Room.findOneAndUpdate(
+      { _id: thisRoom._id },
+      { current_turn: thisRoom.current_turn, maps: thisRoom.maps }
+    );
+    console.log(thisRoom.maps[idx].map[X][Y].type);
+    res.send({ message: "Tir lancé" });
+    Broadcast(thisRoom, "Shoot", thisRoom);
   } catch (e) {
+    console.log(e);
     res.status(400).json({ error: e.message });
   }
+};
+
+const Broadcast = (Room, key, message) => {
+  let receiverSocketId;
+  Room.users.map((_id, idx) => {
+    receiverSocketId = null;
+    receiverSocketId = getReceiverSocketId(_id);
+    // console.log(receiverSocketId);
+    if (receiverSocketId) {
+      // console.log(receiverSocketId);
+      io.to(receiverSocketId).emit(key, message);
+    }
+  });
 };
 
 module.exports = {

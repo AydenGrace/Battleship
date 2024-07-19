@@ -8,7 +8,12 @@ import { PreparationsCompleted } from "../../apis/room";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { UserContext } from "../../context/UserContext";
 
-export default function BattleArea({ ForcedMode, ShipPositions }) {
+export default function BattleArea({
+  ForcedMode,
+  ShipPositions,
+  isEnemyMap,
+  Map,
+}) {
   const {
     myBattleMap,
     setMyShips,
@@ -27,8 +32,10 @@ export default function BattleArea({ ForcedMode, ShipPositions }) {
   const [BtnView, setBtnView] = useState(true);
   const [currentShip, setCurrentShip] = useState("ship2");
   const [localShip, setLocalShip] = useState(myShips);
+  const [localTiles, setLocalTiles] = useState(myBattleMap);
 
   useEffect(() => {
+    if (Map) setLocalTiles(Map);
     if (ForcedMode) {
       setThisMode(ForcedMode);
     }
@@ -39,7 +46,7 @@ export default function BattleArea({ ForcedMode, ShipPositions }) {
     } else {
       setLocalShip(myShips);
     }
-  }, [ShipPositions, ForcedMode]);
+  }, [ShipPositions, ForcedMode, Map]);
 
   const ResetShips = () => {
     for (let i = 0; i < 5; i++)
@@ -184,30 +191,31 @@ export default function BattleArea({ ForcedMode, ShipPositions }) {
   return (
     <section className={`${style.BattleArea}`}>
       <div className={`d-flex flex-wrap ${style.container}`}>
-        {ShipPositions
-          ? ShipPositions.map((ship, idx) => (
-              <Ship
-                key={`ship_${idx}`}
-                id={idx}
-                nbTiles={ship.Tiles}
-                TileSize={TileSize}
-                X={ship.Start[0]}
-                Y={ship.Start[1]}
-                isRotated={ship.rotated}
-              />
-            ))
-          : localShip.map((ship, idx) => (
-              <Ship
-                key={`ship_${idx}`}
-                id={idx}
-                nbTiles={ship.Tiles}
-                TileSize={TileSize}
-                X={ship.Start[0]}
-                Y={ship.Start[1]}
-                isRotated={ship.rotated}
-              />
-            ))}
-        {myBattleMap.map((Row, ridx) =>
+        {!isEnemyMap &&
+          (ShipPositions
+            ? ShipPositions.map((ship, idx) => (
+                <Ship
+                  key={`ship_${idx}`}
+                  id={idx}
+                  nbTiles={ship.Tiles}
+                  TileSize={TileSize}
+                  X={ship.Start[0]}
+                  Y={ship.Start[1]}
+                  isRotated={ship.rotated}
+                />
+              ))
+            : localShip.map((ship, idx) => (
+                <Ship
+                  key={`ship_${idx}`}
+                  id={idx}
+                  nbTiles={ship.Tiles}
+                  TileSize={TileSize}
+                  X={ship.Start[0]}
+                  Y={ship.Start[1]}
+                  isRotated={ship.rotated}
+                />
+              )))}
+        {localTiles.map((Row, ridx) =>
           Row.map((tile, cidx) => (
             <Tile
               key={`${ridx}_${cidx}`}

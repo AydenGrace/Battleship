@@ -17,6 +17,8 @@ export default function Battle() {
   const [MyBattleMapShip, setMyBattleMapShips] = useState(null);
   const [myTurn, setMyTurn] = useState(false);
   const [EnemyMapMode, setEnemyMapMode] = useState("none");
+  const [MyTiles, setMyTiles] = useState(null);
+  const [EnemyTiles, setEnemyTiles] = useState(null);
 
   useEffect(() => {
     refresh();
@@ -26,6 +28,12 @@ export default function Battle() {
     if (socket) {
       socket.on("battle", (message) => {
         console.log("START BATTLE");
+        console.log(message);
+        setThisRoom(message);
+        refresh();
+      });
+      socket.on("Shoot", (message) => {
+        console.log("SHOOT LANDING");
         console.log(message);
         setThisRoom(message);
         refresh();
@@ -41,9 +49,15 @@ export default function Battle() {
     setGameStatus(response.status);
     let idx;
     if (user) {
-      if (response.maps[0].user === user._id) idx = 0;
-      else if (response.maps[1].user === user._id) idx = 1;
-      else idx = -1;
+      if (response.maps[0].user === user._id) {
+        idx = 0;
+        setMyTiles(response.maps[idx].map);
+        setEnemyTiles(response.maps[1].map);
+      } else if (response.maps[1].user === user._id) {
+        idx = 1;
+        setMyTiles(response.maps[idx].map);
+        setEnemyTiles(response.maps[0].map);
+      } else idx = -1;
       if (idx > -1) {
         setMyBattleMapShips(response.maps[idx].ships);
         if (idx === response.current_turn) {
@@ -74,9 +88,18 @@ export default function Battle() {
 
           <div className="f-center flex-wrap">
             <div className={`${style.MyBattleMap}`}>
-              <BattleArea ForcedMode="none" ShipPositions={MyBattleMapShip} />
+              <BattleArea
+                ForcedMode="none"
+                ShipPositions={MyBattleMapShip}
+                isEnemyMap={false}
+                Map={MyTiles}
+              />
             </div>
-            <BattleArea ForcedMode={EnemyMapMode} />
+            <BattleArea
+              ForcedMode={EnemyMapMode}
+              isEnemyMap={true}
+              Map={EnemyTiles}
+            />
           </div>
         </>
       ) : (

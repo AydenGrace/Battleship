@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Tile.module.scss";
+import { CurrentRoomContext } from "../../../../context/CurrentRoomContext";
 import { ShipContext } from "../../../../context/ShipContext";
+import { UserContext } from "../../../../context/UserContext";
 import toast from "react-hot-toast";
+import { Shoot } from "../../../../apis/room";
 
 export default function Tile({ Value, Column, Row, Mode }) {
+  const { room } = useContext(CurrentRoomContext);
+  const { user } = useContext(UserContext);
   const [Pointer, setPointer] = useState("");
   const [Hover, setHover] = useState("");
   const [EffectBG, setEffectBG] = useState("");
@@ -17,6 +22,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
   } = useContext(ShipContext);
 
   useEffect(() => {
+    console.log(Value);
     switch (Value.type) {
       case "sea":
         setHover("TileHover");
@@ -55,7 +61,10 @@ export default function Tile({ Value, Column, Row, Mode }) {
         setPointer("");
         break;
       case "battle":
-        if (Value.type != "border") setHover("BattleHover");
+        if (Value.type != "border") {
+          setHover("BattleHover");
+          setPointer("pointer");
+        }
         break;
       case "selection":
       case "test":
@@ -63,7 +72,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
         break;
     }
     if (Value.type === "border") return;
-  }, [myBattleMap, Mode]);
+  }, [Value, Mode]);
 
   const handleClick = () => {
     switch (Mode) {
@@ -73,6 +82,8 @@ export default function Tile({ Value, Column, Row, Mode }) {
         break;
       case "battle":
         console.log("SHOOT", Row, Column);
+        console.log(room);
+        Shoot(room._id, user._id, Row, Column);
         break;
       case "test":
         // TestSwitch(Row, Column);
