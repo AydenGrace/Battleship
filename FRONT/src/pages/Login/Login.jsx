@@ -72,14 +72,14 @@ export default function Login() {
           )}
         </div>
         <div className="d-flex flex-column mb-10">
-          <label htmlFor="password" className="mb-10 input">
+          <label htmlFor="password" className="mb-10">
             Mot de passe
           </label>
           <input
             {...register("password")}
             type="password"
             id="password"
-            className="mb-10"
+            className="mb-10 input"
           />
           {errors.password && (
             <p className="text-error">{errors.password.message}</p>
