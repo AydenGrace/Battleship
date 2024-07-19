@@ -62,8 +62,8 @@ export default function Register() {
 
   return (
     <div className="f-center flex-column flex-fill">
-      <form className="d-flex flex-column" onSubmit={handleSubmit(submit)}>
-        <div className="d-flex flex-column mb-10 card">
+      <form className="d-flex flex-column card" onSubmit={handleSubmit(submit)}>
+        <div className="d-flex flex-column mb-10 ">
           <label htmlFor="username" className="mb-10">
             Pseudo
           </label>
@@ -88,7 +88,9 @@ export default function Register() {
             className="mb-10 input"
           />
           {errors.password && (
-            <p className="text-error">{errors.password.message}</p>
+            <p className="text-error" style={{ maxWidth: "300px" }}>
+              {errors.password.message}
+            </p>
           )}
         </div>
         <div className="d-flex flex-column mb-10">

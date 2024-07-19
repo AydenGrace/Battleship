@@ -56,8 +56,8 @@ export default function Login() {
 
   return (
     <div className="f-center flex-column flex-fill">
-      <form className="d-flex flex-column" onSubmit={handleSubmit(submit)}>
-        <div className="d-flex flex-column mb-10 card">
+      <form className="d-flex flex-column card" onSubmit={handleSubmit(submit)}>
+        <div className="d-flex flex-column mb-10 ">
           <label htmlFor="username" className="mb-10">
             Pseudo
           </label>
