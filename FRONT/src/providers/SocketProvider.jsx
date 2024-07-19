@@ -14,7 +14,8 @@ export default function SocketProvider({ children }) {
       return;
     }
 
-    const socket = io("http://localhost:5000", { query: { userId: user._id } });
+    // const socket = io("http://localhost:5000", { query: { userId: user._id } });
+    const socket = io("https://battleship-zb1l.onrender.com", { query: { userId: user._id } });
     setSocket(socket);
     socket.on("getOnlineUsers", (users) => {
       setOnlineUsers(users);

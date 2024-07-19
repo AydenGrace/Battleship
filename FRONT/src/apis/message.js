@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5000/api/messages";
+// const BASE_URL = "http://localhost:5000/api/messages";
+const BASE_URL = "https://battleship-zb1l.onrender.com/api/messages";
 
 export async function sendMessage(messageToSend, ReceiverId) {
   if (!localStorage.getItem("user")) return [];

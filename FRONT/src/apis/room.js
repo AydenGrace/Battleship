@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5000/api/rooms";
+// const BASE_URL = "http://localhost:5000/api/rooms";
+const BASE_URL = "https://battleship-zb1l.onrender.com/api/rooms";
 
 export async function createRoom(_id) {
   try {
