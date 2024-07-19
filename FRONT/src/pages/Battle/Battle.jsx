@@ -135,7 +135,7 @@ export default function Battle() {
               showModal={isFinish}
               OnClose={() => (window.location.href = "/")}
             >
-              <h2>Vous avez gagné !</h2>
+              <h2 className="mb-10">Vous avez gagné !</h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}
@@ -148,7 +148,7 @@ export default function Battle() {
               showModal={isFinish}
               OnClose={() => (window.location.href = "/")}
             >
-              <h2>Vous avez perdu !</h2>
+              <h2 className="mb-10">Vous avez perdu !</h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}

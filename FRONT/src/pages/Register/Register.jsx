@@ -13,13 +13,15 @@ export default function Register() {
     username: yup.string().required("Le champ est obligatoire"),
     password: yup
       .string()
-      .required("Le mot de passe est obligatoire")
-      .min(5, "trop court")
-      .max(10, "trop long"),
+      .required("Champs requis")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$#!%*?&]{12,}$/,
+        "Votre mot de passe doit contenir au moins :\n1 lettre capitale\n1 lettre minuscule\n1 chiffre\n1 caractère spécial (&@$#!%*?&)"
+      ),
     confirmPassword: yup
       .string()
-      .required("Vous devez confirmer votre mot de passe")
-      .oneOf([yup.ref("password"), ""], "Les mots ne correspondent pas"),
+      .required("Champs requis")
+      .oneOf([yup.ref("password"), ""], "Le mot de passe doit être identique"),
     rgpd: yup
       .boolean()
       .oneOf([true], "Vous devez accepter les termes et les conditions"),
@@ -69,7 +71,7 @@ export default function Register() {
             {...register("username")}
             type="text"
             id="username"
-            className="mb-10"
+            className="mb-10 input"
           />
           {errors.username && (
             <p className="text-error">{errors.username.message}</p>
@@ -83,7 +85,7 @@ export default function Register() {
             {...register("password")}
             type="password"
             id="password"
-            className="mb-10"
+            className="mb-10 input"
           />
           {errors.password && (
             <p className="text-error">{errors.password.message}</p>
@@ -97,7 +99,7 @@ export default function Register() {
             {...register("confirmPassword")}
             type="password"
             id="confirmPassword"
-            className="mb-10"
+            className="mb-10 input"
           />
           {errors.confirmPassword && (
             <p className="text-error">{errors.confirmPassword.message}</p>
@@ -118,7 +120,7 @@ export default function Register() {
         <NavLink to="/login" className="mb-20 feedbackText">
           Déjà inscrit ?
         </NavLink>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Valider</button>
       </form>
     </div>
   );

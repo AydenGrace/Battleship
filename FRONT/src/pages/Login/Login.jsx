@@ -65,14 +65,14 @@ export default function Login() {
             {...register("username")}
             type="text"
             id="username"
-            className="mb-10"
+            className="mb-10 input"
           />
           {errors.username && (
             <p className="text-error">{errors.username.message}</p>
           )}
         </div>
         <div className="d-flex flex-column mb-10">
-          <label htmlFor="password" className="mb-10">
+          <label htmlFor="password" className="mb-10 input">
             Mot de passe
           </label>
           <input
@@ -88,7 +88,7 @@ export default function Login() {
         <NavLink to="/register" className="mb-20 feedbackText">
           Pas encore inscrit ?
         </NavLink>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Valider</button>
       </form>
     </div>
   );
