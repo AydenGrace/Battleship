@@ -6,6 +6,7 @@ import { UserContext } from "../../context/UserContext";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { getRoom } from "../../apis/room";
 import BattleArea from "../../components/BattleArea/BattleArea";
+import Modal from "../../components/Modal/Modal";
 
 export default function Battle() {
   const { room, setRoom } = useContext(CurrentRoomContext);
@@ -19,6 +20,8 @@ export default function Battle() {
   const [EnemyMapMode, setEnemyMapMode] = useState("none");
   const [MyTiles, setMyTiles] = useState(null);
   const [EnemyTiles, setEnemyTiles] = useState(null);
+  const [isFinish, setIsFinish] = useState(false);
+  const [Winner, setWinner] = useState(false);
 
   useEffect(() => {
     refresh();
@@ -27,15 +30,30 @@ export default function Battle() {
   useEffect(() => {
     if (socket) {
       socket.on("battle", (message) => {
-        console.log("START BATTLE");
-        console.log(message);
+        // console.log("START BATTLE");
+        // console.log(message);
         setThisRoom(message);
         refresh();
       });
       socket.on("Shoot", (message) => {
-        console.log("SHOOT LANDING");
-        console.log(message);
+        // console.log("SHOOT LANDING");
+        // console.log(message);
         setThisRoom(message);
+        refresh();
+      });
+      socket.on("Finish", (message) => {
+        console.log("Game Finished");
+        //Le message est l'id du gagnant
+        console.log("Message :", message);
+        if (user._id === message) {
+          console.log("I'm the looser");
+          setWinner(false);
+        } else {
+          console.log("I'm the winner");
+          setWinner(true);
+        }
+        // EnemyMapMode("none");
+        setIsFinish(true);
         refresh();
       });
     }
@@ -43,7 +61,7 @@ export default function Battle() {
 
   const refresh = async () => {
     const response = await getRoom(id);
-    console.log(response);
+    // console.log(response);
     setThisRoom(response);
     setRoom(response);
     setGameStatus(response.status);
@@ -84,7 +102,17 @@ export default function Battle() {
         </>
       ) : gameStatus === "battle" ? (
         <>
-          {myTurn ? <h1>Votre Tour</h1> : <h1>Tour de l'adversaire</h1>}
+          {myTurn ? (
+            <>
+              <h1>Votre Tour</h1>
+              <h2>Tirez sur une case</h2>
+            </>
+          ) : (
+            <>
+              <h1>Tour de l'adversaire</h1>
+              <h2>Veuillez patienter...</h2>
+            </>
+          )}
 
           <div className="f-center flex-wrap">
             <div className={`${style.MyBattleMap}`}>
@@ -101,6 +129,34 @@ export default function Battle() {
               Map={EnemyTiles}
             />
           </div>
+
+          {isFinish && Winner ? (
+            <Modal
+              showModal={isFinish}
+              OnClose={() => (window.location.href = "/")}
+            >
+              <h2>Vous avez gagné !</h2>
+              <button
+                className="btn btn-primary"
+                onClick={() => (window.location.href = "/")}
+              >
+                Accueil
+              </button>
+            </Modal>
+          ) : (
+            <Modal
+              showModal={isFinish}
+              OnClose={() => (window.location.href = "/")}
+            >
+              <h2>Vous avez perdu !</h2>
+              <button
+                className="btn btn-primary"
+                onClick={() => (window.location.href = "/")}
+              >
+                Accueil
+              </button>
+            </Modal>
+          )}
         </>
       ) : (
         <></>

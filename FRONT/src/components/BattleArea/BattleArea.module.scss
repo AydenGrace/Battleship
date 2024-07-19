@@ -3,22 +3,26 @@
 .BattleArea {
   position: relative;
   max-width: calc(var(--Tile-desktop) * 11);
+  min-width: calc(var(--Tile-desktop) * 11);
   display: flex;
   flex-wrap: wrap;
 
   @include mixin.xs {
     max-width: calc(var(--Tile-mobile) * 11);
+    min-width: calc(var(--Tile-mobile) * 11);
   }
 }
 
 .container {
   position: relative;
   max-width: calc(var(--Tile-desktop) * 11);
+  min-width: calc(var(--Tile-desktop) * 11);
   display: flex;
   flex-wrap: wrap;
 
   @include mixin.xs {
     max-width: calc(var(--Tile-mobile) * 11);
+    min-width: calc(var(--Tile-mobile) * 11);
   }
   &::before {
     content: "";

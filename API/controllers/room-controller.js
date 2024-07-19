@@ -270,7 +270,17 @@ const Shoot = async (req, res) => {
     );
     console.log(thisRoom.maps[idx].map[X][Y].type);
     res.send({ message: "Tir lancé" });
-    Broadcast(thisRoom, "Shoot", thisRoom);
+
+    //VERIFICATION SI FIN DE JEU
+    let isFinish = true;
+    thisRoom.maps[idx].map.map((Row) => {
+      Row.map((Tile) => {
+        if (Tile.type === "ship") isFinish = false;
+      });
+    });
+    //ENVOI DU MESSAGE CORRESPONDANT
+    if (isFinish) Broadcast(thisRoom, "Finish", thisRoom.maps[idx].user);
+    else Broadcast(thisRoom, "Shoot", thisRoom);
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: e.message });

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { createRoom, joinRoom } from "../../apis/room";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { Navigate } from "react-router-dom";
+import Modal from "../../components/Modal/Modal";
 
 export default function Homepage() {
   const { user } = useContext(UserContext);

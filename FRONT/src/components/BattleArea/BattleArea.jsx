@@ -39,7 +39,7 @@ export default function BattleArea({
     if (ForcedMode) {
       setThisMode(ForcedMode);
     }
-    console.log(ShipPositions);
+    // console.log(ShipPositions);
     if (ShipPositions) {
       setMyShips(ShipPositions);
       setLocalShip(ShipPositions);
@@ -47,35 +47,6 @@ export default function BattleArea({
       setLocalShip(myShips);
     }
   }, [ShipPositions, ForcedMode, Map]);
-
-  const ResetShips = () => {
-    for (let i = 0; i < 5; i++)
-      document.getElementById(`ship_${i}`).style.display = "none";
-  };
-
-  const ShowShip = () => {
-    if (idx > 5 || idx === 0) return;
-    document.getElementById(`ship_${idx - 1}`).style.display = "block";
-  };
-
-  const changeMode = () => {
-    switch (thisMode) {
-      case "selection":
-        setMode("battle");
-        break;
-      case "battle":
-        setMode("test");
-        break;
-      case "test":
-        setMode("none");
-        break;
-      case "none":
-      default:
-        setMode("selection");
-        break;
-    }
-    setThisMode(thisMode);
-  };
 
   const handleRotate = () => {
     let canRotate = false;
@@ -109,13 +80,13 @@ export default function BattleArea({
     //VERIFICATION NAVIRE SUR TRAJECTOIR
     if (!localShip[preparedIndex].rotated) {
       for (let i = 1; i < localShip[preparedIndex].Tiles; i++) {
-        console.log(
-          myBattleMap[localShip[preparedIndex].Start[1] + i][
-            localShip[preparedIndex].Start[0]
-          ]
-        );
+        // console.log(
+        //   myBattleMap[localShip[preparedIndex].Start[1] + i][
+        //     localShip[preparedIndex].Start[0]
+        //   ]
+        // );
         if (
-          myBattleMap[localShip[preparedIndex].Start[1] + i][
+          localTiles[localShip[preparedIndex].Start[1] + i][
             localShip[preparedIndex].Start[0]
           ].type === "ship"
         )
@@ -124,7 +95,7 @@ export default function BattleArea({
     } else {
       for (let i = 1; i < localShip[preparedIndex].Tiles; i++) {
         if (
-          myBattleMap[localShip[preparedIndex].Start[1]][
+          localTiles[localShip[preparedIndex].Start[1]][
             localShip[preparedIndex].Start[0] + i
           ].type === "ship"
         )
@@ -142,7 +113,7 @@ export default function BattleArea({
       if (tempsShips[preparedIndex].rotated)
         tempsShips[preparedIndex].rotated = !tempsShips[preparedIndex].rotated;
       else tempsShips[preparedIndex].rotated = true;
-      setLocalShip(tempsShips);
+      setLocalShip([...tempsShips]);
       return;
     }
   };
@@ -159,9 +130,9 @@ export default function BattleArea({
       setValidateText("En attente de l'adversaire...");
       setBtnView(false);
       setMode("none");
-      console.log(room);
-      console.log(user);
-      console.log(myBattleMap);
+      // console.log(room);
+      // console.log(user);
+      // console.log(myBattleMap);
       setPreparedIndex(0);
       PreparationsCompleted(room._id, user._id, myBattleMap, localShip);
     } else {

@@ -22,7 +22,6 @@ export default function Tile({ Value, Column, Row, Mode }) {
   } = useContext(ShipContext);
 
   useEffect(() => {
-    console.log(Value);
     switch (Value.type) {
       case "sea":
         setHover("TileHover");
@@ -77,17 +76,17 @@ export default function Tile({ Value, Column, Row, Mode }) {
   const handleClick = () => {
     switch (Mode) {
       case "selection":
-        console.log(Row, Column, Value.type);
+        // console.log(Row, Column, Value.type);
         PrepareMyShips(Row, Column);
         break;
       case "battle":
-        console.log("SHOOT", Row, Column);
-        console.log(room);
+        // console.log("SHOOT", Row, Column);
+        // console.log(room);
         Shoot(room._id, user._id, Row, Column);
         break;
       case "test":
         // TestSwitch(Row, Column);
-        console.log(Row, Column, Value.type);
+        // console.log(Row, Column, Value.type);
         break;
       case "none":
       default:
@@ -96,7 +95,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
   };
 
   const PrepareMyShips = (Row, Column) => {
-    console.log(myShips[preparedIndex]);
+    // console.log(myShips[preparedIndex]);
     //SI CLICK SUR BORDURE
     if (Row < 1 || Column < 1) {
       toast.error("Impossible de placer un navire sur une bordure");
@@ -130,19 +129,16 @@ export default function Tile({ Value, Column, Row, Mode }) {
         ]);
       }
     }
-    console.log(OldShipPosition);
+    // console.log(OldShipPosition);
 
     if (myShips[preparedIndex].rotated) {
       for (let i = 0; i < myShips[preparedIndex].Tiles; i++) {
-        console.log(myBattleMap[Row + i][Column]);
+        // console.log(myBattleMap[Row + i][Column]);
         if (myBattleMap[Row + i][Column].type === "ship") {
           const found = OldShipPosition.find(
             (pos) => pos[0] === Row + i && pos[1] === Column
           );
-          if (found) {
-            console.log("IS OLD SHIP POSITION");
-          } else {
-            console.log("IS ANOTHER SHIP POSITION");
+          if (!found) {
             ThereIsAShip = true;
           }
         }
@@ -153,10 +149,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
           const found = OldShipPosition.find(
             (pos) => pos[0] === Row && pos[1] === Column + i
           );
-          if (found) {
-            console.log("IS OLD SHIP POSITION");
-          } else {
-            console.log("IS ANOTHER SHIP POSITION");
+          if (!found) {
             ThereIsAShip = true;
           }
         }
@@ -169,11 +162,11 @@ export default function Tile({ Value, Column, Row, Mode }) {
     setShipPosition(preparedIndex, Column, Row);
   };
 
-  const rotate = () => {
-    if (Mode === "selection") {
-      console.log("ROTATE");
-    }
-  };
+  // const rotate = () => {
+  //   if (Mode === "selection") {
+  //     console.log("ROTATE");
+  //   }
+  // };
 
   return (
     <div className={`${style.Tile} f-center ${Pointer} `} onClick={handleClick}>
