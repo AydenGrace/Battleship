@@ -35,13 +35,13 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
     if (isRotated) {
       switch (nbTiles) {
         case 2:
-          setTransform(`translateX(-20%) translateY(50%) rotate(90deg)`);
+          setTransform(`translateX(-25%) translateY(50%) rotate(90deg)`);
           break;
         case 3:
           setTransform(`translateX(-33%) translateY(100%) rotate(90deg)`);
           break;
         case 4:
-          setTransform(`translateX(-38%) translateY(150%) rotate(90deg)`);
+          setTransform(`translateX(-37.5%) translateY(150%) rotate(90deg)`);
           break;
         case 5:
         default:
