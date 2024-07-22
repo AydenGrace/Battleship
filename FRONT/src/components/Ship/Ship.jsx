@@ -69,12 +69,6 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
     setSelectedShip(id);
     console.log(`Current selected ship : ${id}`);
     toast.success("Ship selected !");
-    // toast("TOUCHÉ !", {
-    //   icon: "📢",
-    // });
-    // toast("RATÉ !", {
-    //   icon: "🌊",
-    // });
   };
 
   return (

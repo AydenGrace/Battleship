@@ -71,7 +71,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
         break;
     }
     if (Value.type === "border") return;
-  }, [Value, Mode]);
+  }, [Value, Mode, myBattleMap]);
 
   const handleClick = () => {
     switch (Mode) {
@@ -161,12 +161,6 @@ export default function Tile({ Value, Column, Row, Mode }) {
     }
     setShipPosition(preparedIndex, Column, Row);
   };
-
-  // const rotate = () => {
-  //   if (Mode === "selection") {
-  //     console.log("ROTATE");
-  //   }
-  // };
 
   return (
     <div className={`${style.Tile} f-center ${Pointer} `} onClick={handleClick}>
