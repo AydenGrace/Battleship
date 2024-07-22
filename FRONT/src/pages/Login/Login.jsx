@@ -94,7 +94,7 @@ export default function Login() {
               onClick={(e) => togglePwd()}
             >
               {showPwd ? (
-                <i className="fa-solid faeye-slash fa-xl"></i>
+                <i className="fa-solid fa-eye-slash fa-xl"></i>
               ) : (
                 <i className="fa-solid fa-eye fa-xl"></i>
               )}

@@ -4,9 +4,12 @@ import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signup } from "../../apis/users";
+import style from "./Register.module.scss";
 
 export default function Register() {
   const [feedback, setFeedback] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
+  const [showConfPwd, setShowConfPwd] = useState(false);
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -60,6 +63,10 @@ export default function Register() {
     }
   }
 
+  const togglePwd = (isConf) => {
+    isConf ? setShowConfPwd(!showConfPwd) : setShowPwd(!showPwd);
+  };
+
   return (
     <div className="f-center flex-column flex-fill">
       <h1 className="mb-10">Inscription</h1>
@@ -82,12 +89,24 @@ export default function Register() {
           <label htmlFor="password" className="mb-10">
             Mot de passe
           </label>
-          <input
-            {...register("password")}
-            type="password"
-            id="password"
-            className="mb-10 input"
-          />
+          <div className="relative">
+            <input
+              {...register("password")}
+              type={showPwd ? "text" : "password"}
+              id="password"
+              className="mb-10 input"
+            />
+            <div
+              className={`${style.showBtn} btn btn-primary`}
+              onClick={(e) => togglePwd(false)}
+            >
+              {showPwd ? (
+                <i className="fa-solid fa-eye-slash fa-xl"></i>
+              ) : (
+                <i className="fa-solid fa-eye fa-xl"></i>
+              )}
+            </div>
+          </div>
           {errors.password && (
             <p className="text-error" style={{ maxWidth: "300px" }}>
               {errors.password.message}
@@ -98,12 +117,24 @@ export default function Register() {
           <label htmlFor="confirmPassword" className="mb-10">
             Confirmation de mot de passe
           </label>
-          <input
-            {...register("confirmPassword")}
-            type="password"
-            id="confirmPassword"
-            className="mb-10 input"
-          />
+          <div className="relative">
+            <input
+              {...register("confirmPassword")}
+              type={showConfPwd ? "text" : "password"}
+              id="confirmPassword"
+              className="mb-10 input"
+            />
+            <div
+              className={`${style.showBtn} btn btn-primary`}
+              onClick={(e) => togglePwd(truee)}
+            >
+              {showPwd ? (
+                <i className="fa-solid fa-eye-slash fa-xl"></i>
+              ) : (
+                <i className="fa-solid fa-eye fa-xl"></i>
+              )}
+            </div>
+          </div>
           {errors.confirmPassword && (
             <p className="text-error">{errors.confirmPassword.message}</p>
           )}

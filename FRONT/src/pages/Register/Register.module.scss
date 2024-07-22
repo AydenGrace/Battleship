@@ -1,0 +1,14 @@
+.showBtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  background-color: var(--primary);
+  border-radius: 20px;
+  min-height: 100%;
+  min-width: 50px;
+  padding: 0;
+  z-index: 2;
+}
