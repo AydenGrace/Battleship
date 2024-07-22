@@ -80,23 +80,39 @@
 }
 
 .ship2 {
-  mask-size: contain;
-  -webkit-mask-image: url("../../../public/ship_2.svg");
-  mask-image: url("../../../public/ship_2.svg");
+  // mask-size: contain;
+  // -webkit-mask-image: url("../../../public/ship_2.svg");
+  // mask-image: url("../../../public/ship_2.svg");
+  background-image: url("../../../public/ship_2.webp");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
 }
 .ship3 {
-  -webkit-mask-image: url("../../../public/ship_3.svg");
-  mask-image: url("../../../public/ship_3.svg");
+  // -webkit-mask-image: url("../../../public/ship_3.svg");
+  // mask-image: url("../../../public/ship_3.svg");
+  background-image: url("../../../public/ship_3.webp");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
 }
 .ship4 {
-  mask-size: contain;
-  -webkit-mask-image: url("../../../public/ship_4.svg");
-  mask-image: url("../../../public/ship_4.svg");
+  // mask-size: contain;
+  // -webkit-mask-image: url("../../../public/ship_4.svg");
+  // mask-image: url("../../../public/ship_4.svg");
+  background-image: url("../../../public/ship_4.webp");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
 }
 .ship5 {
-  mask-size: cover;
-  -webkit-mask-image: url("../../../public/ship_5.svg");
-  mask-image: url("../../../public/ship_5.svg");
+  // mask-size: cover;
+  // -webkit-mask-image: url("../../../public/ship_5.svg");
+  // mask-image: url("../../../public/ship_5.svg");
+  background-image: url("../../../public/ship_5.webp");
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
 }
 
 .w-100 {
