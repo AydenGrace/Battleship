@@ -64,6 +64,21 @@ a {
   position: relative;
 }
 
+.showBtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  background-color: var(--primary);
+  border-radius: 20px;
+  min-height: 100%;
+  min-width: 50px;
+  padding: 0;
+  z-index: 2;
+}
+
 @-webkit-keyframes bounce-in-fwd {
   0% {
     -webkit-transform: scale(0);

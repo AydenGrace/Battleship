@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 export default function Login() {
   const [feedback, setFeedback] = useState("");
   const navigate = useNavigate();
+  const [showPwd, setShowPwd] = useState(false);
   const { setConnectedUser } = useContext(UserContext);
 
   const schema = yup.object({
@@ -54,6 +55,10 @@ export default function Login() {
     }
   }
 
+  const togglePwd = () => {
+    setShowPwd(!showPwd);
+  };
+
   return (
     <div className="f-center flex-column flex-fill">
       <h1 className="mb-10">Connexion</h1>
@@ -76,12 +81,24 @@ export default function Login() {
           <label htmlFor="password" className="mb-10">
             Mot de passe
           </label>
-          <input
-            {...register("password")}
-            type="password"
-            id="password"
-            className="mb-10 input"
-          />
+          <div className="relative">
+            <input
+              {...register("password")}
+              type={showPwd ? "text" : "password"}
+              id="password"
+              className="mb-10 input"
+            />
+            <div
+              className={`${style.showBtn} btn btn-primary`}
+              onClick={(e) => togglePwd()}
+            >
+              {showPwd ? (
+                <i className="fa-solid faeye-slash fa-xl"></i>
+              ) : (
+                <i className="fa-solid fa-eye fa-xl"></i>
+              )}
+            </div>
+          </div>
           {errors.password && (
             <p className="text-error">{errors.password.message}</p>
           )}
