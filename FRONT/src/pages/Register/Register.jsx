@@ -94,7 +94,7 @@ export default function Register() {
               {...register("password")}
               type={showPwd ? "text" : "password"}
               id="password"
-              className="mb-10 input"
+              className="mb-10 input w-100"
             />
             <div
               className={`${style.showBtn} btn btn-primary`}
@@ -122,7 +122,7 @@ export default function Register() {
               {...register("confirmPassword")}
               type={showConfPwd ? "text" : "password"}
               id="confirmPassword"
-              className="mb-10 input"
+              className="mb-10 input w-100"
             />
             <div
               className={`${style.showBtn} btn btn-primary`}
