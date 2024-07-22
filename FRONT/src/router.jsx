@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Homepage from "./pages/Homepage/Homepage";
-import Prepare from "./pages/Prepare/Prepare";
 import Battle from "./pages/Battle/Battle";
 import RoomTest from "./pages/RoomTest/RoomTest";
 import Login from "./pages/Login/Login";
@@ -10,7 +9,6 @@ import Logout from "./pages/Logout/Logout";
 import Room from "./pages/Room/Room";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
-import InRoom from "./components/ProtectedRoutes/InRoom";
 
 export const router = createBrowserRouter([
   {
