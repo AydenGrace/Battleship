@@ -75,7 +75,7 @@ export default function Login() {
             className="mb-10 input"
           />
           {errors.username && (
-            <p className="text-error">{errors.username.message}</p>
+            <p className="text-error c-p">{errors.username.message}</p>
           )}
         </div>
         <div className="d-flex flex-column mb-10">
@@ -101,7 +101,7 @@ export default function Login() {
             </div>
           </div>
           {errors.password && (
-            <p className="text-error">{errors.password.message}</p>
+            <p className="text-error c-p">{errors.password.message}</p>
           )}
         </div>
         <NavLink to="/register" className="mb-20 feedbackText">

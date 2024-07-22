@@ -82,12 +82,16 @@ export default function Register() {
             className="mb-10 input"
           />
           {errors.username && (
-            <p className="text-error">{errors.username.message}</p>
+            <p className="text-error c-p">{errors.username.message}</p>
           )}
         </div>
         <div className="d-flex flex-column mb-10">
           <label htmlFor="password" className="mb-10">
-            Mot de passe
+            Mot de passe{" "}
+            <div className={`${style.ToolBox}`}>
+              <i className={`fa-solid c-p fa-circle-info ${style.ToolTip}`}></i>
+              <div className={`${style.ToolArea}`}>Hello</div>
+            </div>
           </label>
           <div className="relative">
             <input
@@ -108,7 +112,7 @@ export default function Register() {
             </div>
           </div>
           {errors.password && (
-            <p className="text-error" style={{ maxWidth: "300px" }}>
+            <p className="text-error c-p" style={{ maxWidth: "300px" }}>
               {errors.password.message}
             </p>
           )}
@@ -136,7 +140,7 @@ export default function Register() {
             </div>
           </div>
           {errors.confirmPassword && (
-            <p className="text-error">{errors.confirmPassword.message}</p>
+            <p className="text-error c-p">{errors.confirmPassword.message}</p>
           )}
         </div>
         <div className="d-flex flex-column mb-10">
@@ -149,7 +153,9 @@ export default function Register() {
             />
             En soumettant ce formulaire j'accepte ...
           </label>
-          {errors.rgpd && <p className="text-error">{errors.rgpd.message}</p>}
+          {errors.rgpd && (
+            <p className="text-error c-p">{errors.rgpd.message}</p>
+          )}
         </div>
         <NavLink to="/login" className="mb-20 feedbackText">
           Déjà inscrit ?
