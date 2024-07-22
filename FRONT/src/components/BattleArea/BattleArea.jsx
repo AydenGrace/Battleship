@@ -222,7 +222,7 @@ export default function BattleArea({
             </div>
           )}
           <div
-            className={`d-flex justify-content-sb align-items-center w-100 p-10 ${style.btnArea}`}
+            className={`d-flex justify-content-center align-items-center w-100 p-10 ${style.btnArea}`}
           >
             {BtnView && (
               <button className="btn btn-primary" onClick={handleRotate}>
