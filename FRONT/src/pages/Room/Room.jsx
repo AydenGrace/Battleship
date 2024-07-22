@@ -97,6 +97,10 @@ export default function Room() {
         else setOneReadyBg("");
       }
     });
+    if (!response.users.length) {
+      setCanStart(false);
+      return;
+    }
     if (response.users[0].ready && response.users[1].ready) setCanStart(true);
     else setCanStart(false);
   };
