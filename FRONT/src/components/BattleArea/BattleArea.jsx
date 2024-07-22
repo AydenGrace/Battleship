@@ -109,7 +109,7 @@ export default function BattleArea({
 
     //ROTATION
     if (canRotate) {
-      let tempsShips = [...localShip];
+      let tempsShips = localShip;
       if (tempsShips[preparedIndex].rotated)
         tempsShips[preparedIndex].rotated = !tempsShips[preparedIndex].rotated;
       else tempsShips[preparedIndex].rotated = true;
