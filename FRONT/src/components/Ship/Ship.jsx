@@ -52,7 +52,7 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
 
     if (X > 0 && X < 11 && Y > 0 && Y < 11) setDisplay("block");
     else setDisplay("none");
-  }, [myShips]);
+  }, [myShips, isRotated]);
 
   useEffect(() => {
     // console.log(window.innerWidth);

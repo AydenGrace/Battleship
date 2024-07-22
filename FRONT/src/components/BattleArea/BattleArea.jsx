@@ -48,6 +48,10 @@ export default function BattleArea({
     }
   }, [ShipPositions, ForcedMode, Map]);
 
+  useEffect(() => {
+    console.log("Ship value changed");
+  }, [localShip]);
+
   const handleRotate = () => {
     let canRotate = false;
     if (localShip[preparedIndex].rotated) {
@@ -115,6 +119,7 @@ export default function BattleArea({
       else tempsShips[preparedIndex].rotated = true;
       setLocalShip([...tempsShips]);
       myShips([...tempsShips]);
+
       return;
     }
   };
