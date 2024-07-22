@@ -16,6 +16,7 @@
 .ToolBox {
   cursor: pointer;
   height: 100%;
+  display: flex;
   .ToolArea {
     position: absolute;
     right: -80px;
