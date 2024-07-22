@@ -212,7 +212,7 @@ export default function BattleArea({
               className={`d-flex justify-content-sb align-items-center w-100 p-10 gap-10 ${style.btnArea}`}
             >
               <div
-                className={`${style.ship} ship${currentShip}`}
+                className={`${style.ship} ${currentShip}`}
                 id="ship_preview"
               ></div>
               <div className="d-flex align-items-center flex-fill gap-10">
