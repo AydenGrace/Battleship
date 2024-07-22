@@ -86,12 +86,12 @@ export default function Room() {
     setThisRoom(response);
     setRoom(response);
     setImReady(false);
-    response.users.map((user, idx) => {
-      console.log(`Player ${idx} is ${user.ready}`);
-      if (user.ready) {
+    response.users.map((user_, idx) => {
+      console.log(`Player ${idx} is ${user_.ready}`);
+      if (user_.ready) {
         if (idx) setTwoReadyBg("bg-g");
         else setOneReadyBg("bg-g");
-        if (user._id.equals(user._id)) setImReady(true);
+        if (user_._id === user._id) setImReady(true);
       } else {
         if (idx) setTwoReadyBg("");
         else setOneReadyBg("");
