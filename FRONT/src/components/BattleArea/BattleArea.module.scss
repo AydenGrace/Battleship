@@ -40,6 +40,15 @@
   }
 }
 
+.test {
+  width: 300px;
+  height: 300px;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/battleship-65975.appspot.com/o/tile.webp?alt=media&token=a7d2745a-612b-4a09-ae9c-06d16dca0466");
+  background-position: center;
+  background-size: cover;
+  filter: url("#turbulence");
+}
+
 .btnArea {
   @include mixin.xs {
     align-items: center;

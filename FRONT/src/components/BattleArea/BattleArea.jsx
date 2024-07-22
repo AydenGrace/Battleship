@@ -273,6 +273,7 @@ export default function BattleArea({
           </button>
         </div>
       )}
+      <div className={`${style.test}`}></div>
     </section>
   );
 }
