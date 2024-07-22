@@ -114,6 +114,7 @@ export default function BattleArea({
         tempsShips[preparedIndex].rotated = !tempsShips[preparedIndex].rotated;
       else tempsShips[preparedIndex].rotated = true;
       setLocalShip([...tempsShips]);
+      myShips([...tempsShips]);
       return;
     }
   };
