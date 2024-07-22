@@ -87,11 +87,7 @@ export default function Register() {
         </div>
         <div className="d-flex flex-column mb-10">
           <label htmlFor="password" className="mb-10">
-            Mot de passe{" "}
-            <div className={`${style.ToolBox}`}>
-              <i className={`fa-solid c-p fa-circle-info ${style.ToolTip}`}></i>
-              <div className={`${style.ToolArea}`}>Hello</div>
-            </div>
+            Mot de passe
           </label>
           <div className="relative">
             <input
