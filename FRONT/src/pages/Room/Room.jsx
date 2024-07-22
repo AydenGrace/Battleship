@@ -15,6 +15,7 @@ export default function Room() {
   const [thisRoom, setThisRoom] = useState();
   const [OneReadyBg, setOneReadyBg] = useState("");
   const [TwoReadyBg, setTwoReadyBg] = useState("");
+  const [ImReady, setImReady] = useState(false);
   const [canStart, setCanStart] = useState(false);
   const ReadyBg = "bg-g";
   let userInRoom = false;
@@ -84,11 +85,13 @@ export default function Room() {
     // console.log(response);
     setThisRoom(response);
     setRoom(response);
+    setImReady(false);
     response.users.map((user, idx) => {
       console.log(`Player ${idx} is ${user.ready}`);
       if (user.ready) {
         if (idx) setTwoReadyBg("bg-g");
         else setOneReadyBg("bg-g");
+        if (user._id.equals(user._id)) setImReady(true);
       } else {
         if (idx) setTwoReadyBg("");
         else setOneReadyBg("");
@@ -148,6 +151,13 @@ export default function Room() {
                   onClick={handleStart}
                 >
                   Démarrer la partie !
+                </button>
+              ) : ImReady ? (
+                <button
+                  className={`btn btn-primary bg-r ${style.ReadyBtn}`}
+                  onClick={handleClick}
+                >
+                  Annuler
                 </button>
               ) : (
                 <button
