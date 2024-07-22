@@ -126,9 +126,9 @@ export default function Register() {
             />
             <div
               className={`${style.showBtn} btn btn-primary`}
-              onClick={(e) => togglePwd(truee)}
+              onClick={(e) => togglePwd(true)}
             >
-              {showPwd ? (
+              {showConfPwd ? (
                 <i className="fa-solid fa-eye-slash fa-xl"></i>
               ) : (
                 <i className="fa-solid fa-eye fa-xl"></i>
