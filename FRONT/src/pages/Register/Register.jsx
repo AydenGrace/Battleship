@@ -18,7 +18,7 @@ export default function Register() {
       .string()
       .required("Champs requis")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d²&é~"#'{(-|è`_ç^à@)=}°)}$£¨^¤ù%!§:;.,?µ*-+/\\\[\]]{12,}$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[²&é~"#'{(-|è`_ç^à@)=}°)$£¨^¤ù%!§:;.,?µ*-+/\\\[\]])[A-Za-z\d²&é~"#'{(-|è`_ç^à@)=}°)$£¨^¤ù%!§:;.,?µ*-+/\\\[\]]{12,}$/,
         "Votre mot de passe doit contenir au moins :\n1 lettre capitale\n1 lettre minuscule\n1 chiffre\n1 caractère spécial"
       ),
     confirmPassword: yup
