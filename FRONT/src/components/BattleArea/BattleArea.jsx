@@ -168,7 +168,7 @@ export default function BattleArea({
   return (
     <section className={`${style.BattleArea}`}>
       <div className={`d-flex flex-wrap ${style.container}`}>
-        <svg style={{ width: "0" }}>
+        <svg style={{ width: "0", height: "0" }}>
           <filter id="turbulence" x="0" y="0" width="100%" height="100%">
             <feTurbulence
               id="sea-filter"
