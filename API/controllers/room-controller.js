@@ -60,7 +60,7 @@ const joinRoom = async (req, res) => {
       res.status(400).json({ error: "User not Found" });
       return;
     }
-    const isRoomExist = await Room.findOne({ code: code });
+    const isRoomExist = await Room.findOne({ code: code, status: "pending" });
     // VERIFICATIONS
     // console.log(isRoomExist);
     if (!isRoomExist) {
