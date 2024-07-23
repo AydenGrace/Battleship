@@ -250,6 +250,8 @@ const Shoot = async (req, res) => {
     switch (thisRoom.maps[idx].map[X][Y].type) {
       case "ship":
         thisRoom.maps[idx].map[X][Y].type = "destroyed";
+        const shipIDX = thisRoom.maps[idx].map[X][Y].shipIDX;
+        thisRoom.maps[idx].ships[shipIDX].Life--;
         break;
       case "sea":
         thisRoom.maps[idx].map[X][Y].type = "miss";
