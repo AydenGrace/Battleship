@@ -14,7 +14,11 @@
   margin: 20px;
   padding: 20px;
   color: white;
-  @include mixin.xs {
-    display: none;
-  }
+  // @include mixin.xs {
+  //   display: none;
+  // }
+}
+
+.bottomMargin {
+  min-height: 100px;
 }
