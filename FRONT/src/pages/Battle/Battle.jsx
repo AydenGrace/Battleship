@@ -90,13 +90,13 @@ export default function Battle() {
           setEnemyMapMode("none");
         }
       }
-
+      setMusic(response.status);
       // console.log(idx);
     }
   };
 
-  const setMusic = () => {
-    switch (gameStatus) {
+  const setMusic = (status) => {
+    switch (status) {
       case "prepare_battle":
         if (!PrepareAudio) {
           PrepareAudio = new Audio({
