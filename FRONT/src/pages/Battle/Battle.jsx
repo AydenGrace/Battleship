@@ -7,6 +7,8 @@ import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { getRoom } from "../../apis/room";
 import BattleArea from "../../components/BattleArea/BattleArea";
 import Modal from "../../components/Modal/Modal";
+import battle from "../../assets/sounds/battle.mp3";
+import prepare from "../../assets/sounds/prepare.mp3";
 
 export default function Battle() {
   const { room, setRoom } = useContext(CurrentRoomContext);
@@ -22,6 +24,8 @@ export default function Battle() {
   const [EnemyTiles, setEnemyTiles] = useState(null);
   const [isFinish, setIsFinish] = useState(false);
   const [Winner, setWinner] = useState(false);
+  let PrepareAudio;
+  let BattleAudio;
 
   useEffect(() => {
     refresh();
@@ -88,6 +92,42 @@ export default function Battle() {
       }
 
       // console.log(idx);
+    }
+  };
+
+  const setMusic = () => {
+    switch (gameStatus) {
+      case "prepare_battle":
+        if (!PrepareAudio) {
+          PrepareAudio = new Audio({
+            loop: true,
+            volume: 0.5,
+            src: prepare,
+          });
+          PrepareAudio.play();
+        }
+        break;
+      case "battle":
+        if (PrepareAudio) {
+          PrepareAudio.animate({ volume: 0 }, 1000, () => {
+            BattleAudio = new Audio({
+              loop: true,
+              volume: 0.5,
+              src: battle,
+            });
+            BattleAudio.play();
+          });
+        } else {
+          BattleAudio = new Audio({
+            loop: true,
+            volume: 0.5,
+            src: battle,
+          });
+          BattleAudio.play();
+        }
+        break;
+      default:
+        break;
     }
   };
 
