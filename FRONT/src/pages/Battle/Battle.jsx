@@ -25,6 +25,8 @@ export default function Battle() {
   const [EnemyTiles, setEnemyTiles] = useState(null);
   const [isFinish, setIsFinish] = useState(false);
   const [Winner, setWinner] = useState(false);
+  const [myLife, setMyLife] = useState(5);
+  const [enemyLife, setEnemyLife] = useState(5);
   let PrepareAudio;
   let BattleAudio;
 
@@ -82,6 +84,20 @@ export default function Battle() {
         setEnemyTiles(response.maps[0].map);
       } else idx = -1;
       if (idx > -1) {
+        let i = 0;
+        response.maps[idx].ships.map((ship_) => {
+          if (ship_.Life > 0) i++;
+        });
+        setMyLife(i);
+        i = 0;
+        let otherIdx;
+        if (idx) otherIdx = 0;
+        else otherIdx = 1;
+        response.maps[otherIdx].ships.map((ship_) => {
+          if (ship_.Life > 0) i++;
+        });
+        setEnemyLife(i);
+
         setMyBattleMapShips(response.maps[idx].ships);
         if (idx) setEnemyShips(response.maps[0].ships);
         else setEnemyShips(response.maps[1].ships);
@@ -138,7 +154,7 @@ export default function Battle() {
   };
 
   return (
-    <div className="d-flex flex-column w-100 flex-fill align-items-center p-20">
+    <div className="d-flex flex-column w-100 flex-fill align-items-center p-20 relative">
       {gameStatus === "prepare_battle" ? (
         <>
           <h1>Préparez vous !</h1>
@@ -164,7 +180,14 @@ export default function Battle() {
               <h2>Veuillez patienter...</h2>
             </>
           )}
+          {/* Lifes Points */}
 
+          <div className={`w-100 d-flex justify-content-sb ${style.LifeArea}`}>
+            <p>{myLife}</p>
+            <p>{enemyLife}</p>
+          </div>
+
+          {/* Battle Area */}
           <div className="f-center flex-wrap mb-20">
             <div className={`${style.MyBattleMap}`}>
               <BattleArea
@@ -199,7 +222,7 @@ export default function Battle() {
 
           {isFinish && Winner ? (
             <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
-              <h2 className="mb-10">Vous avez gagné !</h2>
+              <h2 className="mb-20">Vous avez gagné !</h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}
@@ -209,7 +232,7 @@ export default function Battle() {
             </Modal>
           ) : (
             <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
-              <h2 className="mb-10">Vous avez perdu !</h2>
+              <h2 className="mb-20">Vous avez perdu !</h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}
