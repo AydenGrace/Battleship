@@ -165,7 +165,7 @@ export default function Battle() {
             </>
           )}
 
-          <div className="f-center flex-wrap mb-10">
+          <div className="f-center flex-wrap mb-20">
             <div className={`${style.MyBattleMap}`}>
               <BattleArea
                 ForcedMode="none"
