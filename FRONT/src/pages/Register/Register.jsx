@@ -89,15 +89,15 @@ export default function Register() {
           <label htmlFor="password" className="mb-10">
             Mot de passe
           </label>
-          <div className="relative">
+          <div className="relative d-flex">
             <input
               {...register("password")}
               type={showPwd ? "text" : "password"}
               id="password"
-              className="mb-10 input w-100"
+              className="mb-10 input w-100 input_and_btn"
             />
             <div
-              className={`${style.showBtn} btn btn-primary`}
+              className={`${style.showBtn} btn btn-primary input_btn`}
               onClick={(e) => togglePwd(false)}
             >
               {showPwd ? (
@@ -117,15 +117,15 @@ export default function Register() {
           <label htmlFor="confirmPassword" className="mb-10">
             Confirmation de mot de passe
           </label>
-          <div className="relative">
+          <div className="relative d-flex">
             <input
               {...register("confirmPassword")}
               type={showConfPwd ? "text" : "password"}
               id="confirmPassword"
-              className="mb-10 input w-100"
+              className="mb-10 input w-100 input_and_btn"
             />
             <div
-              className={`${style.showBtn} btn btn-primary`}
+              className={`${style.showBtn} btn btn-primary input_btn`}
               onClick={(e) => togglePwd(true)}
             >
               {showConfPwd ? (
