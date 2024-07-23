@@ -240,6 +240,7 @@ export default function Battle() {
               </button>
             </Modal>
           )}
+          <div className={`${style.bottomMargin}`}></div>
         </>
       ) : (
         <></>
