@@ -90,9 +90,16 @@ export default function Tile({ Value, Column, Row, Mode }) {
             case "destroyed":
               const sound = new Audio(destroyed_sound);
               sound.play();
-              toast("Touché !", {
-                icon: "💣",
-              });
+              if (response.sink) {
+                toast("Touché Coulé !", {
+                  icon: "💣",
+                });
+              } else {
+                toast("Touché !", {
+                  icon: "💣",
+                });
+              }
+
               break;
             case "miss":
               const misssound = new Audio(miss_sound);

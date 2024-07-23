@@ -247,11 +247,14 @@ const Shoot = async (req, res) => {
     else idx = -1;
 
     // console.log(thisRoom.maps[idx].map[X][Y]);
+    let shipIDX;
+    let isSink = false;
     switch (thisRoom.maps[idx].map[X][Y].type) {
       case "ship":
         thisRoom.maps[idx].map[X][Y].type = "destroyed";
-        const shipIDX = thisRoom.maps[idx].map[X][Y].shipIDX;
+        shipIDX = thisRoom.maps[idx].map[X][Y].shipIDX;
         thisRoom.maps[idx].ships[shipIDX].Life--;
+        if (thisRoom.maps[idx].ships[shipIDX].Life <= 0) isSink = true;
         break;
       case "sea":
         thisRoom.maps[idx].map[X][Y].type = "miss";
@@ -271,7 +274,7 @@ const Shoot = async (req, res) => {
       { current_turn: thisRoom.current_turn, maps: thisRoom.maps }
     );
     console.log(thisRoom.maps[idx].map[X][Y].type);
-    res.send({ message: thisRoom.maps[idx].map[X][Y].type });
+    res.send({ message: thisRoom.maps[idx].map[X][Y].type, sink: isSink });
 
     //VERIFICATION SI FIN DE JEU
     let isFinish = true;
