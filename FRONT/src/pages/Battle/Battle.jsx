@@ -153,6 +153,11 @@ export default function Battle() {
               <h1>Votre Tour</h1>
               <h2>Tirez sur une case</h2>
             </>
+          ) : gameStatus === "finish" ? (
+            <>
+              <h1>Partie terminée</h1>
+              <h2>Bravo pour votre bataille</h2>
+            </>
           ) : (
             <>
               <h1>Tour de l'adversaire</h1>
