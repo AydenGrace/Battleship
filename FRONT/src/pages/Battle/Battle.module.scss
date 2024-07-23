@@ -1,3 +1,5 @@
+@use "../../assets/styles/mixins" as mixin;
+
 .MyBattleMap {
   //   transform: scale(0.5);
   opacity: 0.5;
@@ -5,10 +7,14 @@
 
 .LifeArea {
   position: fixed;
+  z-index: 5;
   bottom: 0;
   // width: 100%;
   background-color: var(--secondary);
   margin: 20px;
   padding: 20px;
   color: white;
+  @include mixin.xs {
+    display: none;
+  }
 }
