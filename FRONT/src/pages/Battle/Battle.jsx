@@ -182,9 +182,8 @@ export default function Battle() {
           )}
           {/* Lifes Points */}
 
-          <div className={`w-100 d-flex justify-content-sb ${style.LifeArea}`}>
-            <p>{myLife}</p>
-            <p>{enemyLife}</p>
+          <div className={`d-flex card ${style.LifeArea}`}>
+            <p>Navires restants : {enemyLife}</p>
           </div>
 
           {/* Battle Area */}
