@@ -100,30 +100,33 @@ export default function Battle() {
       case "prepare_battle":
         if (!PrepareAudio) {
           PrepareAudio = new Audio({
+            autoplay: true,
             loop: true,
             volume: 0.5,
             src: prepare,
           });
-          PrepareAudio.play();
+          // PrepareAudio.play();
         }
         break;
       case "battle":
         if (PrepareAudio) {
           PrepareAudio.animate({ volume: 0 }, 1000, () => {
             BattleAudio = new Audio({
+              autoplay: true,
               loop: true,
               volume: 0.5,
               src: battle,
             });
-            BattleAudio.play();
+            // BattleAudio.play();
           });
         } else {
           BattleAudio = new Audio({
+            autoplay: true,
             loop: true,
             volume: 0.5,
             src: battle,
           });
-          BattleAudio.play();
+          // BattleAudio.play();
         }
         break;
       default:
