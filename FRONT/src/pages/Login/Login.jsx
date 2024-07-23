@@ -82,15 +82,15 @@ export default function Login() {
           <label htmlFor="password" className="mb-10">
             Mot de passe
           </label>
-          <div className="relative">
+          <div className="relative d-flex">
             <input
               {...register("password")}
               type={showPwd ? "text" : "password"}
               id="password"
-              className="mb-10 input"
+              className="mb-10 input input_and_btn"
             />
             <div
-              className={`${style.showBtn} btn btn-primary`}
+              className={`${style.showBtn} btn btn-primary input_btn`}
               onClick={(e) => togglePwd()}
             >
               {showPwd ? (
