@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./Battle.module.scss";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { SocketContext } from "../../context/SocketContext";
 import { UserContext } from "../../context/UserContext";
 import { CurrentRoomContext } from "../../context/CurrentRoomContext";
@@ -184,12 +184,16 @@ export default function Battle() {
               />
             )}
           </div>
+          {gameStatus === "finish" && (
+            <div className="f-center w-100 mt-10">
+              <Link to={"/"} className="btn btn-primary">
+                Accueil
+              </Link>
+            </div>
+          )}
 
           {isFinish && Winner ? (
-            <Modal
-              showModal={isFinish}
-              OnClose={() => (window.location.href = "/")}
-            >
+            <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
               <h2 className="mb-10">Vous avez gagné !</h2>
               <button
                 className="btn btn-primary"
@@ -199,10 +203,7 @@ export default function Battle() {
               </button>
             </Modal>
           ) : (
-            <Modal
-              showModal={isFinish}
-              OnClose={() => (window.location.href = "/")}
-            >
+            <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
               <h2 className="mb-10">Vous avez perdu !</h2>
               <button
                 className="btn btn-primary"
