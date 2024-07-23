@@ -20,6 +20,7 @@ export default function Battle() {
   const [MyBattleMapShip, setMyBattleMapShips] = useState(null);
   const [myTurn, setMyTurn] = useState(false);
   const [EnemyMapMode, setEnemyMapMode] = useState("none");
+  const [enemyShips, setEnemyShips] = useState(null);
   const [MyTiles, setMyTiles] = useState(null);
   const [EnemyTiles, setEnemyTiles] = useState(null);
   const [isFinish, setIsFinish] = useState(false);
@@ -82,6 +83,8 @@ export default function Battle() {
       } else idx = -1;
       if (idx > -1) {
         setMyBattleMapShips(response.maps[idx].ships);
+        if (idx) setEnemyShips(response.maps[0].ships);
+        else setEnemyShips(response.maps[1].ships);
         if (idx === response.current_turn) {
           setMyTurn(true);
           setEnemyMapMode("battle");
@@ -143,7 +146,7 @@ export default function Battle() {
           <h2>Sélectionnez une case</h2>
           <BattleArea ForcedMode="selection" />
         </>
-      ) : gameStatus === "battle" ? (
+      ) : gameStatus === "battle" || gameStatus === "finish" ? (
         <>
           {myTurn ? (
             <>
@@ -166,11 +169,20 @@ export default function Battle() {
                 Map={MyTiles}
               />
             </div>
-            <BattleArea
-              ForcedMode={EnemyMapMode}
-              isEnemyMap={true}
-              Map={EnemyTiles}
-            />
+            {gameStatus === "finish" ? (
+              <BattleArea
+                ForcedMode="none"
+                ShipPositions={enemyShips}
+                isEnemyMap={false}
+                Map={EnemyTiles}
+              />
+            ) : (
+              <BattleArea
+                ForcedMode={EnemyMapMode}
+                isEnemyMap={true}
+                Map={EnemyTiles}
+              />
+            )}
           </div>
 
           {isFinish && Winner ? (

@@ -279,8 +279,10 @@ const Shoot = async (req, res) => {
       });
     });
     //ENVOI DU MESSAGE CORRESPONDANT
-    if (isFinish) Broadcast(thisRoom, "Finish", thisRoom.maps[idx].user);
-    else Broadcast(thisRoom, "Shoot", thisRoom);
+    if (isFinish) {
+      await Room.findOneAndUpdate({ _id: thisRoom._id }, { status: "finish" });
+      Broadcast(thisRoom, "Finish", thisRoom.maps[idx].user);
+    } else Broadcast(thisRoom, "Shoot", thisRoom);
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: e.message });
