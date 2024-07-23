@@ -269,7 +269,7 @@ const Shoot = async (req, res) => {
       { current_turn: thisRoom.current_turn, maps: thisRoom.maps }
     );
     console.log(thisRoom.maps[idx].map[X][Y].type);
-    res.send({ message: "Tir lancé" });
+    res.send({ message: thisRoom.maps[idx].map[X][Y].type });
 
     //VERIFICATION SI FIN DE JEU
     let isFinish = true;

@@ -5,6 +5,8 @@ import { ShipContext } from "../../../../context/ShipContext";
 import { UserContext } from "../../../../context/UserContext";
 import toast from "react-hot-toast";
 import { Shoot } from "../../../../apis/room";
+import destroyed_sound from "../../../../assets/sounds/destroyed_sound.mp3";
+import miss_sound from "../../../../assets/sounds/miss_sound.mp3";
 
 export default function Tile({ Value, Column, Row, Mode }) {
   const { room } = useContext(CurrentRoomContext);
@@ -73,7 +75,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
     if (Value.type === "border") return;
   }, [Value, Mode, myBattleMap]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     switch (Mode) {
       case "selection":
         // console.log(Row, Column, Value.type);
@@ -82,7 +84,27 @@ export default function Tile({ Value, Column, Row, Mode }) {
       case "battle":
         // console.log("SHOOT", Row, Column);
         // console.log(room);
-        Shoot(room._id, user._id, Row, Column);
+        const response = await Shoot(room._id, user._id, Row, Column);
+        if (response.message) {
+          switch (response.message) {
+            case "destroyed":
+              const sound = new Audio(destroyed_sound);
+              sound.play();
+              toast("Touché !", {
+                icon: "💣",
+              });
+              break;
+            case "miss":
+              const misssound = new Audio(miss_sound);
+              misssound.play();
+              toast("Raté !", {
+                icon: "📢",
+              });
+              break;
+            default:
+              break;
+          }
+        }
         break;
       case "test":
         // TestSwitch(Row, Column);
