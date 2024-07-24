@@ -23,6 +23,11 @@ export default function Tile({ Value, Column, Row, Mode }) {
     myShips,
   } = useContext(ShipContext);
 
+  /******************************************************************************/
+  /* Function name : -                                                          */
+  /* Description : refresh hooks when passed values are changed                 */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   useEffect(() => {
     switch (Value.type) {
       case "sea":
@@ -75,6 +80,11 @@ export default function Tile({ Value, Column, Row, Mode }) {
     if (Value.type === "border") return;
   }, [Value, Mode, myBattleMap]);
 
+  /**********************************************************************************/
+  /* Function name : handleClick                                                    */
+  /* Description : Call function depending of the current game mode and play audios */
+  /* Other functions called : prepareMyShips, Shoot (room.js)                       */
+  /**********************************************************************************/
   const handleClick = async () => {
     switch (Mode) {
       case "selection":
@@ -123,14 +133,18 @@ export default function Tile({ Value, Column, Row, Mode }) {
     }
   };
 
+  /******************************************************************************/
+  /* Function name : PrepareMyShips                                             */
+  /* Description : Verify is the ship can be placed with this Tile as reference */
+  /* Other functions called : setShipPosition (ShipContext)                     */
+  /******************************************************************************/
   const PrepareMyShips = (Row, Column) => {
-    // console.log(myShips[preparedIndex]);
-    //SI CLICK SUR BORDURE
+    //This Tile is a border
     if (Row < 1 || Column < 1) {
       toast.error("Impossible de placer un navire sur une bordure");
       return;
     }
-    //SI CLICK TROP PROCHE BORD
+    //This tile is too close of a border
     if (myShips[preparedIndex].rotated) {
       if (Row + myShips[preparedIndex].Tiles - 1 > 10) {
         toast.error("La navire est trop grand");
@@ -142,7 +156,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
         return;
       }
     }
-    //SI AUTRE NAVIRE DANS LE CHEMIN
+    //If there is a ship on the path
     let ThereIsAShip = false;
     let OldShipPosition = [];
     for (let i = 0; i < myShips[preparedIndex].Tiles; i++) {
@@ -158,11 +172,9 @@ export default function Tile({ Value, Column, Row, Mode }) {
         ]);
       }
     }
-    // console.log(OldShipPosition);
 
     if (myShips[preparedIndex].rotated) {
       for (let i = 0; i < myShips[preparedIndex].Tiles; i++) {
-        // console.log(myBattleMap[Row + i][Column]);
         if (myBattleMap[Row + i][Column].type === "ship") {
           const found = OldShipPosition.find(
             (pos) => pos[0] === Row + i && pos[1] === Column
@@ -188,6 +200,8 @@ export default function Tile({ Value, Column, Row, Mode }) {
       toast.error("Un navire est dans le chemin");
       return;
     }
+
+    //Validate the ship position
     setShipPosition(preparedIndex, Column, Row);
   };
 

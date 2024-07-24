@@ -66,9 +66,13 @@ export default function Battle() {
     }
   }, [socket]);
 
+  /******************************************************************************/
+  /* Function name : refresh                                                    */
+  /* Description : get DB room informations and refresh hooks                   */
+  /* Other functions called : getRoom (room.js), setMusic                       */
+  /******************************************************************************/
   const refresh = async () => {
     const response = await getRoom(id);
-    // console.log(response);
     setThisRoom(response);
     setRoom(response);
     setGameStatus(response.status);
@@ -114,6 +118,11 @@ export default function Battle() {
     }
   };
 
+  /***********************************************************************************/
+  /* Function name : setMusic                                                        */
+  /* Description : Change music depending of the game mode (don't work)              */
+  /* Other functions called : -                                                      */
+  /***********************************************************************************/
   const setMusic = (status) => {
     switch (status) {
       case "prepare_battle":

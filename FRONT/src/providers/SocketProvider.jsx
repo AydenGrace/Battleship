@@ -14,7 +14,6 @@ export default function SocketProvider({ children }) {
       return;
     }
 
-    // const socket = io("http://localhost:5000", { query: { userId: user._id } });
     const socket = io("https://battleship-zb1l.onrender.com", { query: { userId: user._id } });
     setSocket(socket);
     socket.on("getOnlineUsers", (users) => {
@@ -22,10 +21,6 @@ export default function SocketProvider({ children }) {
     });
 
     socket.on("newMessage", (message) => {});
-
-    // socket.on("join", (message) => {
-    //   console.log(message);
-    // });
 
     return () => socket.close();
   }, [user]);

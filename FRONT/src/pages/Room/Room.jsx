@@ -20,18 +20,18 @@ export default function Room() {
   const ReadyBg = "bg-g";
   let userInRoom = false;
 
+  /******************************************************************************/
+  /* Function name : -                                                          */
+  /* Description : get DB room values and refresh hooks when current user is get*/
+  /* Other functions called : refresh, getRoom (apis)                           */
+  /******************************************************************************/
   useEffect(() => {
     const getThisRoom = async () => {
       const response = await getRoom(id);
-      // console.log('room',response);
       if (response && !response.error) {
-        // console.log('user',user);
-        // while(!user);
         userInRoom = false;
         if (user) {
           response.users.map((item, idx) => {
-            // console.log("User in Room Id :",item);
-            // console.log("User id",user._id);
             if (user._id.valueOf() === item._id.valueOf()) userInRoom = true;
           });
           if (!userInRoom) window.location.href = "/";
@@ -58,6 +58,11 @@ export default function Room() {
     getThisRoom();
   }, [user]);
 
+  /******************************************************************************/
+  /* Function name : -                                                          */
+  /* Description : Web Sockets listening                                        */
+  /* Other functions called : refresh                                           */
+  /******************************************************************************/
   useEffect(() => {
     if (socket) {
       socket.on("join", (message) => {
@@ -80,9 +85,13 @@ export default function Room() {
     }
   }, [socket]);
 
+  /******************************************************************************/
+  /* Function name : refresh                                                    */
+  /* Description : get DB room informations and refresh hooks                   */
+  /* Other functions called : getRoom (apis)                                    */
+  /******************************************************************************/
   const refresh = async () => {
     const response = await getRoom(id);
-    // console.log(response);
     setThisRoom(response);
     setRoom(response);
     setImReady(false);
@@ -105,15 +114,29 @@ export default function Room() {
     else setCanStart(false);
   };
 
+  /******************************************************************************/
+  /* Function name : CopyCode                                                   */
+  /* Description : Copy the room code in the clipboard                          */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   const copyCode = () => {
     navigator.clipboard.writeText(thisRoom.code);
     toast.success("Code copié !");
   };
-
+  /******************************************************************************/
+  /* Function name : HandleClick                                                */
+  /* Description : Set the player ready                                         */
+  /* Other functions called : Ready (apis)                                      */
+  /******************************************************************************/
   const handleClick = () => {
     Ready(thisRoom.code, user._id);
   };
 
+  /******************************************************************************/
+  /* Function name : HandleStart                                                */
+  /* Description : Event when start the battle                                  */
+  /* Other functions called : Start (apis)                                      */
+  /******************************************************************************/
   const handleStart = () => {
     Start(thisRoom.code, user._id);
   };

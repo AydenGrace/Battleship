@@ -23,10 +23,10 @@ export const router = createBrowserRouter([
         path: "/battle/:id",
         element: <Battle />,
       },
-      {
-        path: "/test",
-        element: <RoomTest />,
-      },
+      // {
+      //   path: "/test",
+      //   element: <RoomTest />,
+      // },
       {
         path: "/login",
         element: (

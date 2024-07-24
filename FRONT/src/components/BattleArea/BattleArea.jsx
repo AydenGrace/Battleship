@@ -34,6 +34,11 @@ export default function BattleArea({
   const [localShip, setLocalShip] = useState(myShips);
   const [localTiles, setLocalTiles] = useState(myBattleMap);
 
+  /******************************************************************************/
+  /* Function name : -                                                          */
+  /* Description : refresh hooks when passed values are changed                 */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   useEffect(() => {
     if (Map) setLocalTiles(Map);
     if (ForcedMode) {
@@ -48,12 +53,15 @@ export default function BattleArea({
     }
   }, [ShipPositions, ForcedMode, Map]);
 
-  useEffect(() => {
-    console.log("Ship value changed");
-  }, [localShip]);
-
+  /******************************************************************************/
+  /* Function name : handleRotate                                               */
+  /* Description : Verify if the ship can be rotated and rotate it if it can be */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   const handleRotate = () => {
     let canRotate = false;
+
+    //Verify if the ship is too close to the board's border
     if (localShip[preparedIndex].rotated) {
       //Vertical to Horizontal
       if (
@@ -65,6 +73,7 @@ export default function BattleArea({
         canRotate = true;
       } else {
         toast.error("Rotation impossible");
+        return;
       }
     } else {
       //Horizontal to Vertical
@@ -77,18 +86,14 @@ export default function BattleArea({
         canRotate = true;
       } else {
         toast.error("Rotation impossible");
+        return;
       }
     }
 
     let ThereIsAShip = false;
-    //VERIFICATION NAVIRE SUR TRAJECTOIR
+    //Verify if there is a ship in the path
     if (!localShip[preparedIndex].rotated) {
       for (let i = 1; i < localShip[preparedIndex].Tiles; i++) {
-        // console.log(
-        //   myBattleMap[localShip[preparedIndex].Start[1] + i][
-        //     localShip[preparedIndex].Start[0]
-        //   ]
-        // );
         if (
           localTiles[localShip[preparedIndex].Start[1] + i][
             localShip[preparedIndex].Start[0]
@@ -106,12 +111,14 @@ export default function BattleArea({
           ThereIsAShip = true;
       }
     }
+
+    //Ship can't be rotated
     if (ThereIsAShip) {
       toast.error("Un navire est dans le chemin");
       return;
     }
 
-    //ROTATION
+    //Ship rotation
     if (canRotate) {
       let tempsShips = localShip;
       if (tempsShips[preparedIndex].rotated)
@@ -124,6 +131,11 @@ export default function BattleArea({
     }
   };
 
+  /***********************************************************************************/
+  /* Function name : handleNext                                                      */
+  /* Description : Validate the current ship position and increase provider's index  */
+  /* Other functions called : PreparationsCompleted (api)                            */
+  /***********************************************************************************/
   const handleNext = () => {
     if (
       localShip[preparedIndex].Start[0] < 0 ||
@@ -136,9 +148,6 @@ export default function BattleArea({
       setValidateText("En attente de l'adversaire...");
       setBtnView(false);
       setMode("none");
-      // console.log(room);
-      // console.log(user);
-      // console.log(myBattleMap);
       setPreparedIndex(0);
       PreparationsCompleted(room._id, user._id, myBattleMap, localShip);
     } else {
@@ -168,28 +177,6 @@ export default function BattleArea({
   return (
     <section className={`${style.BattleArea}`}>
       <div className={`d-flex flex-wrap ${style.container}`}>
-        {/* <svg style={{ width: "0", height: "0" }}>
-          <filter id="turbulence" x="0" y="0" width="100%" height="100%">
-            <feTurbulence
-              id="seafilter"
-              numOctaves="3"
-              seed="2"
-              baseFrequency="0.02 0.05"
-            ></feTurbulence>
-            <feDisplacementMap
-              scale="20"
-              in="SourceGraphic"
-            ></feDisplacementMap>
-            <animate
-              xlink:href="#seafilter"
-              attributeName="baseFrequency"
-              dur="60s"
-              keyTimes="0;0.5;1"
-              values="0.02 0.06;0.04 0.08;0.02 0.06"
-              repeatCount="indefinite"
-            />
-          </filter>
-        </svg> */}
         {!isEnemyMap &&
           (ShipPositions
             ? ShipPositions.map((ship, idx) => (
@@ -273,7 +260,6 @@ export default function BattleArea({
           </button>
         </div>
       )}
-      {/* <div className={`${style.test}`}></div> */}
     </section>
   );
 }

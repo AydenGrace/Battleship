@@ -4,6 +4,11 @@ import { ShipContext } from "../context/ShipContext";
 export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
 
+  /******************************************************************************/
+  /* Function name : reset                                                      */
+  /* Description : Reset all values by default                                  */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   const Reset = () => {
     setMyShips([
       { Tiles: 2, Start: [-1, -1], Life: 2, rotated: false },
@@ -622,9 +627,6 @@ export default function ShipProvider({ children }) {
   ]);
 
   const [mode, setMode] = useState("none");
-  //none
-  //selection
-  //battle
 
   const SettingShips = async (idxShip) => {
     console.log(myShips.length, idxShip);
@@ -637,6 +639,11 @@ export default function ShipProvider({ children }) {
     console.log(`Placez votre navire de taille ${myShips[idxShip].Tiles}`);
   };
 
+  /******************************************************************************/
+  /* Function name : ShipOnBattlefield                                          */
+  /* Description : set Tiles values depending of the ships positions            */
+  /* Other functions called : getRoom (apis)                                    */
+  /******************************************************************************/
   const ShipOnBattlefield = async () => {
     //Change value of the Tiles when a ship is set
 
@@ -653,25 +660,21 @@ export default function ShipProvider({ children }) {
     myShips.map((ship, idx) => {
       if (ship.Start[0] > 0 && ship.Start[1] > 0) {
         myBattleMap.map((row, ridx) => {
-          // console.log(ridx, ship.Start[1]);
           if (ridx === ship.Start[1]) {
             //Find Row
             row.map((tile, cidx) => {
               if (cidx === ship.Start[0]) {
                 //Starting Point Found
                 if (ship.rotated) {
-                  //Is rotated (Y)
                   for (let i = 0; i < ship.Tiles; i++) {
-                    // console.log(`SHIP ${idx} : [${ridx + i},${cidx}]`);
                     if (ridx + i < 11) {
                       myBattleMap[ridx + i][cidx].type = "ship";
                       myBattleMap[ridx + i][cidx].shipIDX = idx;
                     }
                   }
                 } else {
-                  //Is horintaly (X)
+                  //Is horinzontaly (X)
                   for (let i = 0; i < ship.Tiles; i++) {
-                    // console.log(`SHIP ${idx} : [${ridx},${cidx + i}]`);
                     if (cidx + i < 11) {
                       myBattleMap[ridx][cidx + i].type = "ship";
                       myBattleMap[ridx][cidx + i].shipIDX = idx;
@@ -685,7 +688,6 @@ export default function ShipProvider({ children }) {
       }
     });
     setMyBattleMap([...myBattleMap]);
-    // console.log(myBattleMap);
   };
 
   const setShipPosition = (shipIdx, Row, Column) => {
@@ -694,8 +696,11 @@ export default function ShipProvider({ children }) {
     setMyShips([...temp]);
   };
 
-  const Shoot = () => {};
-
+  /******************************************************************************/
+  /* Function name : TestSwitch                                                 */
+  /* Description : Function of testing to change Tiles values                   */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
   const TestSwitch = (row, column) => {
     let tempBattleMap = [...myBattleMap];
     tempBattleMap.map((Row, ridx) => {
@@ -725,6 +730,7 @@ export default function ShipProvider({ children }) {
     setMyBattleMap([...tempBattleMap]);
   };
 
+  
   useEffect(() => {
     ShipOnBattlefield();
   }, [myShips]);

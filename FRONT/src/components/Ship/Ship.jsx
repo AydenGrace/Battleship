@@ -11,10 +11,21 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
   const [Zindex, setZindex] = useState(3);
   const [display, setDisplay] = useState("none");
 
+  /***********************************************************************************/
+  /* Function name : handleWindowResize                                              */
+  /* Description : Change ship size by the Tile's size Hook                          */
+  /* Other functions called : -                                                      */
+  /***********************************************************************************/
   const handleWindowResize = (event) => {
     if (window.outerWidth > 577) setSavedTileSize(50);
     else setSavedTileSize(30);
   };
+
+  /***********************************************************************************/
+  /* Function name : -                                                               */
+  /* Description : Set pointer and ZIndex depending of the current game mode         */
+  /* Other functions called : -                                                      */
+  /***********************************************************************************/
   useEffect(() => {
     switch (mode) {
       case "selection":
@@ -31,6 +42,11 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
     }
   }, [mode]);
 
+  /***********************************************************************************/
+  /* Function name : -                                                               */
+  /* Description : set CSS transform text depending of the ship size                 */
+  /* Other functions called : -                                                      */
+  /***********************************************************************************/
   useEffect(() => {
     if (isRotated) {
       switch (nbTiles) {
@@ -54,6 +70,11 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
     else setDisplay("none");
   }, [myShips, isRotated]);
 
+  /***********************************************************************************/
+  /* Function name : -                                                               */
+  /* Description : Event Listener on window resize for responsive                    */
+  /* Other functions called : -                                                      */
+  /***********************************************************************************/
   useEffect(() => {
     // console.log(window.innerWidth);
     if (window.outerWidth > 577) setSavedTileSize(50);
@@ -65,7 +86,6 @@ export default function Ship({ id, nbTiles, TileSize, isRotated, X, Y }) {
   }, [handleWindowResize]);
 
   const handleClick = (e) => {
-    // e.stopPropagation();
     setSelectedShip(id);
     console.log(`Current selected ship : ${id}`);
     toast.success("Ship selected !");
