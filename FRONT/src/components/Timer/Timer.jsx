@@ -5,15 +5,27 @@ import { ShipContext } from "../../context/ShipContext";
 export default function Timer({ seconds }) {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(seconds);
+  const [enemyTimeLeft, setEnemyTimeLeft] = useState(seconds);
   const { timer } = useContext(ShipContext);
   let intervalId;
+  let enemyIntervalId;
 
   useEffect(() => {
     if (!timer) {
       console.log("Timer to false");
       setTimeLeft(seconds);
       clearInterval(intervalId);
-      return;
+
+      if (!enemyTimeLeft) {
+        console.log("Enemy Timeout");
+        return;
+      }
+
+      enemyIntervalId = setInterval(() => {
+        setEnemyTimeLeft(enemyTimeLeft - 1);
+        console.log("Enemy Timer : ", enemyTimeLeft - 1);
+      }, 1000);
+      return () => clearInterval(enemyIntervalId);
     }
 
     // exit early when we reach 0
@@ -26,14 +38,14 @@ export default function Timer({ seconds }) {
     // component re-renders
     intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
-      console.log(timeLeft - 1);
+      console.log("My Timer : ", timeLeft - 1);
     }, 1000);
 
     // clear interval on re-render to avoid memory leaks
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft, timer]);
+  }, [timeLeft, enemyTimeLeft, timer]);
 
   return (
     <div className={`${style.timerArea}`}>
