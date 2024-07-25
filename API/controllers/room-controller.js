@@ -347,7 +347,7 @@ const Leave = async (req, res) => {
     }
 
     await Room.findOneAndUpdate({ _id: roomId }, { status: "give_up" });
-    Broadcast(roomId, "Give Up", thisRoom.maps[thisRoom.current_turn].user);
+    Broadcast(thisRoom, "Give Up", thisRoom.maps[thisRoom.current_turn].user);
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: e.message });
