@@ -37,7 +37,7 @@ export default function Timer({ seconds }) {
 
   return (
     <div className={`${style.timerArea}`}>
-      <p>{timeLeft}</p>
+      {timer ? <p>{timeLeft}</p> : <i className="fa-solid fa-pause fa-2xl"></i>}
     </div>
   );
 }
