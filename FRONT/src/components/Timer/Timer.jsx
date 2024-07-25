@@ -6,6 +6,7 @@ export default function Timer({ seconds }) {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(seconds);
   const { timer } = useContext(ShipContext);
+  let intervalId;
 
   useEffect(() => {
     if (!timer) {
@@ -22,7 +23,7 @@ export default function Timer({ seconds }) {
 
     // save intervalId to clear the interval when the
     // component re-renders
-    const intervalId = setInterval(() => {
+    intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
       console.log(timeLeft - 1);
     }, 1000);
