@@ -26,9 +26,9 @@ export default function ShipProvider({ children }) {
         localTimer--;
         console.log(localTimer);
         if (localTimer <= 0) {
+          clearInterval(timer);
           timer = 0;
           console.log("TIME OUT");
-          clearInterval(timer);
         }
       }, 1000);
   };
