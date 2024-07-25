@@ -5,6 +5,7 @@ export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
   const NbMaxSecOfATurn = 60;
   let [timer, setTimer] = useState(0);
+  let [currentTime, setCurrentTime] = useState(NbMaxSecOfATurn);
 
   /******************************************************************************/
   /* Function name : launchTimer                                                */
@@ -13,10 +14,20 @@ export default function ShipProvider({ children }) {
   /******************************************************************************/
   const launchTimer = () => {
     console.log("Timer set");
+    setCurrentTime(NbMaxSecOfATurn);
     setTimer(
-      setTimeout(() => {
-        console.log("TIMEOUT");
-      }, NbMaxSecOfATurn * 1000)
+      // setTimeout(() => {
+      //   console.log("TIMEOUT");
+      // }, NbMaxSecOfATurn * 1000)
+      setInterval(() => {
+        setCurrentTime(currentTime - 1);
+        console.log(currentTime - 1);
+        if (currentTime - 1 <= 0) {
+          clearInterval(timer);
+          setTimer(0);
+          console.log("TIME OUT");
+        }
+      }, 1000)
     );
   };
 
@@ -28,8 +39,9 @@ export default function ShipProvider({ children }) {
   const stopTimer = () => {
     console.log("Timer stopped");
     if (timer) {
-      clearTimeout(timer);
-      timer = 0;
+      // clearTimeout(timer);
+      clearInterval(timer);
+      setTimer(0);
     }
   };
 
