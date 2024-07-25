@@ -4,8 +4,9 @@ import { ShipContext } from "../context/ShipContext";
 export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
   const NbMaxSecOfATurn = 60;
-  let [timer, setTimer] = useState(0);
+  // let [timer, setTimer] = useState(0);
   let [currentTime, setCurrentTime] = useState();
+  let timer = 0;
 
   /******************************************************************************/
   /* Function name : launchTimer                                                */
@@ -15,8 +16,8 @@ export default function ShipProvider({ children }) {
   const launchTimer = () => {
     console.log("Timer set");
     let localTimer = NbMaxSecOfATurn;
-    setCurrentTime(NbMaxSecOfATurn);
-    setTimer(
+    // setCurrentTime(NbMaxSecOfATurn);
+    timer =
       // setTimeout(() => {
       //   console.log("TIMEOUT");
       // }, NbMaxSecOfATurn * 1000)
@@ -25,12 +26,11 @@ export default function ShipProvider({ children }) {
         localTimer--;
         console.log(localTimer);
         if (localTimer <= 0) {
-          setTimer(0);
+          timer = 0;
           console.log("TIME OUT");
           clearInterval(timer);
         }
-      }, 1000)
-    );
+      }, 1000);
   };
 
   /******************************************************************************/
@@ -43,7 +43,8 @@ export default function ShipProvider({ children }) {
     if (timer) {
       // clearTimeout(timer);
       clearInterval(timer);
-      setTimer(0);
+      // setTimer(0);
+      timer = 0;
     }
   };
 
