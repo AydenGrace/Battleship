@@ -6,7 +6,7 @@ export default function ShipProvider({ children }) {
   const NbMaxSecOfATurn = 60;
   let [timer, setTimer] = useState(0);
   let [currentTime, setCurrentTime] = useState();
-  const [time, setTime] = useState(NbMaxSecOfATurn);
+  const [time, setTime] = useState();
   const currentTimer = useRef();
 
   const startTimer = () => {
@@ -53,6 +53,7 @@ export default function ShipProvider({ children }) {
   const stopTimer = () => {
     console.log("Timer Stop");
     clearInterval(currentTimer.current);
+    setTime((prev) => NbMaxSecOfATurn);
   };
 
   /******************************************************************************/
