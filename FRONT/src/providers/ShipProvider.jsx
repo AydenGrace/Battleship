@@ -17,20 +17,20 @@ export default function ShipProvider({ children }) {
     console.log("Timer set");
     let localTimer = NbMaxSecOfATurn;
     // setCurrentTime(NbMaxSecOfATurn);
-    timer =
-      // setTimeout(() => {
-      //   console.log("TIMEOUT");
-      // }, NbMaxSecOfATurn * 1000)
-      setInterval(() => {
-        // setCurrentTime(currentTime - 1);
-        localTimer--;
-        console.log(localTimer);
-        if (localTimer <= 0) {
-          clearInterval(timer);
-          timer = 0;
-          console.log("TIME OUT");
-        }
-      }, 1000);
+    // timer =
+    // setTimeout(() => {
+    //   console.log("TIMEOUT");
+    // }, NbMaxSecOfATurn * 1000)
+    timer = setInterval(() => {
+      // setCurrentTime(currentTime - 1);
+      localTimer--;
+      console.log(localTimer);
+      if (localTimer <= 0) {
+        clearInterval(timer);
+        timer = 0;
+        console.log("TIME OUT");
+      }
+    }, 1000);
   };
 
   /******************************************************************************/
