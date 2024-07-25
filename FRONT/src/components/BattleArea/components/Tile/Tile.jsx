@@ -21,6 +21,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
     preparedIndex,
     setShipPosition,
     myShips,
+    stopTimer,
   } = useContext(ShipContext);
 
   /******************************************************************************/
@@ -83,7 +84,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
   /**********************************************************************************/
   /* Function name : handleClick                                                    */
   /* Description : Call function depending of the current game mode and play audios */
-  /* Other functions called : prepareMyShips, Shoot (room.js)                       */
+  /* Other functions called : prepareMyShips, Shoot (room.js), stopTimer (provider) */
   /**********************************************************************************/
   const handleClick = async () => {
     switch (Mode) {
@@ -94,6 +95,7 @@ export default function Tile({ Value, Column, Row, Mode }) {
       case "battle":
         // console.log("SHOOT", Row, Column);
         // console.log(room);
+        stopTimer();
         const response = await Shoot(room._id, user._id, Row, Column);
         if (response.message) {
           switch (response.message) {

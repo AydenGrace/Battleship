@@ -3,6 +3,35 @@ import { ShipContext } from "../context/ShipContext";
 
 export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
+  const NbMaxSecOfATurn = 60;
+  let [timer, setTimer] = useState(0);
+
+  /******************************************************************************/
+  /* Function name : launchTimer                                                */
+  /* Description : Set Timeout for a turn                                       */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
+  const launchTimer = () => {
+    console.log("Timer set");
+    setTimer(
+      setTimeout(() => {
+        console.log("TIMEOUT");
+      }, NbMaxSecOfATurn * 1000)
+    );
+  };
+
+  /******************************************************************************/
+  /* Function name : stopTimer                                                */
+  /* Description : Stop Timer if launched                                       */
+  /* Other functions called : -                                                 */
+  /******************************************************************************/
+  const stopTimer = () => {
+    console.log("Timer stopped");
+    if (timer) {
+      clearTimeout(timer);
+      timer = 0;
+    }
+  };
 
   /******************************************************************************/
   /* Function name : reset                                                      */
@@ -730,7 +759,6 @@ export default function ShipProvider({ children }) {
     setMyBattleMap([...tempBattleMap]);
   };
 
-  
   useEffect(() => {
     ShipOnBattlefield();
   }, [myShips]);
@@ -752,6 +780,8 @@ export default function ShipProvider({ children }) {
         selectedShip,
         Reset,
         setShipPosition,
+        launchTimer,
+        stopTimer,
       }}
     >
       {children}

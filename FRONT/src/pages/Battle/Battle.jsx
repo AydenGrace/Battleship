@@ -9,11 +9,13 @@ import BattleArea from "../../components/BattleArea/BattleArea";
 import Modal from "../../components/Modal/Modal";
 import battle from "../../assets/sounds/battle.mp3";
 import prepare from "../../assets/sounds/prepare.mp3";
+import { ShipContext } from "../../context/ShipContext";
 
 export default function Battle() {
   const { room, setRoom } = useContext(CurrentRoomContext);
   const { user } = useContext(UserContext);
   const { socket } = useContext(SocketContext);
+  const { launchTimer } = useContext(ShipContext);
   const { id } = useParams();
   const [thisRoom, setThisRoom] = useState();
   const [gameStatus, setGameStatus] = useState("null");
@@ -43,8 +45,6 @@ export default function Battle() {
         refresh();
       });
       socket.on("Shoot", (message) => {
-        // console.log("SHOOT LANDING");
-        // console.log(message);
         setThisRoom(message);
         refresh();
       });
@@ -106,6 +106,7 @@ export default function Battle() {
         if (idx) setEnemyShips(response.maps[0].ships);
         else setEnemyShips(response.maps[1].ships);
         if (idx === response.current_turn) {
+          launchTimer();
           setMyTurn(true);
           setEnemyMapMode("battle");
         } else {
