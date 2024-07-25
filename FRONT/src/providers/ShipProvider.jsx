@@ -6,7 +6,20 @@ export default function ShipProvider({ children }) {
   const NbMaxSecOfATurn = 60;
   let [timer, setTimer] = useState(0);
   let [currentTime, setCurrentTime] = useState();
-  // let timer;
+  const [time, setTime] = useState(0);
+  const currentTimer = useRef();
+
+  const startTimer = () => {
+    currentTimer.current = setInterval(() => {
+      setTime((prev) => prev + 1);
+      console.log(time);
+    }, 1000);
+  };
+
+  const resetTimer = () => {
+    clearInterval(currentTimer.current);
+    setTime(0);
+  };
 
   /******************************************************************************/
   /* Function name : launchTimer                                                */
@@ -15,24 +28,21 @@ export default function ShipProvider({ children }) {
   /******************************************************************************/
   const launchTimer = () => {
     console.log("Timer set");
-    let localTimer = NbMaxSecOfATurn;
+    // let localTimer = NbMaxSecOfATurn;
     // setCurrentTime(NbMaxSecOfATurn);
     // timer =
     // setTimeout(() => {
     //   console.log("TIMEOUT");
     // }, NbMaxSecOfATurn * 1000)
-    setTimer(() =>
-      setInterval(() => {
-        setCurrentTime((currentTime) => currentTime - 1);
-        // localTimer--;
-        console.log(currentTime);
-        if (currentTime <= 0) {
-          clearInterval(timer);
-          setTimer(null);
-          console.log("TIME OUT");
-        }
-      }, 1000)
-    );
+    setTime(NbMaxSecOfATurn);
+    currentTimer.current = setInterval(() => {
+      setTime((prev) => prev - 1);
+      console.log(time);
+      if (time <= 0) {
+        console.log("Timeout");
+        stopTimer();
+      }
+    }, 1000);
   };
 
   /******************************************************************************/
@@ -41,16 +51,8 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const stopTimer = () => {
-    console.log("Timer stopped");
-    console.log(timer);
-    if (timer) {
-      console.log("Timer exist");
-      // clearTimeout(timer);
-      clearInterval(timer);
-      setTimer(null);
-      // setTimer(0);
-      // timer = 0;
-    }
+    console.log("Timer Stop");
+    clearInterval(currentTimer.current);
   };
 
   /******************************************************************************/
