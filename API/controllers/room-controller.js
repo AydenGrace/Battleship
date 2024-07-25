@@ -2,6 +2,11 @@ const Room = require("../models/room.schema");
 const User = require("../models/user.schema");
 const { getReceiverSocketId, io } = require("../socket/socket");
 
+/*******************************************************************************************/
+/* Function name : makeId                                                                  */
+/* Description : Generate a random alphanumeric code of the passing lenth                  */
+/* Other functions called : -                                                              */
+/*******************************************************************************************/
 const makeid = (length) => {
   let result = "";
   const characters =
@@ -14,7 +19,11 @@ const makeid = (length) => {
   }
   return result;
 };
-
+/*******************************************************************************************/
+/* Function name : getRoomById                                                             */
+/* Description : Get room informations by searching it with the id                         */
+/* Other functions called : -                                                              */
+/*******************************************************************************************/
 const getRoomById = async (req, res) => {
   try {
     const { _id } = req.body;
@@ -27,7 +36,11 @@ const getRoomById = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
+/*******************************************************************************************/
+/* Function name : createRoom                                                              */
+/* Description : Create a room with the user and generate a random code                    */
+/* Other functions called : makeid                                                         */
+/*******************************************************************************************/
 const createRoom = async (req, res) => {
   const { userId } = req.body;
   let code;
@@ -48,7 +61,11 @@ const createRoom = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-
+/*******************************************************************************************/
+/* Function name : joinRoom                                                                */
+/* Description : Verify if user can join the room and emit corresponding message           */
+/* Other functions called : getReceiverSocketId (socket.js)                                */
+/*******************************************************************************************/
 const joinRoom = async (req, res) => {
   const { code, userId } = req.body;
   try {
@@ -108,7 +125,11 @@ const joinRoom = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
+/*******************************************************************************************/
+/* Function name : playerReady                                                             */
+/* Description : Change user's ready status and send corresponding message on sockets      */
+/* Other functions called : getReceiverSocketId (socket.js)                                */
+/*******************************************************************************************/
 const playerReady = async (req, res) => {
   // console.log(req.body);
   const { code, userId } = req.body;
@@ -135,7 +156,11 @@ const playerReady = async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 };
-
+/*******************************************************************************************/
+/* Function name : startRoom                                                               */
+/* Description : get room informations and emit Start message (go to the preparation step) */
+/* Other functions called : getReceiverSocketId (socket.js)                                */
+/*******************************************************************************************/
 const startRoom = async (req, res) => {
   const { code } = req.body;
   console.log(code);
@@ -160,7 +185,11 @@ const startRoom = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-
+/**************************************************************************************/
+/* Function name : setBattleMap                                                       */
+/* Description : set the user battlemap and send the corresponding message on sockets */
+/* Other functions called : getReceiverSocketId (socket.js)                           */
+/**************************************************************************************/
 const setBattleMap = async (roomId, userId, map, ships) => {
   let thisRoom = await Room.findOne({ _id: roomId });
   // console.log(thisRoom);
@@ -205,14 +234,22 @@ const setBattleMap = async (roomId, userId, map, ships) => {
     }
   }
 };
-
+/***********************************************************************************/
+/* Function name : PreparationCompleted                                            */
+/* Description : Get information as a player had finished his preparations         */
+/* Other functions called : setBattleMap                                           */
+/***********************************************************************************/
 const PreparationsCompleted = async (req, res) => {
   // console.log(req.body);
   const { roomId, userId, map, ships } = req.body;
   setBattleMap(roomId, userId, map, ships);
   res.send({ message: "Reçu" });
 };
-
+/***********************************************************************************/
+/* Function name : Shoot                                                           */
+/* Description : Verify if the shoot can be done and emit corresponding message    */
+/* Other functions called : Broadcast                                              */
+/***********************************************************************************/
 const Shoot = async (req, res) => {
   console.log(req.body);
   const { roomId, ShooterId, X, Y } = req.body;
@@ -246,7 +283,6 @@ const Shoot = async (req, res) => {
     else if (thisRoom.maps[1].user === ShooterId) idx = 0;
     else idx = -1;
 
-    // console.log(thisRoom.maps[idx].map[X][Y]);
     let shipIDX;
     let isSink = false;
     switch (thisRoom.maps[idx].map[X][Y].type) {
@@ -276,14 +312,14 @@ const Shoot = async (req, res) => {
     console.log(thisRoom.maps[idx].map[X][Y].type);
     res.send({ message: thisRoom.maps[idx].map[X][Y].type, sink: isSink });
 
-    //VERIFICATION SI FIN DE JEU
+    //Game is finished ?
     let isFinish = true;
     thisRoom.maps[idx].map.map((Row) => {
       Row.map((Tile) => {
         if (Tile.type === "ship") isFinish = false;
       });
     });
-    //ENVOI DU MESSAGE CORRESPONDANT
+    //Send response
     if (isFinish) {
       await Room.findOneAndUpdate({ _id: thisRoom._id }, { status: "finish" });
       Broadcast(thisRoom, "Finish", thisRoom.maps[idx].user);
@@ -293,7 +329,11 @@ const Shoot = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-
+/***********************************************************************************/
+/* Function name : Broadcast                                                       */
+/* Description : Emit on sockets of all users in the room                          */
+/* Other functions called : getReceiverSocketId (socket.js)                        */
+/***********************************************************************************/
 const Broadcast = (Room, key, message) => {
   let receiverSocketId;
   Room.users.map((_id, idx) => {
