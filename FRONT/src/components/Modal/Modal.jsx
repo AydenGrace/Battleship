@@ -34,7 +34,7 @@ export default function Modal({
             className={`${style.modal} flex-column`}
             onClick={(e) => handleClick(e)}
           >
-            <div className="d-flex w-100 justify-content-end">
+            <div className="d-flex w-100 justify-content-end mb-20">
               <i
                 className="fa-solid fa-xmark fa-2xl mb-10"
                 onClick={(e) => handleClose(e)}
