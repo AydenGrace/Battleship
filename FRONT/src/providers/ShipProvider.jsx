@@ -5,7 +5,7 @@ export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
   const NbMaxSecOfATurn = 60;
   let [timer, setTimer] = useState(0);
-  let [currentTime, setCurrentTime] = useState();
+  let [currentTime, setCurrentTime] = useState(60);
   const [time, setTime] = useState();
   const currentTimer = useRef();
 
