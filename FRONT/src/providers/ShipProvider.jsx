@@ -22,7 +22,6 @@ export default function ShipProvider({ children }) {
       // }, NbMaxSecOfATurn * 1000)
       setInterval((localTimer) => {
         setCurrentTime(currentTime - 1);
-
         localTimer--;
         console.log(localTimer);
         if (localTimer <= 0) {
