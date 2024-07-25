@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ShipContext } from "../context/ShipContext";
 
 export default function ShipProvider({ children }) {
