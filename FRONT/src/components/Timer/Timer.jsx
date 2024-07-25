@@ -26,6 +26,9 @@ export default function Timer({ seconds }) {
         console.log("Enemy Timer : ", enemyTimeLeft - 1);
       }, 1000);
       return () => clearInterval(enemyIntervalId);
+    } else {
+      setEnemyTimeLeft(seconds);
+      clearInterval(enemyIntervalId);
     }
 
     // exit early when we reach 0
