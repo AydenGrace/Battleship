@@ -1,13 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./Timer.module.scss";
+import { ShipContext } from "../../context/ShipContext";
 
 export default function Timer({ seconds }) {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(seconds);
+  const { timer } = useContext(ShipContext);
 
   useEffect(() => {
+    if (!timer) {
+      console.log("Timer to false");
+      clearInterval(intervalId);
+      return;
+    }
+
     // exit early when we reach 0
-    if (!timeLeft) return;
+    if (!timeLeft) {
+      console.log("Timeout");
+      return;
+    }
 
     // save intervalId to clear the interval when the
     // component re-renders
@@ -20,7 +31,7 @@ export default function Timer({ seconds }) {
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft]);
+  }, [timeLeft, timer]);
 
   return (
     <div className={`${style.timerArea}`}>

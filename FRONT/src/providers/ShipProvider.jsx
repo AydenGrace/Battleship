@@ -4,22 +4,7 @@ import { ShipContext } from "../context/ShipContext";
 export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
   const NbMaxSecOfATurn = 60;
-  // let [timer, setTimer] = useState(0);
-  let [currentTime, setCurrentTime] = useState();
-  const [time, setTime] = useState();
-  const currentTimer = useRef();
-
-  const startTimer = () => {
-    currentTimer.current = setInterval(() => {
-      setTime((prev) => prev + 1);
-      console.log(time);
-    }, 1000);
-  };
-
-  const resetTimer = () => {
-    clearInterval(currentTimer.current);
-    setTime(0);
-  };
+  const [timer, setTimer] = useState(null);
 
   /******************************************************************************/
   /* Function name : launchTimer                                                */
@@ -27,17 +12,7 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const launchTimer = () => {
-    // setTime(NbMaxSecOfATurn);
-    // clearInterval(currentTimer.current);
-    // console.log("Timer set");
-    // currentTimer.current = setInterval(() => {
-    //   setTime((prev) => prev - 1);
-    //   console.log(time);
-    //   if (time <= 0) {
-    //     console.log("Timeout");
-    //     stopTimer();
-    //   }
-    // }, 1000);
+    setTimer(true);
   };
 
   /******************************************************************************/
@@ -46,9 +21,7 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const stopTimer = () => {
-    // console.log("Timer Stop");
-    // clearInterval(currentTimer.current);
-    // setTime((prev) => NbMaxSecOfATurn);
+    setTimer(false);
   };
 
   /******************************************************************************/
@@ -800,6 +773,7 @@ export default function ShipProvider({ children }) {
         setShipPosition,
         launchTimer,
         stopTimer,
+        timer,
       }}
     >
       {children}
