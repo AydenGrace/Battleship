@@ -329,6 +329,30 @@ const Shoot = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
+
+const Leave = async (req, res) => {
+  console.log(req.body);
+  const { roomId } = req.body;
+  try {
+    const thisRoom = await Room.findOne({ _id: roomId });
+    //ROOM NOT FOUND
+    if (!thisRoom) {
+      res.json({ error: "Room not found" });
+      return;
+    }
+    //GAME NOT LAUNCH
+    if (thisRoom.status != "battle") {
+      res.json({ error: "Battle not started" });
+      return;
+    }
+
+    await Room.findOneAndUpdate({ _id: roomId }, { status: "give_up" });
+    Broadcast(roomId, "Give Up", thisRoom.maps[thisRoom.current_turn].user);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ error: e.message });
+  }
+};
 /***********************************************************************************/
 /* Function name : Broadcast                                                       */
 /* Description : Emit on sockets of all users in the room                          */
@@ -356,4 +380,5 @@ module.exports = {
   playerReady,
   PreparationsCompleted,
   Shoot,
+  Leave,
 };

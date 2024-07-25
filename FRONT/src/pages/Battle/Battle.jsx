@@ -28,6 +28,7 @@ export default function Battle() {
   const [EnemyTiles, setEnemyTiles] = useState(null);
   const [isFinish, setIsFinish] = useState(false);
   const [Winner, setWinner] = useState(false);
+  const [giveUp, setGiveUp] = useState(false);
   const [myLife, setMyLife] = useState(5);
   const [enemyLife, setEnemyLife] = useState(5);
   let PrepareAudio;
@@ -60,7 +61,22 @@ export default function Battle() {
           console.log("I'm the winner");
           setWinner(true);
         }
-        // EnemyMapMode("none");
+        setGiveUp(false);
+        setIsFinish(true);
+        refresh();
+      });
+      socket.on("Give Up", (message) => {
+        console.log("A player give up");
+        //Le message est l'id du gagnant
+        console.log("Message :", message);
+        if (user._id === message) {
+          console.log("I'm the looser");
+          setWinner(false);
+        } else {
+          console.log("I'm the winner");
+          setWinner(true);
+        }
+        setGiveUp(true);
         setIsFinish(true);
         refresh();
       });
@@ -174,14 +190,16 @@ export default function Battle() {
           <h2>Sélectionnez une case</h2>
           <BattleArea ForcedMode="selection" />
         </>
-      ) : gameStatus === "battle" || gameStatus === "finish" ? (
+      ) : gameStatus === "battle" ||
+        gameStatus === "finish" ||
+        gameStatus === "give_up" ? (
         <>
           {myTurn ? (
             <>
               <h1>Votre Tour</h1>
               <h2>Tirez sur une case</h2>
             </>
-          ) : gameStatus === "finish" ? (
+          ) : gameStatus === "finish" || gameStatus === "give_up" ? (
             <>
               <h1>Partie terminée</h1>
               <h2>Bravo pour votre bataille</h2>
@@ -208,7 +226,7 @@ export default function Battle() {
                 Map={MyTiles}
               />
             </div>
-            {gameStatus === "finish" ? (
+            {gameStatus === "finish" || gameStatus === "give_up" ? (
               <BattleArea
                 ForcedMode="none"
                 ShipPositions={enemyShips}
@@ -223,7 +241,7 @@ export default function Battle() {
               />
             )}
           </div>
-          {gameStatus === "finish" && (
+          {(gameStatus === "finish" || gameStatus === "give_up") && (
             <div className="f-center w-100 mt-10">
               <Link to={"/"} className="btn btn-primary">
                 Accueil
@@ -233,7 +251,9 @@ export default function Battle() {
 
           {isFinish && Winner ? (
             <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
-              <h2 className="mb-20">Vous avez gagné !</h2>
+              <h2 className="mb-20">
+                {giveUp ? "Victoire par abandon !" : "Vous avez gagné !"}
+              </h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}
@@ -243,7 +263,9 @@ export default function Battle() {
             </Modal>
           ) : (
             <Modal showModal={isFinish} OnClose={() => setIsFinish(false)}>
-              <h2 className="mb-20">Vous avez perdu !</h2>
+              <h2 className="mb-20">
+                {giveUp ? "Votre temps s'est écoulé !" : "Vous avez perdu !"}
+              </h2>
               <button
                 className="btn btn-primary"
                 onClick={() => (window.location.href = "/")}

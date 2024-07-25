@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import style from "./Timer.module.scss";
 import { ShipContext } from "../../context/ShipContext";
+import { Leave } from "../../apis/room";
 
 export default function Timer({ seconds }) {
   // initialize timeLeft with the seconds prop
@@ -18,6 +19,7 @@ export default function Timer({ seconds }) {
 
       if (!enemyTimeLeft) {
         console.log("Enemy Timeout");
+        Leave();
         return;
       }
 
@@ -33,6 +35,7 @@ export default function Timer({ seconds }) {
 
     // exit early when we reach 0
     if (!timeLeft) {
+      Leave();
       console.log("Timeout");
       return;
     }
