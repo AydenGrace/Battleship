@@ -11,6 +11,7 @@ export default function Timer({ seconds }) {
   useEffect(() => {
     if (!timer) {
       console.log("Timer to false");
+      setTimeLeft(seconds);
       clearInterval(intervalId);
       return;
     }
