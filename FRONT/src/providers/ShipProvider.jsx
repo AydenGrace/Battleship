@@ -34,7 +34,8 @@ export default function ShipProvider({ children }) {
     // setTimeout(() => {
     //   console.log("TIMEOUT");
     // }, NbMaxSecOfATurn * 1000)
-    setTime((prev) => NbMaxSecOfATurn);
+    setTime((prev) => (prev = NbMaxSecOfATurn));
+
     currentTimer.current = setInterval(() => {
       setTime((prev) => prev - 1);
       console.log(time);
