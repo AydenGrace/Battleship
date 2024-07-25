@@ -10,7 +10,7 @@ import Modal from "../../components/Modal/Modal";
 import battle from "../../assets/sounds/battle.mp3";
 import prepare from "../../assets/sounds/prepare.mp3";
 import { ShipContext } from "../../context/ShipContext";
-import Timer from "../../components/timer/Timer";
+import Timer from "../../components/Timer/Timer";
 
 export default function Battle() {
   const { room, setRoom } = useContext(CurrentRoomContext);
