@@ -4,9 +4,9 @@ import { ShipContext } from "../context/ShipContext";
 export default function ShipProvider({ children }) {
   const [preparedIndex, setPreparedIndex] = useState(0);
   const NbMaxSecOfATurn = 60;
-  let [timer, setTimer] = useState(0);
+  // let [timer, setTimer] = useState(0);
   let [currentTime, setCurrentTime] = useState();
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState();
   const currentTimer = useRef();
 
   const startTimer = () => {
@@ -27,7 +27,7 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const launchTimer = () => {
-    setTime(NbMaxSecOfATurn);
+    setTime(...NbMaxSecOfATurn);
     clearInterval(currentTimer.current);
     console.log("Timer set");
 
