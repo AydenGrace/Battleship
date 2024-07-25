@@ -13,6 +13,7 @@ export default function Timer({ seconds }) {
     // component re-renders
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);
+      console.log(timeLeft - 1);
     }, 1000);
 
     // clear interval on re-render to avoid memory leaks

@@ -27,18 +27,17 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const launchTimer = () => {
-    setTime(NbMaxSecOfATurn);
-    clearInterval(currentTimer.current);
-    console.log("Timer set");
-
-    currentTimer.current = setInterval(() => {
-      setTime((prev) => prev - 1);
-      console.log(time);
-      if (time <= 0) {
-        console.log("Timeout");
-        stopTimer();
-      }
-    }, 1000);
+    // setTime(NbMaxSecOfATurn);
+    // clearInterval(currentTimer.current);
+    // console.log("Timer set");
+    // currentTimer.current = setInterval(() => {
+    //   setTime((prev) => prev - 1);
+    //   console.log(time);
+    //   if (time <= 0) {
+    //     console.log("Timeout");
+    //     stopTimer();
+    //   }
+    // }, 1000);
   };
 
   /******************************************************************************/
@@ -47,9 +46,9 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const stopTimer = () => {
-    console.log("Timer Stop");
-    clearInterval(currentTimer.current);
-    setTime((prev) => NbMaxSecOfATurn);
+    // console.log("Timer Stop");
+    // clearInterval(currentTimer.current);
+    // setTime((prev) => NbMaxSecOfATurn);
   };
 
   /******************************************************************************/
