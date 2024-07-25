@@ -20,7 +20,7 @@ export default function ShipProvider({ children }) {
       // setTimeout(() => {
       //   console.log("TIMEOUT");
       // }, NbMaxSecOfATurn * 1000)
-      setInterval((localTimer) => {
+      setInterval(() => {
         setCurrentTime(currentTime - 1);
         localTimer--;
         console.log(localTimer);
