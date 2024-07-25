@@ -194,15 +194,15 @@ export default function Battle() {
         gameStatus === "finish" ||
         gameStatus === "give_up" ? (
         <>
-          {myTurn ? (
-            <>
-              <h1>Votre Tour</h1>
-              <h2>Tirez sur une case</h2>
-            </>
-          ) : gameStatus === "finish" || gameStatus === "give_up" ? (
+          {gameStatus === "finish" || gameStatus === "give_up" ? (
             <>
               <h1>Partie terminée</h1>
               <h2>Bravo pour votre bataille</h2>
+            </>
+          ) : myTurn ? (
+            <>
+              <h1>Votre tour</h1>
+              <h2>Tirez sur une case</h2>
             </>
           ) : (
             <>
