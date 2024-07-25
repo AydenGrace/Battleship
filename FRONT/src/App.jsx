@@ -33,7 +33,7 @@ function App() {
                         <Outlet />
                       </main>
                     </ShipProvider>
-                    <Footer />
+
                     <Toaster position="bottom-right" reverseOrder={false} />
                   </CurrentRoomProvider>
                 </MessageSocketProvider>
@@ -42,6 +42,7 @@ function App() {
           </AllUsersProvider>
         </UserProvider>
       </div>
+      <Footer />
     </>
   );
 }
