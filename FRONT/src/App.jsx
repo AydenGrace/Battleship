@@ -9,6 +9,7 @@ import MessagesProvider from "./providers/MessagesProvider";
 import SocketProvider from "./providers/SocketProvider";
 import MessageSocketProvider from "./providers/MessageSocketProvider";
 import CurrentRoomProvider from "./providers/CurrentRoomProvider";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   // const [title, setTitle] = useState("Bataille Navale");
@@ -32,7 +33,7 @@ function App() {
                         <Outlet />
                       </main>
                     </ShipProvider>
-
+                    <Footer />
                     <Toaster position="bottom-right" reverseOrder={false} />
                   </CurrentRoomProvider>
                 </MessageSocketProvider>

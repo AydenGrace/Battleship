@@ -1,0 +1,11 @@
+.Footer {
+  background-color: var(--secondary);
+  padding: 40px 20px;
+  color: white;
+  a {
+    color: white;
+    &:visited {
+      color: white;
+    }
+  }
+}
