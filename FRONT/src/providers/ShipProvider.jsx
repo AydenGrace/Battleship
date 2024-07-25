@@ -27,7 +27,7 @@ export default function ShipProvider({ children }) {
   /* Other functions called : -                                                 */
   /******************************************************************************/
   const launchTimer = () => {
-    setTime(...NbMaxSecOfATurn);
+    setTime(NbMaxSecOfATurn);
     clearInterval(currentTimer.current);
     console.log("Timer set");
 

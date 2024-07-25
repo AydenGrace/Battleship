@@ -10,6 +10,7 @@ import Modal from "../../components/Modal/Modal";
 import battle from "../../assets/sounds/battle.mp3";
 import prepare from "../../assets/sounds/prepare.mp3";
 import { ShipContext } from "../../context/ShipContext";
+import Timer from "../../components/timer/Timer";
 
 export default function Battle() {
   const { room, setRoom } = useContext(CurrentRoomContext);
@@ -165,6 +166,7 @@ export default function Battle() {
 
   return (
     <div className="d-flex flex-column w-100 flex-fill align-items-center p-20 relative">
+      <Timer seconds={60} />
       {gameStatus === "prepare_battle" ? (
         <>
           <h1>Préparez vous !</h1>
