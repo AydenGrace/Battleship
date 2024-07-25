@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import style from "./Timer.module.scss";
 import { ShipContext } from "../../context/ShipContext";
+import { CurrentRoomContext } from "../../context/CurrentRoomContext";
 import { Leave } from "../../apis/room";
 
 export default function Timer({ seconds }) {
@@ -8,6 +9,7 @@ export default function Timer({ seconds }) {
   const [timeLeft, setTimeLeft] = useState(seconds);
   const [enemyTimeLeft, setEnemyTimeLeft] = useState(seconds + 30);
   const { timer } = useContext(ShipContext);
+  const { room } = useContext(CurrentRoomContext);
   let intervalId;
   let enemyIntervalId;
 
@@ -19,7 +21,7 @@ export default function Timer({ seconds }) {
 
       if (!enemyTimeLeft) {
         console.log("Enemy Timeout");
-        Leave();
+        Leave(room._id);
         return;
       }
 
@@ -35,7 +37,7 @@ export default function Timer({ seconds }) {
 
     // exit early when we reach 0
     if (!timeLeft) {
-      Leave();
+      Leave(room._id);
       console.log("Timeout");
       return;
     }
