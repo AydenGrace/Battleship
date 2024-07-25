@@ -6,7 +6,7 @@ export default function ShipProvider({ children }) {
   const NbMaxSecOfATurn = 60;
   // let [timer, setTimer] = useState(0);
   let [currentTime, setCurrentTime] = useState();
-  let timer = 0;
+  let timer;
 
   /******************************************************************************/
   /* Function name : launchTimer                                                */
