@@ -5,7 +5,7 @@ import { ShipContext } from "../../context/ShipContext";
 export default function Timer({ seconds }) {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(seconds);
-  const [enemyTimeLeft, setEnemyTimeLeft] = useState(seconds);
+  const [enemyTimeLeft, setEnemyTimeLeft] = useState(seconds + 30);
   const { timer } = useContext(ShipContext);
   let intervalId;
   let enemyIntervalId;
@@ -27,7 +27,7 @@ export default function Timer({ seconds }) {
       }, 1000);
       return () => clearInterval(enemyIntervalId);
     } else {
-      setEnemyTimeLeft(seconds);
+      setEnemyTimeLeft(seconds + 30);
       clearInterval(enemyIntervalId);
     }
 
