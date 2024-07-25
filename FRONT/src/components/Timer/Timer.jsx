@@ -14,6 +14,9 @@ export default function Timer({ seconds }) {
   let enemyIntervalId;
 
   useEffect(() => {
+    if (room.status != "battle") {
+      return;
+    }
     if (!timer) {
       console.log("Timer to false");
       setTimeLeft(seconds);
@@ -53,7 +56,7 @@ export default function Timer({ seconds }) {
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft, enemyTimeLeft, timer]);
+  }, [timeLeft, enemyTimeLeft, timer, room]);
 
   return (
     <div className={`${style.timerArea}`}>
