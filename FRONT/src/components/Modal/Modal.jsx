@@ -36,7 +36,7 @@ export default function Modal({
           >
             <div className="d-flex w-100 justify-content-end mb-20">
               <i
-                className="fa-solid fa-xmark fa-2xl mb-10"
+                className="fa-solid fa-xmark fa-2xl mb-10 pointer"
                 onClick={(e) => handleClose(e)}
               ></i>
             </div>
