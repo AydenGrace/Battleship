@@ -40,6 +40,7 @@ export default function ShipProvider({ children }) {
   /******************************************************************************/
   const stopTimer = () => {
     console.log("Timer stopped");
+    console.log(timer);
     if (timer) {
       console.log("Timer exist");
       // clearTimeout(timer);
