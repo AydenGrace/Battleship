@@ -22,7 +22,7 @@ export default function ShipProvider({ children }) {
       //   console.log("TIMEOUT");
       // }, NbMaxSecOfATurn * 1000)
       setInterval(() => {
-        setCurrentTime(currentTime - 1);
+        // setCurrentTime(currentTime - 1);
         localTimer--;
         console.log(localTimer);
         if (localTimer <= 0) {
