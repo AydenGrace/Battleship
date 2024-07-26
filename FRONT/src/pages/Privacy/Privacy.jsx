@@ -3,13 +3,13 @@ import styles from "./Privacy.module.scss";
 
 export default function Privacy() {
   return (
-    <div className={`d-flex flex-column ${styles.page}`}>
+    <div className={`f-center flex-column ${styles.page}`}>
       {/* <div className={`${styles.headerSeparator}`}></div> */}
       <h1>Politique de confidentialité</h1>
       <section
-        className={`d-flex flex-column justify-content-start ${styles.section}`}
+        className={`d-flex flex-column w-100 justify-content-start ${styles.section}`}
       >
-        <h2>Identité du site Web</h2>
+        <h2 className="c-p">Identité du site Web</h2>
         <p>
           <strong>Nom :</strong> Bataille Navale
         </p>
@@ -28,7 +28,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Le but de cette politique de confidentialité</h2>
+        <h2 className="c-p">Le but de cette politique de confidentialité</h2>
         <p>
           Le but de cette politique de confidentialité est d’informer les
           utilisateurs de notre site des données personnelles que nous
@@ -50,7 +50,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Lois applicables</h2>
+        <h2 className="c-p">Lois applicables</h2>
         <p>
           Conformément aux{" "}
           <i>Règlement Général sur la Protection des Données</i> (RGPD), cette
@@ -154,7 +154,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Consentement</h2>
+        <h2 className="c-p">Consentement</h2>
         <p>
           Les utilisateurs conviennent qu’en utilisant notre site, ils
           consentent à :
@@ -174,7 +174,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Données personnelles que nous collectons</h2>
+        <h2 className="c-p">Données personnelles que nous collectons</h2>
         <p>
           <strong>Données collectées automatiquement</strong>
         </p>
@@ -208,7 +208,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Comment nous utilisons les données personnelles</h2>
+        <h2 className="c-p">Comment nous utilisons les données personnelles</h2>
         <p>
           Les données personnelles recueillies sur notre site seront utilisées
           uniquement aux fins précisées dans la présente politique ou indiquées
@@ -228,7 +228,9 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Avec qui nous partageons les données personnelles</h2>
+        <h2 className="c-p">
+          Avec qui nous partageons les données personnelles
+        </h2>
         <p>
           <strong>Propriétaire du site web</strong>
         </p>
@@ -279,7 +281,9 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Combien de temps nous stockons les données personnelles</h2>
+        <h2 className="c-p">
+          Combien de temps nous stockons les données personnelles
+        </h2>
         <p>
           Nous ne conservons pas les données des utilisateurs au-delà de ce qui
           est nécessaire pour atteindre les fins pour lesquelles elles sont
@@ -290,7 +294,9 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Comment nous protégeons vos données personnelles</h2>
+        <h2 className="c-p">
+          Comment nous protégeons vos données personnelles
+        </h2>
         <p>
           Afin d’assurer la protection de vos données, nous utilisons le
           protocole de sécurité de la couche transport pour transmettre des
@@ -313,7 +319,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Mineurs</h2>
+        <h2 className="c-p">Mineurs</h2>
         <p>
           Le RGPD précise que les personnes de moins de 15 ans sont considérées
           comme des mineurs aux fins de la collecte de données. Les mineurs
@@ -325,7 +331,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Vos droits en tant qu’utilisateur</h2>
+        <h2 className="c-p">Vos droits en tant qu’utilisateur</h2>
         <p>
           En vertu du RGPD, les utilisateurs ont les droits suivants en tant que
           personnes concernées :
@@ -347,7 +353,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>
+        <h2 className="c-p">
           Comment modifier, supprimer ou contester les données recueillies
         </h2>
         <p>
@@ -365,7 +371,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Politique sur les cookies</h2>
+        <h2 className="c-p">Politique sur les cookies</h2>
         <p>
           Un cookie est un petit fichier, stocké sur le disque dur d’un
           utilisateur par le site Web. Son but est de recueillir des données
@@ -399,7 +405,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Modifications</h2>
+        <h2 className="c-p">Modifications</h2>
         <p>
           Cette politique de confidentialité peut être modifiée à l’occasion
           afin de maintenir la conformité avec la loi et de tenir compte de tout
@@ -414,7 +420,7 @@ export default function Privacy() {
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
-        <h2>Contact</h2>
+        <h2 className="c-p">Contact</h2>
         <p>
           Si vous avez des questions à nous poser, n’hésitez pas à communiquer
           avec nous en utilisant ce qui suit :
