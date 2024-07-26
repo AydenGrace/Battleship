@@ -35,31 +35,37 @@ export default function History_Item({ match }) {
     <div
       className={`d-flex w-100 align-items-center justify-content-sb ${style.container}`}
     >
-      {match.status === "finish" ? (
-        winner ? (
-          <h3 className={`${style.status} ${style.green}`}>Victoire</h3>
+      <div className="w-100">
+        {match.status === "finish" ? (
+          winner ? (
+            <h3 className={`${style.status} ${style.green}`}>Victoire</h3>
+          ) : (
+            <h3 className={`${style.status} ${style.red}`}>Défaite</h3>
+          )
+        ) : match.status === "battle" ? (
+          <h3 className={`${style.status} ${style.orange}`}>
+            Bataille en cours
+          </h3>
+        ) : match.status === "give_up" ? (
+          <h3 className={`${style.status} ${style.red}`}>Abandon</h3>
         ) : (
-          <h3 className={`${style.status} ${style.red}`}>Défaite</h3>
-        )
-      ) : match.status === "battle" ? (
-        <h3 className={`${style.status} ${style.orange}`}>Bataille en cours</h3>
-      ) : match.status === "give_up" ? (
-        <h3 className={`${style.status} ${style.red}`}>Abandon</h3>
-      ) : (
-        <h3 className={`${style.status} ${style.orange}`}>Préparation</h3>
-      )}
-      <p>
+          <h3 className={`${style.status} ${style.orange}`}>Préparation</h3>
+        )}
+      </div>
+      <p className="w-100 justify-content-center">
         {match.users[0].username} VS {match.users[1].username}
       </p>
-      {match.status === "pending" ? (
-        <Link to={`/room/${match._id}`} className="btn btn-primary">
-          Salle
-        </Link>
-      ) : (
-        <Link to={`/battle/${match._id}`} className="btn btn-primary">
-          Salle
-        </Link>
-      )}
+      <div className="w-100 justify-content-end">
+        {match.status === "pending" ? (
+          <Link to={`/room/${match._id}`} className="btn btn-primary">
+            Salle
+          </Link>
+        ) : (
+          <Link to={`/battle/${match._id}`} className="btn btn-primary">
+            Salle
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
