@@ -1,4 +1,8 @@
+@use "../../../../assets/styles/mixins" as mixin;
 .itemsArea {
   overflow: scroll;
   max-height: 90vh;
+  @include mixin.xs {
+    max-height: 78vh;
+  }
 }
