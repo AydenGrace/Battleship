@@ -1,0 +1,31 @@
+.headerSeparator {
+  height: 70px;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+.page {
+  padding: 0 50px;
+  text-align: justify;
+  // background-image: url('https://firebasestorage.googleapis.com/v0/b/challe-de-jeux.appspot.com/o/backgrounds%2FCdJ_Landing_BG-min.webp?alt=media&token=8ff7bae1-b314-493a-954c-2570ddf36ea3');
+  // background-position: center;
+  // background-size: cover;
+  // background-attachment: fixed;
+}
+
+.section {
+  h2 {
+    text-align: left;
+  }
+  ul,
+  p {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  li {
+    list-style-type: circle;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+}

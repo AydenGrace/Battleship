@@ -9,6 +9,7 @@ import Logout from "./pages/Logout/Logout";
 import Room from "./pages/Room/Room";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
+import Privacy from "./pages/Privacy/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -23,10 +24,6 @@ export const router = createBrowserRouter([
         path: "/battle/:id",
         element: <Battle />,
       },
-      // {
-      //   path: "/test",
-      //   element: <RoomTest />,
-      // },
       {
         path: "/login",
         element: (
@@ -54,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "/room/:id",
         element: <Room />,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />,
       },
     ],
   },
