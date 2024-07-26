@@ -5,10 +5,9 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 export default function Account() {
   const transform = (isReturn) => {
     if (isReturn) {
-      document.getElementById("navColumn").style.transform = "translateX(0)";
+      document.getElementById("navColumn").style.display = "flex";
     } else {
-      document.getElementById("navColumn").style.transform =
-        "translateX(-100vw)";
+      document.getElementById("navColumn").style.display = "none";
     }
   };
   return (

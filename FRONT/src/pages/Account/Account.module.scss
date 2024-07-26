@@ -32,6 +32,17 @@
   }
 }
 
+.backBtn {
+  display: none;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: white;
+  @include mixin.sm-lt {
+    display: flex;
+  }
+}
+
 .BtnMobile {
   display: none;
   @include mixin.sm-lt {
@@ -44,11 +55,4 @@
   @include mixin.sm-lt {
     display: none;
   }
-}
-
-.backBtn {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  color: white;
 }
