@@ -53,7 +53,7 @@ export default function History_Item({ match }) {
         )}
       </div>
       <p className="w-100 d-flex justify-content-center flex-column align-items-center text-align-center">
-        <p>{new Date(match.createdAt).toLocaleString()}</p>
+        <p>{new Date(match.updatedAt).toLocaleString()}</p>
         <p>
           {match.users[0].username} VS {match.users[1].username}
         </p>
