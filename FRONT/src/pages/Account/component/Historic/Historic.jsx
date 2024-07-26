@@ -11,7 +11,7 @@ export default function Historic() {
     const getInfos = async () => {
       const hystory = await getUserHistory();
       console.log(hystory);
-      hystory.history.sort((a, b) => b.createdAt - a.createdAt);
+      hystory.history.sort((a, b) => a.createdAt - b.createdAt);
       setHistory(hystory.history);
     };
     getInfos();
