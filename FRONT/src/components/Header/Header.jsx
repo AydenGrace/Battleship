@@ -21,8 +21,8 @@ export default function Header() {
           Connexion
         </Link>
       ) : (
-        <Link to={"/logout"} className="btn btn-primary">
-          Déconnexion
+        <Link to={"/account"} className="btn btn-primary">
+          Mon Compte
         </Link>
       )}
     </header>

@@ -10,6 +10,7 @@ import Room from "./pages/Room/Room";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import Privacy from "./pages/Privacy/Privacy";
+import Account from "./pages/Account/Account";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,15 @@ export const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <Privacy />,
+      },
+
+      {
+        path: "/account",
+        element: (
+          <UserConnected>
+            <Account />
+          </UserConnected>
+        ),
       },
     ],
   },
