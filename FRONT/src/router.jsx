@@ -73,7 +73,7 @@ export const router = createBrowserRouter([
             element: <Account_Informations />,
           },
           {
-            path: "/history",
+            path: "history",
             element: <Historic />,
           },
         ],
