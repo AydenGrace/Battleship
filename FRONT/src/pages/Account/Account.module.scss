@@ -1,6 +1,6 @@
 .NavColumn {
   position: relative;
-  max-width: 250px;
+  max-width: 275px;
   text-align: center;
   background-color: var(--dark-secondary);
   padding: 8px;
@@ -13,7 +13,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &:active &:hover {
+  text-decoration: none;
+  &:active {
+    background-color: var(--secondary);
+  }
+  &:hover {
     background-color: var(--secondary);
   }
 }
