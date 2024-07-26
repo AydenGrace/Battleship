@@ -4,7 +4,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function Account() {
   return (
-    <div className="w-100 d-flex flex-fill">
+    <div className={`w-100 d-flex flex-fill ${style.page}`}>
       <div className={` d-flex flex-column flex-fill ${style.NavColumn}`}>
         <div className="d-flex flex-column">
           <h1>Mon Compte</h1>
