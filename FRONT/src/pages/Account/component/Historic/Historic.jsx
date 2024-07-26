@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./History.module.scss";
+import style from "./Historic.module.scss";
 
-export default function History() {
+export default function Historic() {
   return <div>History</div>;
 }
