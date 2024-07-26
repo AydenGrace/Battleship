@@ -8,6 +8,7 @@ export default function History_Item({ match }) {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
+    if(!user) return;
     switch (match.status) {
       case "finish":
         FinishSetup();
@@ -32,6 +33,8 @@ export default function History_Item({ match }) {
   };
 
   return (
+    <>
+    {user &&
     <div
       className={`d-flex w-100 align-items-center justify-content-sb ${style.container}`}
     >
@@ -69,6 +72,8 @@ export default function History_Item({ match }) {
           </Link>
         )}
       </div>
-    </div>
+    
+    </div>}
+    </>
   );
 }
