@@ -9,7 +9,9 @@ export default function Historic() {
   const [History, setHistory] = useState([]);
   useEffect(() => {
     const getInfos = async () => {
-      setHistory(await getUserHistory().history);
+      const hystory = await getUserHistory();
+      console.log(hystory);
+      setHistory(hystory.history);
     };
     getInfos();
   }, [user]);
