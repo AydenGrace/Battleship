@@ -2,6 +2,21 @@
 
 .page {
   overflow-x: hidden;
+  transition: all 0.5 ease-in-out;
+}
+
+.BtnMobile {
+  display: none;
+  @include mixin.sm-lt {
+    display: flex;
+  }
+}
+
+.backBtn {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: white;
 }
 
 .NavColumn {
@@ -11,6 +26,7 @@
   background-color: var(--dark-secondary);
   padding: 8px;
   justify-content: space-between;
+
   @include mixin.sm-lt {
     min-width: 100vw;
     max-width: 100vw;

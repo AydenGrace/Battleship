@@ -3,8 +3,15 @@ import style from "./Account.module.scss";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function Account() {
+  const transform = (isReturn) => {
+    if (isReturn) {
+      document.getElementById("page").style.transform = "translateX(100vw)";
+    } else {
+      document.getElementById("page").style.transform = "translateX(0)";
+    }
+  };
   return (
-    <div className={`w-100 d-flex flex-fill ${style.page}`}>
+    <div className={`w-100 d-flex flex-fill ${style.page}`} id="page">
       <div className={` d-flex flex-column flex-fill ${style.NavColumn}`}>
         <div className="d-flex flex-column">
           <h1>Mon Compte</h1>
@@ -14,13 +21,36 @@ export default function Account() {
           <Link to={"/account/history"} className={`${style.NavBtn}`}>
             Historique
           </Link>
+
+          <Link
+            to={"/account"}
+            className={`${style.NavBtn} ${style.BtnMobile}`}
+            onClick={() => {
+              transform(false);
+            }}
+          >
+            Informations personnelles
+          </Link>
+          <Link
+            to={"/account/history"}
+            className={`${style.NavBtn} ${style.BtnMobile}`}
+            onClick={() => {
+              transform(false);
+            }}
+          >
+            Historique
+          </Link>
         </div>
 
         <Link className="btn btn-primary f-center" to={"/logout"}>
           Déconnexion
         </Link>
       </div>
-      <div className="d-flex flex-fill">
+      <div className="d-flex flex-fill relative">
+        <i
+          className={`fa-solid fa-circle-arrow-left fa-2xl pointer ${style.BtnMobile} ${style.backBtn}`}
+          onClick={() => transform(true)}
+        ></i>
         <Outlet />
       </div>
     </div>
