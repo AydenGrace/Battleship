@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signup } from "../../apis/users";
 import style from "./Register.module.scss";
@@ -147,7 +147,8 @@ export default function Register() {
               className="mr-15"
               id="rgpd"
             />
-            En soumettant ce formulaire j'accepte ...
+            En continuant, vous reconnaissez avoir lu notre{" "}
+            <Link to={"/privacy"}>Politique de confidentialité</Link>
           </label>
           {errors.rgpd && (
             <p className="text-error c-p">{errors.rgpd.message}</p>

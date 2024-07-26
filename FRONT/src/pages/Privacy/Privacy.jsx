@@ -5,7 +5,6 @@ export default function Privacy() {
   return (
     <div className={`d-flex flex-column ${styles.page}`}>
       {/* <div className={`${styles.headerSeparator}`}></div> */}
-
       <h1>Politique de confidentialité</h1>
       <section
         className={`d-flex flex-column justify-content-start ${styles.section}`}
