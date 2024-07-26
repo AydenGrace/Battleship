@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./History_Item.module.scss";
 import { UserContext } from "../../../../../context/UserContext";
+import { Link } from "react-router-dom";
 
 export default function History_Item({ match }) {
   const [winner, setWinner] = useState(false);
@@ -32,7 +33,7 @@ export default function History_Item({ match }) {
 
   return (
     <div
-      className={`d-flex w-100 align-items-center justify-content-sb mb-10 ${style.container}`}
+      className={`d-flex w-100 align-items-center justify-content-sb ${style.container}`}
     >
       {match.status === "finish" ? (
         winner ? (
@@ -48,6 +49,11 @@ export default function History_Item({ match }) {
         <h3 className={`${style.status} ${style.orange}`}>Préparation</h3>
       )}
       History_Item
+      {match.status === "pending" ? (
+        <Link to={`/room/${match._id}`}>Salle</Link>
+      ) : (
+        <Link to={`/battle/${match._id}`}>Salle</Link>
+      )}
     </div>
   );
 }
