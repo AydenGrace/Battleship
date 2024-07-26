@@ -14,9 +14,7 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  &:active {
-    background-color: var(--secondary);
-  }
+  background-color: transparent;
   &:hover {
     background-color: var(--secondary);
   }
