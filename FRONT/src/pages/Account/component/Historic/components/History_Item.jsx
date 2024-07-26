@@ -52,8 +52,11 @@ export default function History_Item({ match }) {
           <h3 className={`${style.status} ${style.orange}`}>Préparation</h3>
         )}
       </div>
-      <p className="w-100 d-flex justify-content-center">
-        {match.users[0].username} VS {match.users[1].username}
+      <p className="w-100 d-flex justify-content-center flex-column align-items-center">
+        <p>{match.createdAt.toLocaleString()}</p>
+        <p>
+          {match.users[0].username} VS {match.users[1].username}
+        </p>
       </p>
       <div className="w-100 d-flex justify-content-end">
         {match.status === "pending" ? (
