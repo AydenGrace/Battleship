@@ -87,6 +87,7 @@ const getUserHistory = async (req, res) => {
           maps: 1,
         }
       )
+        .sort({ createdAt: -1 })
         .select("-maps.map -__v")
         .populate("users", "-password -createdAt -updatedAt -__v -ready");
       console.log(allRooms);
