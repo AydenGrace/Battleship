@@ -8,6 +8,7 @@ export default function Historic() {
   const { user } = useContext(UserContext);
   const [History, setHistory] = useState([]);
   useEffect(() => {
+    if(!user) return;
     const getInfos = async () => {
       const hystory = await getUserHistory();
       console.log(hystory);
