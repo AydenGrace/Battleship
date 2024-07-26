@@ -34,7 +34,7 @@ export default function History_Item({ match }) {
 
   return (
     <>
-    {user &&
+    {(user && match.status != "pending") &&
     <div
       className={`d-flex w-100 align-items-center justify-content-sb ${style.container}`}
     >
