@@ -12,6 +12,7 @@ import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import Privacy from "./pages/Privacy/Privacy";
 import Account from "./pages/Account/Account";
 import Historic from "./pages/Account/component/Historic/Historic";
+import Account_Informations from "./pages/Account/component/Account_Informations/Account_Informations";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
+            element: <Account_Informations />,
+          },
+          {
+            path: "/history",
             element: <Historic />,
           },
         ],
