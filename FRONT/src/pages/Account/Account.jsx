@@ -8,12 +8,12 @@ export default function Account() {
       <div className={` d-flex flex-column flex-fill ${style.NavColumn}`}>
         <div className="d-flex flex-column">
           <h1>Mon Compte</h1>
-          <NavLink to={"/account"} className={`${style.NavBtn}`}>
+          <Link to={"/account"} className={`${style.NavBtn}`}>
             Informations personnelles
-          </NavLink>
-          <NavLink to={"/account/history"} className={`${style.NavBtn}`}>
+          </Link>
+          <Link to={"/account/history"} className={`${style.NavBtn}`}>
             Historique
-          </NavLink>
+          </Link>
         </div>
 
         <Link className="btn btn-primary f-center" to={"/logout"}>
