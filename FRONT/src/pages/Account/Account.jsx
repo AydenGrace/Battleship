@@ -56,10 +56,12 @@ export default function Account() {
         </Link>
       </div>
       <div className="d-flex flex-fill relative">
-        <i
-          className={`fa-solid fa-circle-arrow-left fa-2xl pointer ${style.BtnMobile} ${style.backBtn}`}
-          onClick={() => transform(true)}
-        ></i>
+        <div className={`${style.BtnMobile}`}>
+          <i
+            className={`fa-solid fa-circle-arrow-left fa-2xl pointer ${style.backBtn}`}
+            onClick={() => transform(true)}
+          ></i>
+        </div>
         <Outlet />
       </div>
     </div>
