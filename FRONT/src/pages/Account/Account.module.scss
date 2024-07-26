@@ -12,7 +12,7 @@
   background-color: var(--dark-secondary);
   padding: 8px;
   justify-content: space-between;
-
+  transition: all 0.5 ease-in-out;
   @include mixin.sm-lt {
     min-width: 100vw;
     max-width: 100vw;
