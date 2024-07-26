@@ -12,6 +12,7 @@
   padding: 8px;
   justify-content: space-between;
   @include mixin.sm-lt {
+    min-width: 100vw;
     max-width: 100vw;
   }
 }
