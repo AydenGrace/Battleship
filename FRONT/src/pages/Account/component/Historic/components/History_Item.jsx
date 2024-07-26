@@ -48,7 +48,9 @@ export default function History_Item({ match }) {
       ) : (
         <h3 className={`${style.status} ${style.orange}`}>Préparation</h3>
       )}
-      History_Item
+      <p>
+        {match.users[0].username} VS {match.users[1].username}
+      </p>
       {match.status === "pending" ? (
         <Link to={`/room/${match._id}`}>Salle</Link>
       ) : (
