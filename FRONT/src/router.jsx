@@ -11,6 +11,7 @@ import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import Privacy from "./pages/Privacy/Privacy";
 import Account from "./pages/Account/Account";
+import Historic from "./pages/Account/component/Historic/Historic";
 
 export const router = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <History />,
+            element: <Historic />,
           },
         ],
       },
