@@ -3,11 +3,12 @@ import styles from "./Privacy.module.scss";
 
 export default function Privacy() {
   return (
-    <div className={`f-center flex-column ${styles.page}`}>
+    <div className={`d-flex flex-column ${styles.page}`}>
       {/* <div className={`${styles.headerSeparator}`}></div> */}
+
       <h1>Politique de confidentialité</h1>
       <section
-        className={`d-flex flex-column w-100 justify-content-start ${styles.section}`}
+        className={`d-flex flex-column justify-content-start ${styles.section}`}
       >
         <h2 className="c-p">Identité du site Web</h2>
         <p>
