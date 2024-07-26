@@ -1,6 +1,6 @@
 @use "../../../../assets/styles/mixins" as mixin;
 .itemsArea {
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 90vh;
   width: 100%;
   @include mixin.xs {
