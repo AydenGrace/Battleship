@@ -1,6 +1,7 @@
 const User = require("../models/user.schema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Room = require("../models/room.schema");
 
 const createTokenLogin = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "10h" });
@@ -68,8 +69,39 @@ const loginUser = async (req, res) => {
   }
 };
 
+const getUserHistory = async (req, res) => {
+  console.log(req.body);
+  const { userId } = req.body;
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      const allRooms = await Room.find(
+        { users: { $in: user._id } },
+        {
+          _id: 1,
+          users: 1,
+          status: 1,
+          current_turn: 1,
+          updatedAt: 1,
+          createdAt: 1,
+          maps: 1,
+        }
+      )
+        .select("-maps.map -__v")
+        .populate("users", "-password -createdAt -updatedAt -__v -ready");
+      console.log(allRooms);
+      res.json({ history: allRooms });
+    } else {
+      res.json({ error: "User not found" });
+    }
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
 module.exports = {
   signupUser,
   loginUser,
   getUsers,
+  getUserHistory,
 };
