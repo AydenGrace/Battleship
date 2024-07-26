@@ -52,9 +52,13 @@ export default function History_Item({ match }) {
         {match.users[0].username} VS {match.users[1].username}
       </p>
       {match.status === "pending" ? (
-        <Link to={`/room/${match._id}`}>Salle</Link>
+        <Link to={`/room/${match._id}`} className="btn btn-primary">
+          Salle
+        </Link>
       ) : (
-        <Link to={`/battle/${match._id}`}>Salle</Link>
+        <Link to={`/battle/${match._id}`} className="btn btn-primary">
+          Salle
+        </Link>
       )}
     </div>
   );
