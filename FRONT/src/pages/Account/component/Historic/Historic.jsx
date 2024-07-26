@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Historic.module.scss";
 import { getUserHistory } from "../../../../apis/users";
 import { UserContext } from "../../../../context/UserContext";
