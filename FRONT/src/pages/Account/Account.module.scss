@@ -12,6 +12,13 @@
   }
 }
 
+.BtnDesktop {
+  display: flex;
+  @include mixin.sm-lt {
+    display: none;
+  }
+}
+
 .backBtn {
   position: absolute;
   top: 25px;

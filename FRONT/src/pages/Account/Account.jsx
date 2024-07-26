@@ -15,10 +15,16 @@ export default function Account() {
       <div className={` d-flex flex-column flex-fill ${style.NavColumn}`}>
         <div className="d-flex flex-column">
           <h1>Mon Compte</h1>
-          <Link to={"/account"} className={`${style.NavBtn}`}>
+          <Link
+            to={"/account"}
+            className={`${style.NavBtn} ${style.BtnDesktop}`}
+          >
             Informations personnelles
           </Link>
-          <Link to={"/account/history"} className={`${style.NavBtn}`}>
+          <Link
+            to={"/account/history"}
+            className={`${style.NavBtn} ${style.BtnDesktop}`}
+          >
             Historique
           </Link>
 
