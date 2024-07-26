@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 export default function Account() {
   return (
-    <div className="w-100 d-flex">
-      <div className={` d-flex flex-column ${style.NavColumn}`}>
+    <div className="w-100 d-flex flex-fill">
+      <div className={` d-flex flex-column flex-fill ${style.NavColumn}`}>
         <h1>Mon Compte</h1>
         <Link className="btn btn-primary" to={"/logout"}>
           Déconnexion
