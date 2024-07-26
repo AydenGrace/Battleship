@@ -6,7 +6,10 @@ import { UserContext } from "../../../../context/UserContext";
 export default function Historic() {
   const { user } = useContext(UserContext);
   useEffect(() => {
-    console.log(getUserHistory);
+    const getInfos = async () => {
+      console.log(await getUserHistory());
+    };
+    getInfos();
   }, [user]);
 
   return (
