@@ -65,6 +65,12 @@ export const router = createBrowserRouter([
             <Account />
           </UserConnected>
         ),
+        children: [
+          {
+            index: true,
+            element: <History />,
+          },
+        ],
       },
     ],
   },

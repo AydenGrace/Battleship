@@ -1,6 +1,8 @@
 .NavColumn {
   position: relative;
-  min-width: 400px;
-  height: 100%;
+  max-width: 250px;
+  text-align: center;
   background-color: var(--dark-secondary);
+  padding: 8px;
+  justify-content: space-between;
 }
