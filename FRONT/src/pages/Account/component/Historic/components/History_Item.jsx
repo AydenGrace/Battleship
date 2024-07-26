@@ -32,7 +32,7 @@ export default function History_Item({ match }) {
 
   return (
     <div
-      className={`w-100 align-items-center justify-content-sb mb-10 ${style.container}`}
+      className={`d-flex w-100 align-items-center justify-content-sb mb-10 ${style.container}`}
     >
       {match.status === "finish" ? (
         winner ? (
