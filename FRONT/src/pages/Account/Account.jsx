@@ -5,9 +5,9 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 export default function Account() {
   const transform = (isReturn) => {
     if (isReturn) {
-      document.getElementById("page").style.transform = "translateX(100vw)";
-    } else {
       document.getElementById("page").style.transform = "translateX(0)";
+    } else {
+      document.getElementById("page").style.transform = "translateX(100vw)";
     }
   };
   return (

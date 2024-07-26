@@ -5,27 +5,6 @@
   transition: all 0.5 ease-in-out;
 }
 
-.BtnMobile {
-  display: none;
-  @include mixin.sm-lt {
-    display: flex;
-  }
-}
-
-.BtnDesktop {
-  display: flex;
-  @include mixin.sm-lt {
-    display: none;
-  }
-}
-
-.backBtn {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  color: white;
-}
-
 .NavColumn {
   position: relative;
   max-width: 275px;
@@ -51,4 +30,25 @@
   &:hover {
     background-color: var(--secondary);
   }
+}
+
+.BtnMobile {
+  display: none;
+  @include mixin.sm-lt {
+    display: flex;
+  }
+}
+
+.BtnDesktop {
+  display: flex;
+  @include mixin.sm-lt {
+    display: none;
+  }
+}
+
+.backBtn {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: white;
 }
