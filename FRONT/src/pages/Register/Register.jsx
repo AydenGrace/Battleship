@@ -70,7 +70,10 @@ export default function Register() {
   return (
     <div className="f-center flex-column flex-fill">
       <h1 className="mb-10">Inscription</h1>
-      <form className="d-flex flex-column card" onSubmit={handleSubmit(submit)}>
+      <form
+        className={`d-flex flex-column card ${style.maxWidth}`}
+        onSubmit={handleSubmit(submit)}
+      >
         <div className="d-flex flex-column mb-10 ">
           <label htmlFor="username" className="mb-10">
             Pseudo
