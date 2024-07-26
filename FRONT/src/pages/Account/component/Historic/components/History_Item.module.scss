@@ -1,0 +1,22 @@
+.container {
+  background-color: var(--secondary);
+  border: 2px solid var(--light-secondary);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.status {
+  font-weight: 900;
+}
+
+.green {
+  color: rgb(29, 155, 29);
+}
+
+.red {
+  color: rgb(172, 17, 17);
+}
+
+.orange {
+  color: rgb(190, 130, 18);
+}
